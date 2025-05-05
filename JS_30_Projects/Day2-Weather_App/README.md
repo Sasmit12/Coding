@@ -72,5 +72,3 @@ const apiKey = "your_api_key_here";
 
 ```
 
-Would you like me to save this as a file for you?
-```
