@@ -1,8 +1,3 @@
-Here's a `README.md` file for your **Day2-Weather\_App** project:
-
----
-
-```markdown
 # 🌦️ Weather App
 
 A simple, responsive Weather App that lets users check current weather conditions for any city using the [OpenWeatherMap API](https://openweathermap.org/api). Built with **HTML**, **CSS**, and **JavaScript**.
