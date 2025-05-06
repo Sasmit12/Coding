@@ -8,7 +8,9 @@ This is a responsive and interactive **To Do List** web app built using **HTML, 
 
 ### 📸 Preview
 
-![App Screenshot](./images/icon.png) <!-- You can replace with a real screenshot of the full app UI -->
+### 📷 Screenshots
+
+![App Preview](./images/app-preview.png)
 
 ---
 
