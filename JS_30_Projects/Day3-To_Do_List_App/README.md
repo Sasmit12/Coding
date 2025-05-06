@@ -45,7 +45,6 @@ Day3-To\_Do\_List\_App/
 
    ```bash
    git clone https://github.com/Sasmit12/Coding.git
-````
 
 2. **Navigate to the folder:**
 
