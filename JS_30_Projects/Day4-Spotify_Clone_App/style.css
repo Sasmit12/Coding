@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: antiquewhite;
+  font-family: 'Varela Round', sans-serif;
+}
+
+nav {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  height: 65px;
+  background-color: black;
+  color: white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.3rem;
+  margin-right: auto;
+}
+
+.brand img {
+  width: 44px;
+  padding: 0 8px;
+}
+
+nav ul li {
+  padding: 0 12px;
+}
+
+.container {
+  min-height: 72vh;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 23px auto;
+  width: 70%;
+  border-radius: 10px;
+  padding: 30px;
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.bottom {
+  position: sticky;
+  height: 130px;
+  background: black;
+  color: white;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.icons {
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+#myProgressBar {
+  width: 80vw;
+  cursor: pointer;
+}
+
+.songItemContainer {
+  margin-top: 74px;
+  list-style-type: none;
+}
+
+.songItem {
+  height: 50px;
+  display: flex;
+  background-color: white;
+  width: 100%;
+  color: black;
+  margin: 12px 0;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 23px;
+  padding: 0 20px;
+}
+
+.songItem img {
+  width: 43px;
+  border-radius: 34px;
+}
+
+.timeStamp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeStamp i {
+  cursor: pointer;
+}
+
+.songInfo {
+  font-family: 'Varela Round', sans-serif;
+  position: absolute;
+  left: 10vw;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.songInfo img {
+  opacity: 0;
+  transition: opacity 0.4s ease-in;
+}
+
+#gif {
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  #myProgressBar {
+    width: 90vw;
+  }
+
+  .songInfo {
+    left: 5vw;
+  }
+}
