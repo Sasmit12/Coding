@@ -150,55 +150,8 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
-    <script>
-        // Mobile menu toggle (accessibility)
-        const hamburger = document.getElementById('hamburgerBtn');
-        const navLinks = document.getElementById('navLinks');
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                this.classList.toggle('active');
-            });
-            hamburger.addEventListener('keydown', function(e) {
-                if (e.key === "Enter" || e.key === " ") {
-                    navLinks.classList.toggle('active');
-                    this.classList.toggle('active');
-                }
-            });
-        }
-
-        // Upload Sessions CSV (demo only)
-        document.getElementById('uploadSessionsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fileInput = document.getElementById('sessionsFile');
-            if (!fileInput.files.length) {
-                alert('Please select a CSV file.');
-                return;
-            }
-            alert('File uploaded! (Demo - Implement real upload)');
-            fileInput.value = '';
-        });
-
-        // Example accessible dropdown focus management (if dropdown is implemented)
-        const dropdownBtn = document.getElementById('adminDropdownBtn');
-        const dropdownMenu = document.getElementById('adminDropdownMenu');
-        if (dropdownBtn && dropdownMenu) {
-            dropdownBtn.addEventListener('click', function() {
-                const expanded = dropdownBtn.getAttribute('aria-expanded') === 'true';
-                dropdownBtn.setAttribute('aria-expanded', !expanded);
-                dropdownMenu.hidden = expanded;
-                if (!expanded) {
-                    dropdownMenu.focus();
-                }
-            });
-            dropdownMenu.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    dropdownMenu.hidden = true;
-                    dropdownBtn.setAttribute('aria-expanded', false);
-                    dropdownBtn.focus();
-                }
-            });
-        }
-    </script>
+    <script src="js/utils.js"></script>
+    <script src="js/admin.js"></script>
+    
 </body>
 </html>

@@ -80,45 +80,7 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
-    <script>
-        // Mobile menu toggle (accessibility update)
-        const hamburger = document.getElementById('hamburgerBtn');
-        const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            this.classList.toggle('active');
-        });
-        hamburger.addEventListener('keydown', function(e) {
-            if (e.key === "Enter" || e.key === " ") {
-                navLinks.classList.toggle('active');
-                this.classList.toggle('active');
-            }
-        });
-
-        // Password visibility toggle
-        document.querySelector('.toggle-password').addEventListener('click', function() {
-            const pwdInput = document.getElementById('password');
-            const icon = this.querySelector('i');
-            if (pwdInput.type === 'password') {
-                pwdInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-                this.setAttribute('aria-label', 'Hide password');
-            } else {
-                pwdInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-                this.setAttribute('aria-label', 'Show password');
-            }
-        });
-
-        // Simple login handling (demo)
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Replace this with real authentication
-            alert('Login successful! (Demo - Implement authentication)');
-            window.location.href = 'index.html';
-        });
-    </script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>

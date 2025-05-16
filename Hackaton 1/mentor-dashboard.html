@@ -174,36 +174,8 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
-    <script>
-        // Mobile menu toggle (accessibility)
-        const hamburger = document.getElementById('hamburgerBtn');
-        const navLinks = document.getElementById('navLinks');
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                this.classList.toggle('active');
-            });
-            hamburger.addEventListener('keydown', function(e) {
-                if (e.key === "Enter" || e.key === " ") {
-                    navLinks.classList.toggle('active');
-                    this.classList.toggle('active');
-                }
-            });
-        }
-
-        // Upload New Session CSV (demo only)
-        document.getElementById('uploadSessionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fileInput = document.getElementById('newSessionFile');
-            if (!fileInput.files.length) {
-                alert('Please select a CSV file.');
-                return;
-            }
-            alert('Session file uploaded! (Demo - Implement real upload)');
-            fileInput.value = '';
-        });
-
-        // (Optional) Add JS for filters if you make the table dynamic
-    </script>
+    <script src="js/utils.js"></script>
+    <script src="js/mentor.js"></script>
+    
 </body>
 </html>

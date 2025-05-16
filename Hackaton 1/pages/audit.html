@@ -181,22 +181,6 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
-    <script>
-        // Mobile menu toggle (accessibility)
-        const hamburger = document.getElementById('hamburgerBtn');
-        const navLinks = document.getElementById('navLinks');
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                this.classList.toggle('active');
-            });
-            hamburger.addEventListener('keydown', function(e) {
-                if (e.key === "Enter" || e.key === " ") {
-                    navLinks.classList.toggle('active');
-                    this.classList.toggle('active');
-                }
-            });
-        }
-    </script>
+    <script src="js/utils.js"></script>
 </body>
 </html>
