@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayOrbit - Payout Automation System for EdTech Mentors</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="PayOrbit Logo">
+                    <span>PayOrbit</span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="about">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Streamline Payments for EdTech Mentors</h1>
+                    <p>PayOrbit automates your EdTech platform's payment processing, making mentor payouts simple, transparent, and error-free.</p>
+                    <div class="cta-buttons">
+                        <a href="signup.html" class="btn btn-primary btn-large">Get Started</a>
+                        <a href="#demo" class="btn btn-outline btn-large">Watch Demo</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/hero-dashboard.png" alt="PayOrbit Dashboard Preview">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Key Features</h2>
+                    <p>Everything you need to manage mentor payments efficiently</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>Automated Payouts</h3>
+                        <p>Process payments automatically based on mentor sessions with customizable payment cycles.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Session Tracking</h3>
+                        <p>Log and verify teaching sessions with detailed reporting and approval workflows.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Real-time Support</h3>
+                        <p>Connect mentors and admins through an integrated chat system for quick issue resolution.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h3>Receipt Generation</h3>
+                        <p>Automatically create and distribute professional payment receipts for every transaction.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure Authentication</h3>
+                        <p>Role-based access control with Firebase Authentication ensures data security.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Payment Analytics</h3>
+                        <p>Gain insights from comprehensive reports on mentor activity and payment history.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How PayOrbit Works</h2>
+                    <p>Simple, efficient payment processing in just a few steps</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Session Recording</h3>
+                            <p>Mentors log their teaching sessions manually or upload batch files.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Verification</h3>
+                            <p>Admins review and approve submitted sessions.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Payment Processing</h3>
+                            <p>System calculates payments based on approved sessions and rates.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Documentation</h3>
+                            <p>Receipts are generated and payment records are maintained.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- For Admins & Mentors Section -->
+        <section class="user-benefits">
+            <div class="container">
+                <div class="benefits-grid">
+                    <div class="benefit-col admin-benefits">
+                        <div class="section-header">
+                            <h2>For Administrators</h2>
+                            <p>Take control of your payment operations</p>
+                        </div>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Reduce administrative overhead</li>
+                            <li><i class="fas fa-check-circle"></i> Eliminate payment errors</li>
+                            <li><i class="fas fa-check-circle"></i> Gain financial visibility</li>
+                            <li><i class="fas fa-check-circle"></i> Generate accurate reports</li>
+                            <li><i class="fas fa-check-circle"></i> Improve mentor satisfaction</li>
+                        </ul>
+                        <a href="signup.html?role=admin" class="btn btn-primary">Admin Sign Up</a>
+                    </div>
+                    <div class="benefit-col mentor-benefits">
+                        <div class="section-header">
+                            <h2>For Mentors</h2>
+                            <p>Focus on teaching, not payment tracking</p>
+                        </div>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Track your sessions easily</li>
+                            <li><i class="fas fa-check-circle"></i> Monitor payment status</li>
+                            <li><i class="fas fa-check-circle"></i> Download payment receipts</li>
+                            <li><i class="fas fa-check-circle"></i> Communicate with admin directly</li>
+                            <li><i class="fas fa-check-circle"></i> Access your history anytime</li>
+                        </ul>
+                        <a href="signup.html?role=mentor" class="btn btn-primary">Mentor Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Our Users Say</h2>
+                    <p>Join hundreds of satisfied education platforms</p>
+                </div>
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <div class="testimonial-card active">
+                        <div class="testimonial-content">
+                            <p>"PayOrbit reduced our payment processing time by 75% while eliminating errors. Our mentors are happier with the transparency and our admin team has more time for strategic work."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/testimonial-1.jpg" alt="Sarah Johnson">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Operations Director, EduLearn Pro</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"As a mentor working with multiple platforms, PayOrbit makes it easy to track my sessions and payments in one place. The receipt generation feature is a lifesaver during tax season!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/testimonial-2.jpg" alt="David Chen">
+                            <div class="author-info">
+                                <h4>David Chen</h4>
+                                <p>Senior Mentor, CodePath Academy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Streamline Your EdTech Payment System?</h2>
+                    <p>Join PayOrbit today and transform how you manage mentor payments.</p>
+                    <div class="cta-buttons">
+                        <a href="signup.html" class="btn btn-primary btn-large">Get Started Now</a>
+                        <a href="#contact" class="btn btn-outline btn-large">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Contact Us</h2>
+                    <p>Have questions? Our team is here to help.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Email</h4>
+                                <p>support@payorbit.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Office</h4>
+                                <p>123 Innovation Drive<br>San Francisco, CA 94103</p>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/logo.png" alt="PayOrbit Logo">
+                        <span>PayOrbit</span>
+                    </div>
+                    <p>Streamlining payments for EdTech platforms and their mentors worldwide.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PayOrbit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script>
+        // Mobile menu toggle (adds accessibility)
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        hamburger.addEventListener('keydown', function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+                navLinks.classList.toggle('active');
+                this.classList.toggle('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links (skip if href is just "#")
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const hash = this.getAttribute('href');
+                if (hash.length > 1 && document.querySelector(hash)) {
+                    e.preventDefault();
+                    document.querySelector(hash).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Simple form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real implementation, you would send this data to your backend
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Testimonial slider
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        const dots = document.querySelectorAll('.testimonial-dots .dot');
+        let activeIndex = 0;
+        function setActiveTestimonial(index) {
+            testimonialCards.forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            activeIndex = index;
+        }
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => setActiveTestimonial(index));
+        });
+    </script>
+</body>
+</html>

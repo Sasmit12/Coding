@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Logs | PayOrbit</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .audit-table th, .audit-table td {
+            padding: 10px 7px;
+            text-align: left;
+        }
+        .audit-table th {
+            background: var(--background-darker);
+            font-weight: 600;
+        }
+        .audit-table tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+        .audit-table tr:last-child {
+            border-bottom: none;
+        }
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .audit-type {
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        .audit-type.create { background: #e2f7e2; color: #1d8c2f; }
+        .audit-type.update { background: #fff7e2; color: #b88313; }
+        .audit-type.delete { background: #fbeaea; color: #c0392b; }
+        .audit-type.login { background: #e2eafd; color: #3366cc; }
+        .audit-type.payout { background: #e2f1fb; color: #2073b9; }
+        @media (max-width: 768px) {
+            .audit-table th, .audit-table td { font-size: 0.97rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="PayOrbit Logo">
+                    <span>PayOrbit</span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="#">Mentors</a></li>
+                        <li><a href="#">Sessions</a></li>
+                        <li><a href="#">Payouts</a></li>
+                        <li><a href="audit.html" aria-current="page" class="active">Audit Logs</a></li>
+                        <li><a href="#">Reports</a></li>
+                        <li><a href="#">Settings</a></li>
+                    </ul>
+                </div>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline">Logout</a>
+                </div>
+                <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="dashboard-section" style="background: var(--background-light)">
+            <div class="container">
+                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 38px;">
+                    <div>
+                        <h1 style="margin-bottom:0.2em;">Audit Logs</h1>
+                        <p style="color:var(--text-color-light);">Track all important actions, changes, and access for compliance and transparency.</p>
+                    </div>
+                    <div class="user-dropdown" style="position:relative;">
+                        <button class="btn btn-outline" id="adminDropdownBtn"><i class="fas fa-user-shield"></i> Admin <i class="fas fa-caret-down"></i></button>
+                    </div>
+                </div>
+                <div style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);margin-bottom:28px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+                        <h3 style="margin-bottom:0;">Audit Trail</h3>
+                        <button class="btn btn-outline" style="margin-bottom:8px;"><i class="fas fa-file-csv"></i> Export CSV</button>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="audit-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>Target</th>
+                                    <th>Details</th>
+                                    <th>IP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2025-05-16 17:45</td>
+                                    <td><i class="fas fa-user-shield" style="color:var(--primary-color);"></i> admin1</td>
+                                    <td><span class="audit-type create">CREATE</span></td>
+                                    <td>Mentor</td>
+                                    <td>Added new mentor <strong>Jane Doe</strong></td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-16 17:40</td>
+                                    <td><i class="fas fa-user" style="color:var(--secondary-color);"></i> mentor5</td>
+                                    <td><span class="audit-type login">LOGIN</span></td>
+                                    <td>Account</td>
+                                    <td>Successful login</td>
+                                    <td>192.168.1.23</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-16 17:32</td>
+                                    <td><i class="fas fa-user-shield" style="color:var(--primary-color);"></i> admin2</td>
+                                    <td><span class="audit-type payout">PAYOUT</span></td>
+                                    <td>Payout</td>
+                                    <td>Processed payout <strong>&#36;500</strong> to <strong>mentor3</strong></td>
+                                    <td>192.168.1.115</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-16 17:25</td>
+                                    <td><i class="fas fa-user" style="color:var(--secondary-color);"></i> mentor2</td>
+                                    <td><span class="audit-type update">UPDATE</span></td>
+                                    <td>Profile</td>
+                                    <td>Updated email address</td>
+                                    <td>192.168.1.48</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-16 17:18</td>
+                                    <td><i class="fas fa-user-shield" style="color:var(--primary-color);"></i> admin1</td>
+                                    <td><span class="audit-type delete">DELETE</span></td>
+                                    <td>Session</td>
+                                    <td>Deleted session <strong>SESS-0005</strong></td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-16 17:10</td>
+                                    <td><i class="fas fa-user" style="color:var(--secondary-color);"></i> mentor1</td>
+                                    <td><span class="audit-type update">UPDATE</span></td>
+                                    <td>Session</td>
+                                    <td>Updated session details <strong>SESS-0007</strong></td>
+                                    <td>192.168.1.53</td>
+                                </tr>
+                                <tr>
+                                    <td>2025-05-16 17:06</td>
+                                    <td><i class="fas fa-user-shield" style="color:var(--primary-color);"></i> admin1</td>
+                                    <td><span class="audit-type payout">PAYOUT</span></td>
+                                    <td>Payout</td>
+                                    <td>Processed payout <strong>&#36;350</strong> to <strong>mentor2</strong></td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="background:var(--background-light);padding:20px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
+                    <h4 style="margin-bottom:10px;">What is an Audit Log?</h4>
+                    <p style="font-size:0.97rem;margin-bottom:12px;">
+                        Audit logs record all important actions, changes, and access events in the system for transparency and compliance. Only admins can view all logs. For more details, see the <a href="#" style="color:var(--primary-color);text-decoration:underline;">documentation</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 PayOrbit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        // Mobile menu toggle (accessibility)
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.classList.toggle('active');
+            });
+            hamburger.addEventListener('keydown', function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    navLinks.classList.toggle('active');
+                    this.classList.toggle('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

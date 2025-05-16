@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipts | PayOrbit</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="PayOrbit Logo">
+                    <span>PayOrbit</span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <ul>
+                        <li><a href="mentor-dashboard.html">Dashboard</a></li>
+                        <li><a href="#">Sessions</a></li>
+                        <li><a href="receipt.html" aria-current="page" class="active">Receipts</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Chat</a></li>
+                    </ul>
+                </div>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline">Logout</a>
+                </div>
+                <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="dashboard-section" style="background: var(--background-light)">
+            <div class="container">
+                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 38px;">
+                    <div>
+                        <h1 style="margin-bottom:0.2em;">My Receipts</h1>
+                        <p style="color:var(--text-color-light);">View and download your payment receipts for completed sessions and payouts.</p>
+                    </div>
+                    <div class="user-dropdown" style="position:relative;">
+                        <button class="btn btn-outline" id="mentorDropdownBtn"><i class="fas fa-user"></i> Mentor <i class="fas fa-caret-down"></i></button>
+                    </div>
+                </div>
+                <div class="dashboard-flex" style="display:flex; gap:40px; flex-wrap:wrap;">
+                    <div class="main-content" style="flex:2;min-width:300px;">
+                        <div style="background:var(--light-color);padding:24px 24px 12px 24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);margin-bottom:28px;">
+                            <h3 style="margin-bottom:14px;">Receipts List</h3>
+                            <div style="overflow-x:auto;">
+                            <table style="width:100%; border-collapse:collapse;">
+                                <thead>
+                                    <tr style="background:var(--background-darker);">
+                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Receipt #</th>
+                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Date</th>
+                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Session(s)</th>
+                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Amount</th>
+                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Status</th>
+                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:8px 6px;">ABC123</td>
+                                        <td style="padding:8px 6px;">05/10/2025</td>
+                                        <td style="padding:8px 6px;">SESS-0001, SESS-0002</td>
+                                        <td style="padding:8px 6px;">&#36;400</td>
+                                        <td style="padding:8px 6px;"><span style="color:var(--primary-color);font-weight:500;">Paid</span></td>
+                                        <td style="padding:8px 6px;">
+                                            <button class="btn btn-outline btn-small" onclick="showReceiptDetails('ABC123')"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-outline btn-small"><i class="fas fa-download"></i> PDF</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:8px 6px;">DEF456</td>
+                                        <td style="padding:8px 6px;">05/15/2025</td>
+                                        <td style="padding:8px 6px;">SESS-0003</td>
+                                        <td style="padding:8px 6px;">&#36;200</td>
+                                        <td style="padding:8px 6px;"><span style="color:var(--accent-color);font-weight:500;">Pending</span></td>
+                                        <td style="padding:8px 6px;">
+                                            <button class="btn btn-outline btn-small" onclick="showReceiptDetails('DEF456')"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-outline btn-small" disabled title="Available after payment"><i class="fas fa-download"></i> PDF</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <div style="margin-top:18px;">
+                                <button class="btn btn-outline"><i class="fas fa-file-csv"></i> Export CSV</button>
+                            </div>
+                        </div>
+                        <!-- Receipt Details Modal (hidden by default) -->
+                        <div id="receiptModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.35); z-index:2000; align-items:center; justify-content:center;">
+                            <div style="background:var(--light-color);padding:30px 28px 24px 28px; border-radius:var(--border-radius); box-shadow:var(--box-shadow); max-width:420px; margin:auto; position:relative;">
+                                <button onclick="closeReceiptModal()" style="position:absolute; top:9px; right:10px; background:none; border:none; font-size:1.3rem; color:var(--text-color-light); cursor:pointer;"><i class="fas fa-times"></i></button>
+                                <h3>Receipt #<span id="modalReceiptId">ABC123</span></h3>
+                                <p><strong>Date:</strong> <span id="modalReceiptDate">05/10/2025</span></p>
+                                <p><strong>Mentor:</strong> John Doe</p>
+                                <p><strong>Session(s):</strong> <span id="modalSessionIds">SESS-0001, SESS-0002</span></p>
+                                <p><strong>Hours:</strong> <span id="modalReceiptHours">4</span></p>
+                                <p><strong>Rate:</strong> <span id="modalReceiptRate">&#36;100/hr</span></p>
+                                <p><strong>Total:</strong> <span id="modalReceiptTotal">&#36;400</span></p>
+                                <div style="margin-top:18px;">
+                                    <button class="btn btn-primary btn-small"><i class="fas fa-download"></i> Download PDF</button>
+                                    <button class="btn btn-outline btn-small"><i class="fas fa-envelope"></i> Email</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar -->
+                    <div class="dashboard-sidebar" style="flex:1;min-width:260px;">
+                        <div style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);margin-bottom:28px;">
+                            <h3 style="margin-bottom:14px;">Quick Links</h3>
+                            <ul style="padding-left:0;">
+                                <li style="margin-bottom:10px;"><a href="mentor-dashboard.html" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-calendar-check"></i> Sessions</a></li>
+                                <li style="margin-bottom:10px;"><a href="receipt.html" class="btn btn-outline active" aria-current="page" style="width:100%;text-align:left;"><i class="fas fa-file-invoice-dollar"></i> Receipts</a></li>
+                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-user"></i> Profile</a></li>
+                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-comments"></i> Support</a></li>
+                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-headset"></i> Chat with Admin</a></li>
+                            </ul>
+                        </div>
+                        <div style="background:var(--background-light);padding:20px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
+                            <h4 style="margin-bottom:10px;">Need Help?</h4>
+                            <p style="font-size:0.97rem;margin-bottom:12px;">Contact support or chat with the admin for assistance anytime.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 PayOrbit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        // Mobile menu toggle (accessibility)
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.classList.toggle('active');
+            });
+            hamburger.addEventListener('keydown', function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    navLinks.classList.toggle('active');
+                    this.classList.toggle('active');
+                }
+            });
+        }
+
+        // Receipt modal demo logic
+        function showReceiptDetails(receiptId) {
+            // For demo, just show static info; in real app, populate modal with receipt data
+            document.getElementById('modalReceiptId').textContent = receiptId;
+            if (receiptId === "ABC123") {
+                document.getElementById('modalReceiptDate').textContent = "05/10/2025";
+                document.getElementById('modalSessionIds').textContent = "SESS-0001, SESS-0002";
+                document.getElementById('modalReceiptHours').textContent = "4";
+                document.getElementById('modalReceiptRate').textContent = "$100/hr";
+                document.getElementById('modalReceiptTotal').textContent = "$400";
+            } else if (receiptId === "DEF456") {
+                document.getElementById('modalReceiptDate').textContent = "05/15/2025";
+                document.getElementById('modalSessionIds').textContent = "SESS-0003";
+                document.getElementById('modalReceiptHours').textContent = "2";
+                document.getElementById('modalReceiptRate').textContent = "$100/hr";
+                document.getElementById('modalReceiptTotal').textContent = "$200";
+            }
+            document.getElementById('receiptModal').style.display = "flex";
+        }
+        function closeReceiptModal() {
+            document.getElementById('receiptModal').style.display = "none";
+        }
+        // Close modal on outside click
+        window.addEventListener('click', function(e){
+            const modal = document.getElementById('receiptModal');
+            if (modal && e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

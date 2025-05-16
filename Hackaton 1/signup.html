@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | PayOrbit</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="PayOrbit Logo">
+                    <span>PayOrbit</span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary active" aria-current="page">Sign Up</a>
+                </div>
+                <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-form-wrapper">
+                    <div class="auth-form">
+                        <h2>Create Your PayOrbit Account</h2>
+                        <form id="signupForm" autocomplete="on">
+                            <div class="form-group">
+                                <label for="name"><i class="fas fa-user"></i> Name</label>
+                                <input type="text" id="name" name="name" required autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="email" name="email" required autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="role"><i class="fas fa-user-shield"></i> Sign Up As</label>
+                                <select id="role" name="role" required>
+                                    <option value="">Select role</option>
+                                    <option value="admin">Administrator</option>
+                                    <option value="mentor">Mentor</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                                <input type="password" id="password" name="password" required autocomplete="new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password" required autocomplete="new-password">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-large">Sign Up</button>
+                        </form>
+                        <div class="form-footer">
+                            <p>Already have an account? <a href="login.html">Login</a></p>
+                        </div>
+                        <div class="divider"><span>or</span></div>
+                        <div class="social-login">
+                            <button class="btn btn-outline social-btn" type="button"><i class="fab fa-google"></i> Sign up with Google</button>
+                            <button class="btn btn-outline social-btn" type="button"><i class="fab fa-facebook-f"></i> Sign up with Facebook</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 PayOrbit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        // Mobile menu toggle (accessibility)
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        hamburger.addEventListener('keydown', function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+                navLinks.classList.toggle('active');
+                this.classList.toggle('active');
+            }
+        });
+
+        // Role selection from URL param
+        const params = new URLSearchParams(window.location.search);
+        const roleParam = params.get('role');
+        if (roleParam) {
+            document.getElementById('role').value = roleParam;
+        }
+
+        // Simple signup form validation and demo handling
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pwd = document.getElementById('password').value;
+            const cpwd = document.getElementById('confirm-password').value;
+            if (pwd !== cpwd) {
+                alert('Passwords do not match!');
+                return;
+            }
+            // Replace with real backend signup logic
+            alert('Sign up successful! (Demo - Implement real signup)');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | PayOrbit</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="PayOrbit Logo">
+                    <span>PayOrbit</span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline active" aria-current="page">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-form-wrapper">
+                    <div class="auth-form">
+                        <h2>Sign In to PayOrbit</h2>
+                        <form id="loginForm" autocomplete="on">
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="email" name="email" required autocomplete="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                                <input type="password" id="password" name="password" required autocomplete="current-password">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-large">Login</button>
+                        </form>
+                        <div class="form-footer">
+                            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+                            <p><a href="#">Forgot password?</a></p>
+                        </div>
+                        <div class="divider"><span>or</span></div>
+                        <div class="social-login">
+                            <button class="btn btn-outline social-btn" type="button"><i class="fab fa-google"></i> Sign in with Google</button>
+                            <button class="btn btn-outline social-btn" type="button"><i class="fab fa-facebook-f"></i> Sign in with Facebook</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 PayOrbit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        // Mobile menu toggle (accessibility update)
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        hamburger.addEventListener('keydown', function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+                navLinks.classList.toggle('active');
+                this.classList.toggle('active');
+            }
+        });
+
+        // Simple login handling (demo)
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Replace this with real authentication
+            alert('Login successful! (Demo - Implement authentication)');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
