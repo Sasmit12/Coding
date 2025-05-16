@@ -21,16 +21,16 @@
                 <div class="nav-links" id="navLinks">
                     <ul>
                         <li><a href="dashboard.html" aria-current="page" class="active">Dashboard</a></li>
-                        <li><a href="#">Mentors</a></li>
-                        <li><a href="#">Sessions</a></li>
-                        <li><a href="#">Payouts</a></li>
-                        <li><a href="#">Reports</a></li>
-                        <li><a href="#">Chat</a></li>
-                        <li><a href="#">Settings</a></li>
+                        <li><a href="mentors.html">Mentors</a></li>
+                        <li><a href="sessions.html">Sessions</a></li>
+                        <li><a href="payouts.html">Payouts</a></li>
+                        <li><a href="reports.html">Reports</a></li>
+                        <li><a href="chat.html">Chat</a></li>
+                        <li><a href="settings.html">Settings</a></li>
                     </ul>
                 </div>
                 <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">Logout</a>
+                    <a href="login.html" class="btn btn-outline">Logout</a>
                 </div>
                 <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
                     <span></span>
@@ -41,96 +41,103 @@
         </nav>
     </header>
     <main>
-        <section class="dashboard-section" style="background: var(--background-light)">
+        <section class="dashboard-section dashboard-bg">
             <div class="container">
-                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 38px;">
+                <div class="dashboard-header flex-between">
                     <div>
-                        <h1 style="margin-bottom:0.2em;">Admin Dashboard</h1>
-                        <p style="color:var(--text-color-light);">Overview and management tools for payouts, mentors, and sessions.</p>
+                        <h1 class="dashboard-title">Admin Dashboard</h1>
+                        <p class="dashboard-desc">Overview and management tools for payouts, mentors, and sessions.</p>
                     </div>
-                    <div class="user-dropdown" style="position:relative;">
-                        <button class="btn btn-outline" id="adminDropdownBtn"><i class="fas fa-user-shield"></i> Admin <i class="fas fa-caret-down"></i></button>
-                        <!-- Placeholder for dropdown if needed -->
+                    <div class="user-dropdown" id="userDropdown">
+                        <button class="btn btn-outline" id="adminDropdownBtn" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-shield"></i> Admin <i class="fas fa-caret-down"></i>
+                        </button>
+                        <!-- Example dropdown, add JS for focus trap if used -->
+                        <ul class="dropdown-menu" id="adminDropdownMenu" tabindex="-1" hidden>
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="settings.html">Settings</a></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
                     </div>
                 </div>
                 <!-- Metrics Cards -->
-                <div class="metrics-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:24px; margin-bottom:40px;">
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-users" style="font-size:2rem;color:var(--primary-color);"></i>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-users metric-icon primary"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">24</div>
-                                <div style="color:var(--text-color-light);">Mentors</div>
+                                <div class="metric-value">24</div>
+                                <div class="metric-label">Mentors</div>
                             </div>
                         </div>
                     </div>
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-calendar-check" style="font-size:2rem;color:var(--secondary-color);"></i>
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-calendar-check metric-icon secondary"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">156</div>
-                                <div style="color:var(--text-color-light);">Sessions</div>
+                                <div class="metric-value">156</div>
+                                <div class="metric-label">Sessions</div>
                             </div>
                         </div>
                     </div>
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-clock" style="font-size:2rem;color:var(--accent-color);"></i>
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-clock metric-icon accent"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">12</div>
-                                <div style="color:var(--text-color-light);">Pending Approvals</div>
+                                <div class="metric-value">12</div>
+                                <div class="metric-label">Pending Approvals</div>
                             </div>
                         </div>
                     </div>
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-wallet" style="font-size:2rem;color:var(--primary-color);"></i>
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-wallet metric-icon primary"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">&#36;12,400</div>
-                                <div style="color:var(--text-color-light);">Total Payouts</div>
+                                <div class="metric-value">&#36;12,400</div>
+                                <div class="metric-label">Total Payouts</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Recent Activity and File Upload -->
-                <div class="dashboard-flex" style="display:flex;gap:40px;flex-wrap:wrap;">
+                <div class="dashboard-flex">
                     <!-- Recent Activities -->
-                    <div class="recent-activity" style="flex:2;min-width:300px;">
-                        <div style="background:var(--light-color);padding:24px 24px 12px 24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);margin-bottom:28px;">
-                            <h3 style="margin-bottom:14px;">Recent Activities</h3>
-                            <ul style="padding-left:0; font-size:1rem; color:var(--text-color-light);">
-                                <li style="margin-bottom:12px;"><i class="fas fa-user-plus" style="color:var(--secondary-color);margin-right:7px;"></i> New mentor registered: <strong>Jane Doe</strong></li>
-                                <li style="margin-bottom:12px;"><i class="fas fa-tasks" style="color:var(--primary-color);margin-right:7px;"></i> 5 sessions pending approval</li>
-                                <li style="margin-bottom:12px;"><i class="fas fa-money-check" style="color:var(--accent-color);margin-right:7px;"></i> Payout processed: <strong>&#36;350</strong></li>
-                                <li style="margin-bottom:12px;"><i class="fas fa-file-alt" style="color:var(--primary-color);margin-right:7px;"></i> Audit report generated</li>
+                    <div class="recent-activity">
+                        <div class="activity-card">
+                            <h3>Recent Activities</h3>
+                            <ul class="activity-list">
+                                <li><i class="fas fa-user-plus activity-icon secondary"></i> New mentor registered: <strong>Jane Doe</strong></li>
+                                <li><i class="fas fa-tasks activity-icon primary"></i> 5 sessions pending approval</li>
+                                <li><i class="fas fa-money-check activity-icon accent"></i> Payout processed: <strong>&#36;350</strong></li>
+                                <li><i class="fas fa-file-alt activity-icon primary"></i> Audit report generated</li>
                             </ul>
                         </div>
                         <!-- Upload Sessions CSV -->
-                        <div style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                            <h3 style="margin-bottom:18px;">Upload Sessions</h3>
+                        <div class="activity-card">
+                            <h3>Upload Sessions</h3>
                             <form id="uploadSessionsForm">
-                                <input type="file" accept=".csv" id="sessionsFile" style="margin-bottom:12px;">
-                                <button type="submit" class="btn btn-primary" style="margin-bottom:8px;">Upload</button>
-                                <div style="color:var(--text-color-light);font-size:0.97rem;">Sample format: <code>session-details.csv</code></div>
+                                <input type="file" accept=".csv" id="sessionsFile" class="form-file">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                                <div class="form-hint">Sample format: <code>session-details.csv</code></div>
                             </form>
                         </div>
                     </div>
                     <!-- Sidebar Management -->
-                    <div class="dashboard-sidebar" style="flex:1;min-width:260px;">
-                        <div style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);margin-bottom:28px;">
-                            <h3 style="margin-bottom:14px;">Quick Actions</h3>
-                            <ul style="padding-left:0;">
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-user-cog"></i> Manage Mentors</a></li>
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-search"></i> Verify Sessions</a></li>
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-credit-card"></i> Process Payouts</a></li>
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-chart-bar"></i> View Analytics</a></li>
+                    <aside class="dashboard-sidebar">
+                        <div class="sidebar-card">
+                            <h3>Quick Actions</h3>
+                            <ul class="sidebar-actions">
+                                <li><a href="mentors.html" class="btn btn-outline action-btn"><i class="fas fa-user-cog"></i> Manage Mentors</a></li>
+                                <li><a href="sessions.html" class="btn btn-outline action-btn"><i class="fas fa-search"></i> Verify Sessions</a></li>
+                                <li><a href="payouts.html" class="btn btn-outline action-btn"><i class="fas fa-credit-card"></i> Process Payouts</a></li>
+                                <li><a href="reports.html" class="btn btn-outline action-btn"><i class="fas fa-chart-bar"></i> View Analytics</a></li>
                             </ul>
                         </div>
-                        <div style="background:var(--background-light);padding:20px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                            <h4 style="margin-bottom:10px;">Support</h4>
-                            <p style="font-size:0.97rem;margin-bottom:12px;">Need help? <a href="#" style="color:var(--primary-color);text-decoration:underline;">Contact Support</a></p>
+                        <div class="sidebar-card sidebar-support">
+                            <h4>Support</h4>
+                            <p>Need help? <a href="support.html" class="support-link">Contact Support</a></p>
                         </div>
-                    </div>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -171,6 +178,27 @@
             alert('File uploaded! (Demo - Implement real upload)');
             fileInput.value = '';
         });
+
+        // Example accessible dropdown focus management (if dropdown is implemented)
+        const dropdownBtn = document.getElementById('adminDropdownBtn');
+        const dropdownMenu = document.getElementById('adminDropdownMenu');
+        if (dropdownBtn && dropdownMenu) {
+            dropdownBtn.addEventListener('click', function() {
+                const expanded = dropdownBtn.getAttribute('aria-expanded') === 'true';
+                dropdownBtn.setAttribute('aria-expanded', !expanded);
+                dropdownMenu.hidden = expanded;
+                if (!expanded) {
+                    dropdownMenu.focus();
+                }
+            });
+            dropdownMenu.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    dropdownMenu.hidden = true;
+                    dropdownBtn.setAttribute('aria-expanded', false);
+                    dropdownBtn.focus();
+                }
+            });
+        }
     </script>
 </body>
 </html>

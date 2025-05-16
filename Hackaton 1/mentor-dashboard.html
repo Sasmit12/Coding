@@ -21,15 +21,15 @@
                 <div class="nav-links" id="navLinks">
                     <ul>
                         <li><a href="mentor-dashboard.html" aria-current="page" class="active">Dashboard</a></li>
-                        <li><a href="#">Sessions</a></li>
-                        <li><a href="#">Payments</a></li>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">Chat</a></li>
+                        <li><a href="sessions.html">Sessions</a></li>
+                        <li><a href="payments.html">Payments</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="chat.html">Chat</a></li>
                     </ul>
                 </div>
                 <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">Logout</a>
+                    <a href="login.html" class="btn btn-outline">Logout</a>
                 </div>
                 <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
                     <span></span>
@@ -40,116 +40,128 @@
         </nav>
     </header>
     <main>
-        <section class="dashboard-section" style="background: var(--background-light)">
+        <section class="dashboard-section dashboard-bg">
             <div class="container">
-                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 38px;">
+                <div class="dashboard-header flex-between">
                     <div>
-                        <h1 style="margin-bottom:0.2em;">Mentor Dashboard</h1>
-                        <p style="color:var(--text-color-light);">Track your sessions, earnings, and profile.</p>
+                        <h1 class="dashboard-title">Mentor Dashboard</h1>
+                        <p class="dashboard-desc">Track your sessions, earnings, and profile.</p>
                     </div>
-                    <div class="user-dropdown" style="position:relative;">
+                    <div class="user-dropdown" id="userDropdown">
                         <button class="btn btn-outline" id="mentorDropdownBtn"><i class="fas fa-user"></i> Mentor <i class="fas fa-caret-down"></i></button>
                         <!-- Placeholder for dropdown if needed -->
                     </div>
                 </div>
                 <!-- Metrics Cards -->
-                <div class="metrics-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:24px; margin-bottom:40px;">
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-calendar-check" style="font-size:2rem;color:var(--primary-color);"></i>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-calendar-check metric-icon primary"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">24</div>
-                                <div style="color:var(--text-color-light);">Sessions</div>
+                                <div class="metric-value">24</div>
+                                <div class="metric-label">Sessions</div>
                             </div>
                         </div>
                     </div>
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-clock" style="font-size:2rem;color:var(--secondary-color);"></i>
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-clock metric-icon secondary"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">3</div>
-                                <div style="color:var(--text-color-light);">Pending</div>
+                                <div class="metric-value">3</div>
+                                <div class="metric-label">Pending</div>
                             </div>
                         </div>
                     </div>
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-check-circle" style="font-size:2rem;color:var(--accent-color);"></i>
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-check-circle metric-icon accent"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">21</div>
-                                <div style="color:var(--text-color-light);">Approved</div>
+                                <div class="metric-value">21</div>
+                                <div class="metric-label">Approved</div>
                             </div>
                         </div>
                     </div>
-                    <div class="metric-card" style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <i class="fas fa-wallet" style="font-size:2rem;color:var(--primary-color);"></i>
+                    <div class="metric-card">
+                        <div class="metric-flex">
+                            <i class="fas fa-wallet metric-icon primary"></i>
                             <div>
-                                <div style="font-size:1.3rem;font-weight:600;">&#36;8,400</div>
-                                <div style="color:var(--text-color-light);">Earnings</div>
+                                <div class="metric-value">&#36;8,400</div>
+                                <div class="metric-label">Earnings</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- My Sessions Table -->
-                <div class="dashboard-flex" style="display:flex;gap:40px;flex-wrap:wrap;">
-                    <div class="main-content" style="flex:2;min-width:300px;">
-                        <div style="background:var(--light-color);padding:24px 24px 12px 24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);margin-bottom:28px;">
-                            <h3 style="margin-bottom:14px;">My Sessions</h3>
-                            <div style="overflow-x:auto;">
-                            <table style="width:100%; border-collapse:collapse;">
-                                <thead>
-                                    <tr style="background:var(--background-darker);">
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Session ID</th>
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Date</th>
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="padding:8px 6px;">SESS-0001</td>
-                                        <td style="padding:8px 6px;">05/12</td>
-                                        <td style="padding:8px 6px;"><span style="color:var(--primary-color);font-weight:500;">Paid</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:8px 6px;">SESS-0002</td>
-                                        <td style="padding:8px 6px;">05/14</td>
-                                        <td style="padding:8px 6px;"><span style="color:var(--accent-color);font-weight:500;">Pending</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <!-- My Sessions Table & Filters -->
+                <div class="dashboard-flex">
+                    <div class="main-content">
+                        <div class="table-card">
+                            <div class="table-header flex-between">
+                                <h3>My Sessions</h3>
+                                <!-- Example: status filter and date picker -->
+                                <div class="filters">
+                                    <select name="status" class="filter-select" id="statusFilter">
+                                        <option value="">All Status</option>
+                                        <option value="paid">Paid</option>
+                                        <option value="pending">Pending</option>
+                                    </select>
+                                    <input type="date" class="filter-date" id="dateStart" title="From date">
+                                    <input type="date" class="filter-date" id="dateEnd" title="To date">
+                                </div>
                             </div>
-                            <div style="margin-top:18px;">
-                                <button class="btn btn-outline" style="margin-right:10px;"><i class="fas fa-plus"></i> Add Session</button>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Session ID</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>SESS-0001</td>
+                                            <td>2025-05-12</td>
+                                            <td><span class="status-badge paid">Paid</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SESS-0002</td>
+                                            <td>2025-05-14</td>
+                                            <td><span class="status-badge pending">Pending</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-actions">
+                                <button class="btn btn-outline"><i class="fas fa-plus"></i> Add Session</button>
                                 <button class="btn btn-outline"><i class="fas fa-file-csv"></i> Export CSV</button>
                             </div>
                         </div>
                         <!-- Upload New Sessions -->
-                        <div style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                            <h3 style="margin-bottom:18px;">Upload New Session</h3>
+                        <div class="table-card">
+                            <h3>Upload New Session</h3>
                             <form id="uploadSessionForm">
-                                <input type="file" accept=".csv" id="newSessionFile" style="margin-bottom:12px;">
-                                <button type="submit" class="btn btn-primary" style="margin-bottom:8px;">Upload</button>
-                                <div style="color:var(--text-color-light);font-size:0.97rem;">Format: <code>session-details.csv</code></div>
+                                <input type="file" accept=".csv" id="newSessionFile" class="form-file">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                                <div class="form-hint">Format: <code>session-details.csv</code></div>
                             </form>
                         </div>
                     </div>
                     <!-- Sidebar -->
-                    <div class="dashboard-sidebar" style="flex:1;min-width:260px;">
-                        <div style="background:var(--light-color);padding:24px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);margin-bottom:28px;">
-                            <h3 style="margin-bottom:14px;">Quick Links</h3>
-                            <ul style="padding-left:0;">
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-file-invoice-dollar"></i> Payment History</a></li>
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-user"></i> Profile</a></li>
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-comments"></i> Support</a></li>
-                                <li style="margin-bottom:10px;"><a href="#" class="btn btn-outline" style="width:100%;text-align:left;"><i class="fas fa-headset"></i> Chat with Admin</a></li>
+                    <aside class="dashboard-sidebar">
+                        <div class="sidebar-card">
+                            <h3>Quick Links</h3>
+                            <ul class="sidebar-actions">
+                                <li><a href="payments.html" class="btn btn-outline action-btn"><i class="fas fa-file-invoice-dollar"></i> Payment History</a></li>
+                                <li><a href="profile.html" class="btn btn-outline action-btn"><i class="fas fa-user"></i> Profile</a></li>
+                                <li><a href="support.html" class="btn btn-outline action-btn"><i class="fas fa-comments"></i> Support</a></li>
+                                <li><a href="chat.html" class="btn btn-outline action-btn"><i class="fas fa-headset"></i> Chat with Admin</a></li>
                             </ul>
                         </div>
-                        <div style="background:var(--background-light);padding:20px;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
-                            <h4 style="margin-bottom:10px;">Need Help?</h4>
-                            <p style="font-size:0.97rem;margin-bottom:12px;">Contact support or chat with the admin for assistance anytime.</p>
+                        <div class="sidebar-card sidebar-support">
+                            <h4>Need Help?</h4>
+                            <p>Contact support or chat with the admin for assistance anytime.</p>
                         </div>
-                    </div>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -190,6 +202,8 @@
             alert('Session file uploaded! (Demo - Implement real upload)');
             fileInput.value = '';
         });
+
+        // (Optional) Add JS for filters if you make the table dynamic
     </script>
 </body>
 </html>

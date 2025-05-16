@@ -1118,3 +1118,246 @@ footer {
         font-size: 0.92rem;
     }
 }
+
+/* --- :focus-visible Enhancement for Accessibility --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.15);
+}
+
+/* --- Extracted Inline Styles as Classes for Cards, Flex, Headers, etc. --- */
+.dashboard-bg {
+    background: var(--background-light);
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 38px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.metric-card {
+    background: var(--light-color);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.metric-flex {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.metric-icon.primary { color: var(--primary-color); font-size: 2rem; }
+.metric-icon.secondary { color: var(--secondary-color); font-size: 2rem; }
+.metric-icon.accent { color: var(--accent-color); font-size: 2rem; }
+.metric-value { font-size: 1.3rem; font-weight: 600; }
+.metric-label { color: var(--text-color-light); }
+
+.dashboard-flex {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.activity-card {
+    background: var(--light-color);
+    padding: 24px 24px 12px 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 28px;
+}
+.table-card {
+    background: var(--light-color);
+    padding: 24px 24px 12px 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 28px;
+}
+
+.table-header {
+    margin-bottom: 14px;
+}
+.table-header.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filters {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.filter-select,
+.filter-date {
+    padding: 7px 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    background: var(--background-light);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+.table-actions {
+    margin-top: 18px;
+}
+
+.sidebar-card {
+    background: var(--light-color);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 28px;
+}
+.sidebar-support {
+    background: var(--background-light);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+.sidebar-actions {
+    padding-left: 0;
+}
+.sidebar-actions .action-btn {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.form-file {
+    margin-bottom: 12px;
+}
+.form-hint {
+    color: var(--text-color-light);
+    font-size: 0.97rem;
+}
+
+/* --- Modal Styles Enhancement --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.35);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background: var(--light-color);
+    padding: 30px 28px 24px 28px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 420px;
+    margin: auto;
+    position: relative;
+}
+.modal-close {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--text-color-light);
+    cursor: pointer;
+}
+.modal .btn-small {
+    margin-top: 10px;
+    margin-right: 6px;
+}
+
+/* --- Print Styles for Receipts/Modals --- */
+@media print {
+    body {
+        background: #fff !important;
+        color: #222 !important;
+        font-size: 13pt !important;
+    }
+    header, footer, nav, .navbar, .dashboard-sidebar, .sidebar-card, .sidebar-support, .chat-area, .chat-input-area, .btn, .auth-buttons, .hamburger, .dashboard-header, .testimonials, .feature-grid, .testimonial-slider, .testimonial-dots, .cta-section, .contact-grid, .divider, .social-login, .info-item, .footer-grid, .main-content > :not(.table-card) {
+        display: none !important;
+    }
+    .table-card, .modal-content, #receiptModal {
+        display: block !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .table-card table,
+    .modal-content table {
+        background: #fff !important;
+        color: #222 !important;
+        box-shadow: none !important;
+    }
+    th, td {
+        color: #222 !important;
+        background: #fff !important;
+    }
+    .status-badge,
+    .audit-type {
+        color: #222 !important;
+        background: #eee !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+    .btn, .btn-primary, .btn-outline {
+        display: none !important;
+    }
+}
+
+/* --- Password Toggle (login/signup) --- */
+.password-group .password-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-color-light);
+    font-size: 1.2rem;
+    z-index: 2;
+    padding: 4px 7px;
+}
+.toggle-password:focus-visible {
+    color: var(--primary-color);
+}
+
+/* --- Extra: Utility and Misc Classes --- */
+.main-content {
+    flex: 2;
+    min-width: 300px;
+}
+.dashboard-sidebar {
+    flex: 1;
+    min-width: 260px;
+}
+.dashboard-title {
+    margin-bottom: 0.2em;
+}
+.dashboard-desc {
+    color: var(--text-color-light);
+}

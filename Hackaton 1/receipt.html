@@ -59,12 +59,12 @@
                             <table style="width:100%; border-collapse:collapse;">
                                 <thead>
                                     <tr style="background:var(--background-darker);">
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Receipt #</th>
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Date</th>
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Session(s)</th>
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Amount</th>
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Status</th>
-                                        <th style="padding:10px 6px;text-align:left;font-weight:600;">Actions</th>
+                                        <th scope="col" style="padding:10px 6px;text-align:left;font-weight:600;">Receipt #</th>
+                                        <th scope="col" style="padding:10px 6px;text-align:left;font-weight:600;">Date</th>
+                                        <th scope="col" style="padding:10px 6px;text-align:left;font-weight:600;">Session(s)</th>
+                                        <th scope="col" style="padding:10px 6px;text-align:left;font-weight:600;">Amount</th>
+                                        <th scope="col" style="padding:10px 6px;text-align:left;font-weight:600;">Status</th>
+                                        <th scope="col" style="padding:10px 6px;text-align:left;font-weight:600;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,9 +73,9 @@
                                         <td style="padding:8px 6px;">05/10/2025</td>
                                         <td style="padding:8px 6px;">SESS-0001, SESS-0002</td>
                                         <td style="padding:8px 6px;">&#36;400</td>
-                                        <td style="padding:8px 6px;"><span style="color:var(--primary-color);font-weight:500;">Paid</span></td>
+                                        <td style="padding:8px 6px;"><span class="status-badge paid">Paid</span></td>
                                         <td style="padding:8px 6px;">
-                                            <button class="btn btn-outline btn-small" onclick="showReceiptDetails('ABC123')"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-outline btn-small" onclick="showReceiptDetails('ABC123')" data-receipt="ABC123"><i class="fas fa-eye"></i> View</button>
                                             <button class="btn btn-outline btn-small"><i class="fas fa-download"></i> PDF</button>
                                         </td>
                                     </tr>
@@ -84,9 +84,9 @@
                                         <td style="padding:8px 6px;">05/15/2025</td>
                                         <td style="padding:8px 6px;">SESS-0003</td>
                                         <td style="padding:8px 6px;">&#36;200</td>
-                                        <td style="padding:8px 6px;"><span style="color:var(--accent-color);font-weight:500;">Pending</span></td>
+                                        <td style="padding:8px 6px;"><span class="status-badge pending">Pending</span></td>
                                         <td style="padding:8px 6px;">
-                                            <button class="btn btn-outline btn-small" onclick="showReceiptDetails('DEF456')"><i class="fas fa-eye"></i> View</button>
+                                            <button class="btn btn-outline btn-small" onclick="showReceiptDetails('DEF456')" data-receipt="DEF456"><i class="fas fa-eye"></i> View</button>
                                             <button class="btn btn-outline btn-small" disabled title="Available after payment"><i class="fas fa-download"></i> PDF</button>
                                         </td>
                                     </tr>
@@ -98,9 +98,9 @@
                             </div>
                         </div>
                         <!-- Receipt Details Modal (hidden by default) -->
-                        <div id="receiptModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.35); z-index:2000; align-items:center; justify-content:center;">
-                            <div style="background:var(--light-color);padding:30px 28px 24px 28px; border-radius:var(--border-radius); box-shadow:var(--box-shadow); max-width:420px; margin:auto; position:relative;">
-                                <button onclick="closeReceiptModal()" style="position:absolute; top:9px; right:10px; background:none; border:none; font-size:1.3rem; color:var(--text-color-light); cursor:pointer;"><i class="fas fa-times"></i></button>
+                        <div id="receiptModal" class="modal" aria-modal="true" role="dialog" aria-labelledby="modalReceiptId" style="display:none;">
+                            <div class="modal-content" tabindex="-1">
+                                <button onclick="closeReceiptModal()" class="modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
                                 <h3>Receipt #<span id="modalReceiptId">ABC123</span></h3>
                                 <p><strong>Date:</strong> <span id="modalReceiptDate">05/10/2025</span></p>
                                 <p><strong>Mentor:</strong> John Doe</p>
@@ -162,7 +162,8 @@
             });
         }
 
-        // Receipt modal demo logic
+        // Modal accessibility: Focus trap and return
+        let lastFocusedElement = null;
         function showReceiptDetails(receiptId) {
             // For demo, just show static info; in real app, populate modal with receipt data
             document.getElementById('modalReceiptId').textContent = receiptId;
@@ -179,16 +180,51 @@
                 document.getElementById('modalReceiptRate').textContent = "$100/hr";
                 document.getElementById('modalReceiptTotal').textContent = "$200";
             }
-            document.getElementById('receiptModal').style.display = "flex";
+            const modal = document.getElementById('receiptModal');
+            modal.style.display = "flex";
+            lastFocusedElement = document.activeElement;
+            // Focus first button in modal
+            setTimeout(() => {
+                const firstBtn = modal.querySelector('button, [tabindex="0"]');
+                if (firstBtn) firstBtn.focus();
+            }, 10);
+            // Trap focus inside modal
+            document.addEventListener('keydown', trapFocus);
         }
         function closeReceiptModal() {
-            document.getElementById('receiptModal').style.display = "none";
+            const modal = document.getElementById('receiptModal');
+            modal.style.display = "none";
+            document.removeEventListener('keydown', trapFocus);
+            if (lastFocusedElement) lastFocusedElement.focus();
+        }
+        // Trap focus inside modal
+        function trapFocus(e) {
+            const modal = document.getElementById('receiptModal');
+            if (modal.style.display !== "flex") return;
+            const focusableEls = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstEl = focusableEls[0];
+            const lastEl = focusableEls[focusableEls.length - 1];
+            if (e.key === 'Tab') {
+                if (e.shiftKey) {
+                    if (document.activeElement === firstEl) {
+                        e.preventDefault();
+                        lastEl.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastEl) {
+                        e.preventDefault();
+                        firstEl.focus();
+                    }
+                }
+            } else if (e.key === 'Escape') {
+                closeReceiptModal();
+            }
         }
         // Close modal on outside click
         window.addEventListener('click', function(e){
             const modal = document.getElementById('receiptModal');
             if (modal && e.target === modal) {
-                modal.style.display = "none";
+                closeReceiptModal();
             }
         });
     </script>
