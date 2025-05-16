@@ -19,5 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
             chatArea.scrollTop = chatArea.scrollHeight;
             chatInput.value = '';
         });
+
+        // Optional: demo for attach file button
+        const attachBtn = chatInputForm.querySelector('button[type="button"]');
+        if (attachBtn) {
+            attachBtn.addEventListener('click', function() {
+                alert('File attachment is not implemented in this demo.');
+            });
+        }
     }
 });

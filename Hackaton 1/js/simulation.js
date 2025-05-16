@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('resultMentor').textContent = mentor;
             document.getElementById('resultSessions').textContent = sessions;
             document.getElementById('resultHours').textContent = totalHours;
-            document.getElementById('resultBase').textContent = baseAmount;
-            document.getElementById('resultBonus').textContent = bonus;
-            document.getElementById('resultTotal').textContent = totalPayout;
+            document.getElementById('resultBase').textContent = baseAmount.toLocaleString();
+            document.getElementById('resultBonus').textContent = bonus.toLocaleString();
+            document.getElementById('resultTotal').textContent = totalPayout.toLocaleString();
             document.getElementById('simulationResult').style.display = 'block';
         });
     }

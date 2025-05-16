@@ -9,39 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .audit-table th, .audit-table td {
-            padding: 10px 7px;
-            text-align: left;
-        }
-        .audit-table th {
-            background: var(--background-darker);
-            font-weight: 600;
-        }
-        .audit-table tr {
-            border-bottom: 1px solid var(--border-color);
-        }
-        .audit-table tr:last-child {
-            border-bottom: none;
-        }
-        .audit-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .audit-type {
-            font-weight: 500;
-            padding: 3px 10px;
-            border-radius: 12px;
-        }
-        .audit-type.create { background: #e2f7e2; color: #1d8c2f; }
-        .audit-type.update { background: #fff7e2; color: #b88313; }
-        .audit-type.delete { background: #fbeaea; color: #c0392b; }
-        .audit-type.login { background: #e2eafd; color: #3366cc; }
-        .audit-type.payout { background: #e2f1fb; color: #2073b9; }
-        @media (max-width: 768px) {
-            .audit-table th, .audit-table td { font-size: 0.97rem; }
-        }
-    </style>
+    
 </head>
 <body>
     <header>
@@ -180,7 +148,7 @@
             </div>
         </div>
     </footer>
-    <script src="js/main.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/audit.js"></script>
 </body>
 </html>
