@@ -91,6 +91,17 @@
                         </div>
                     </div>
                 </div>
+                 <!-- Log a New Session -->
+                <div class="table-card">
+                    <h3>Log a New Session</h3>
+                    <form id="sessionForm">
+                        <input type="date" id="session-date" required>
+                        <input type="text" id="session-topic" placeholder="Topic" required>
+                        <input type="number" id="session-duration" placeholder="Duration (minutes)" required min="1">
+                        <button type="submit" class="btn btn-primary">Log Session</button>
+                    </form>
+                    <div id="sessionStatus"></div>
+                </div>
                 <!-- My Sessions Table & Filters -->
                 <div class="dashboard-flex">
                     <div class="main-content">

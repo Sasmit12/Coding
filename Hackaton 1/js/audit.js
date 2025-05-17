@@ -1,53 +1,89 @@
-// js/audit.js
+// Ensure Firebase is loaded and initialized via firebaseConfig.js before this file
 
-// Export Audit table as CSV
 document.addEventListener('DOMContentLoaded', function () {
-    // Find the Export CSV button
-    const exportBtn = Array.from(document.querySelectorAll('.btn.btn-outline'))
-        .find(btn => btn.textContent.includes('Export CSV'));
-    const table = document.querySelector('.audit-table');
-
-    if (exportBtn && table) {
-        exportBtn.addEventListener('click', function () {
-            let csv = [];
-            // Get table headers
-            let headers = Array.from(table.querySelectorAll('thead th')).map(th => th.innerText.trim());
-            csv.push(headers.join(','));
-
-            // Get table rows
-            table.querySelectorAll('tbody tr').forEach(row => {
-                let rowData = [];
-                row.querySelectorAll('td').forEach(cell => {
-                    // Remove inner HTML tags and commas
-                    let text = cell.innerText.replace(/,/g, '');
-                    rowData.push(text);
-                });
-                csv.push(rowData.join(','));
-            });
-
-            // Create and trigger download
-            let csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(csv.join('\n'));
-            let link = document.createElement('a');
-            link.href = csvContent;
-            link.download = 'audit-logs.csv';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        });
-    }
-
-    // (Optional) Admin dropdown: toggle menu logic (add menu in HTML if needed)
-    const adminDropdownBtn = document.getElementById('adminDropdownBtn');
-    const userDropdownMenu = document.getElementById('userDropdownMenu');
-    if (adminDropdownBtn && userDropdownMenu) {
-        adminDropdownBtn.addEventListener('click', function () {
-            userDropdownMenu.classList.toggle('show');
-        });
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function (e) {
-            if (!adminDropdownBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-                userDropdownMenu.classList.remove('show');
+    // ----- Password Show/Hide Toggle -----
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const input = this.parentElement.querySelector('input');
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.querySelector('i').classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                this.querySelector('i').classList.replace('fa-eye-slash', 'fa-eye');
             }
         });
+    });
+
+    // ----- SIGNUP -----
+    const signupForm = document.getElementById('signupForm');
+    if (signupForm) {
+        signupForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const role = document.getElementById('role').value;
+
+            if (!name || !email || !password || !confirmPassword || !role) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            // Create user with email and password
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    const user = userCredential.user;
+                    // Save name and role in Firestore under "users" collection
+                    return firebase.firestore().collection('users').doc(user.uid).set({
+                        name, email, role, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    alert('Sign up successful! You can now log in.');
+                    window.location.href = 'login.html';
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        });
     }
+
+    // ----- LOGIN -----
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    // Optionally check user role here and redirect accordingly
+                    window.location.href = 'dashboard.html';
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        });
+    }
+
+    // ----- SOCIAL LOGINS (optional, not implemented) -----
+    // You can implement Google and Facebook auth here with Firebase Auth Providers.
+    // for Google:
+        document.querySelector('.social-btn.google')
+
+    // ----- LOGOUT FUNCTION (for dashboard, not used here) -----
+    // Add this to dashboard.js if needed
+     document.getElementById('logoutBtn').addEventListener('click', () => {
+         firebase.auth().signOut().then(() => window.location.href = 'login.html');
+     });
 });

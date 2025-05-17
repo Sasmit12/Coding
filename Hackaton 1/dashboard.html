@@ -52,7 +52,6 @@
                         <button class="btn btn-outline" id="adminDropdownBtn" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-shield"></i> Admin <i class="fas fa-caret-down"></i>
                         </button>
-                        <!-- Example dropdown, add JS for focus trap if used -->
                         <ul class="dropdown-menu" id="adminDropdownMenu" role="menu" aria-label="Admin Menu" tabindex="-1" hidden>
                             <li><a href="profile.html">Profile</a></li>
                             <li><a href="settings.html">Settings</a></li>
@@ -66,7 +65,7 @@
                         <div class="metric-flex">
                             <i class="fas fa-users metric-icon primary"></i>
                             <div>
-                                <div class="metric-value">24</div>
+                                <div class="metric-value" id="mentorCount">--</div>
                                 <div class="metric-label">Mentors</div>
                             </div>
                         </div>
@@ -75,7 +74,7 @@
                         <div class="metric-flex">
                             <i class="fas fa-calendar-check metric-icon secondary"></i>
                             <div>
-                                <div class="metric-value">156</div>
+                                <div class="metric-value" id="sessionCount">--</div>
                                 <div class="metric-label">Sessions</div>
                             </div>
                         </div>
@@ -84,7 +83,7 @@
                         <div class="metric-flex">
                             <i class="fas fa-clock metric-icon accent"></i>
                             <div>
-                                <div class="metric-value">12</div>
+                                <div class="metric-value" id="pendingApprovals">--</div>
                                 <div class="metric-label">Pending Approvals</div>
                             </div>
                         </div>
@@ -93,7 +92,7 @@
                         <div class="metric-flex">
                             <i class="fas fa-wallet metric-icon primary"></i>
                             <div>
-                                <div class="metric-value">&#36;12,400</div>
+                                <div class="metric-value" id="totalPayouts">&#36;--</div>
                                 <div class="metric-label">Total Payouts</div>
                             </div>
                         </div>
@@ -105,7 +104,7 @@
                     <div class="recent-activity">
                         <div class="activity-card">
                             <h3>Recent Activities</h3>
-                            <ul class="activity-list">
+                            <ul class="activity-list" id="recentActivities">
                                 <li><i class="fas fa-user-plus activity-icon secondary"></i> New mentor registered: <strong>Jane Doe</strong></li>
                                 <li><i class="fas fa-tasks activity-icon primary"></i> 5 sessions pending approval</li>
                                 <li><i class="fas fa-money-check activity-icon accent"></i> Payout processed: <strong>&#36;350</strong></li>
@@ -139,6 +138,28 @@
                         </div>
                     </aside>
                 </div>
+                <!-- Approve/Reject Sessions Table -->
+                <div class="table-card" style="margin-top:2rem">
+                    <h3>All Mentor Sessions</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mentor</th>
+                                    <th>Date</th>
+                                    <th>Topic</th>
+                                    <th>Duration</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allSessionsTable">
+                                <tr><td colspan="6">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="adminSessionStatus"></div>
+                </div>
             </div>
         </section>
     </main>
@@ -151,6 +172,5 @@
     </footer>
     <script src="js/utils.js"></script>
     <script src="js/admin.js"></script>
-    
 </body>
 </html>

@@ -1,3 +1,6 @@
+console.log("Firebase apps:", firebase.apps); 
+// Should show an array with one app
+
 // Smooth scrolling, testimonial slider, and contact form handling for landing page
 document.addEventListener('DOMContentLoaded', function() {
     // Testimonial slider logic
