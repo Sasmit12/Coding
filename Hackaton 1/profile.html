@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile | PayOrbit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="assets/logo.png" alt="PayOrbit Logo">
+          <span>PayOrbit</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <ul>
+            <li><a href="mentor-dashboard.html">Dashboard</a></li>
+            <li><a href="sessions.html">Sessions</a></li>
+            <li><a href="payments.html">Payments</a></li>
+            <li><a href="profile.html" class="active" aria-current="page">Profile</a></li>
+            <li><a href="support.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="auth-buttons">
+          <a href="logout.html" class="btn btn-outline">Logout</a>
+        </div>
+        <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="dashboard-section">
+      <div class="container">
+        <h1>My Profile</h1>
+        <form class="profile-form">
+          <div class="form-group">
+            <label for="mentorName">Name</label>
+            <input type="text" id="mentorName" name="mentorName" value="Alex Mentor" required>
+          </div>
+          <div class="form-group">
+            <label for="mentorEmail">Email</label>
+            <input type="email" id="mentorEmail" name="mentorEmail" value="alex.mentor@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="mentorBio">Bio</label>
+            <textarea id="mentorBio" name="mentorBio" rows="4">Passionate about mentoring and helping others grow in their careers.</textarea>
+          </div>
+          <div class="form-group">
+            <label for="mentorExpertise">Expertise</label>
+            <input type="text" id="mentorExpertise" name="mentorExpertise" value="Data Science, Python, Career Guidance">
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 PayOrbit. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

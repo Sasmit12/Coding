@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sessions | PayOrbit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img src="assets/logo.png" alt="PayOrbit Logo">
+          <span>PayOrbit</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <ul>
+            <li><a href="mentor-dashboard.html">Dashboard</a></li>
+            <li><a href="sessions.html" class="active" aria-current="page">Sessions</a></li>
+            <li><a href="payments.html">Payments</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="support.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="auth-buttons">
+          <a href="logout.html" class="btn btn-outline">Logout</a>
+        </div>
+        <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="dashboard-section">
+      <div class="container">
+        <h1>My Sessions</h1>
+        <p>View your upcoming and previous mentoring sessions.</p>
+        <div class="table-responsive">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Session Date</th>
+                <th>Time</th>
+                <th>Mentee</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025-05-21</td>
+                <td>15:00</td>
+                <td>Jane Doe</td>
+                <td><span class="badge badge-upcoming">Upcoming</span></td>
+                <td><button class="btn btn-outline btn-small">View</button></td>
+              </tr>
+              <tr>
+                <td>2025-05-14</td>
+                <td>10:30</td>
+                <td>John Smith</td>
+                <td><span class="badge badge-completed">Completed</span></td>
+                <td><button class="btn btn-outline btn-small">Details</button></td>
+              </tr>
+              <tr>
+                <td>2025-05-10</td>
+                <td>09:00</td>
+                <td>Alice Lee</td>
+                <td><span class="badge badge-missed">Missed</span></td>
+                <td><button class="btn btn-outline btn-small">Reschedule</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-primary">Schedule New Session</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 PayOrbit. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
