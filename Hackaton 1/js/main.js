@@ -1,6 +1,3 @@
-console.log("Firebase apps:", firebase.apps); 
-// Should show an array with one app
-
 // Smooth scrolling, testimonial slider, and contact form handling for landing page
 document.addEventListener('DOMContentLoaded', function() {
     // Testimonial slider logic
@@ -19,6 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => setActiveTestimonial(index));
     });
+
+    // (Optional) auto-slide testimonials every 7 seconds
+    setInterval(() => {
+        let next = (activeIndex + 1) % testimonialCards.length;
+        setActiveTestimonial(next);
+    }, 7000);
 
     // Contact form fake submit
     const contactForm = document.getElementById('contactForm');
