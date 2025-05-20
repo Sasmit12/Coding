@@ -1,31 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
-import Admin from "./pages/Admin";
-// ... import other pages
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import FeaturesSection from "./components/FeaturesSection";
+import HowItWorksSection from "./components/HowItWorksSection";
+import UserBenefitsSection from "./components/UserBenefitsSection";
+import TestimonialsSection from "./components/TestimonialsSection";
+import CtaSection from "./components/CtaSection";
+import ContactSection from "./components/ContactSection";
+import Footer from "./components/Footer";
+import "./styles.css";
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/admin" element={
-  <ProtectedRoute allowedRoles={["admin"]}>
-    <Admin />
-  </ProtectedRoute>
-} />
-<Route path="/dashboard" element={
-  <ProtectedRoute allowedRoles={["mentor"]}>
-    <Dashboard />
-  </ProtectedRoute>
-} />
-        {/* ...other routes */}
-      </Routes>
-    </Router>
+    <>
+      <Navbar />
+      <main>
+        <HeroSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <UserBenefitsSection />
+        <TestimonialsSection />
+        <CtaSection />
+        <ContactSection />
+      </main>
+      <Footer />
+    </>
   );
 }
