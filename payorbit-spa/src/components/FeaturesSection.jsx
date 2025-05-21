@@ -1,64 +1,84 @@
 export default function FeaturesSection() {
   return (
-    <section id="features" className="features">
+    <section className="features-section">
       <div className="container">
         <div className="section-header">
-          <h2>Key Features</h2>
-          <p>Everything you need to manage mentor payments efficiently</p>
+          <h2>PayOrbit Features</h2>
+          <p>
+            Discover the robust capabilities that make PayOrbit a seamless, secure, and efficient platform for mentors and administrators.
+          </p>
         </div>
         <div className="feature-grid">
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-money-bill-wave"></i>
+              <i className="fas fa-user-shield"></i>
             </div>
-            <h3>Automated Payouts</h3>
+            <h3>Secure Authentication</h3>
             <p>
-              Process payments automatically based on mentor sessions with customizable payment cycles.
+              Multi-method login and signup options with secure password handling, Google/Facebook social sign-in, and role-based access for administrators and mentors.
             </p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-calendar-check"></i>
+              <i className="fas fa-wallet"></i>
             </div>
-            <h3>Session Tracking</h3>
+            <h3>Automated Payments</h3>
             <p>
-              Log and verify teaching sessions with detailed reporting and approval workflows.
+              Streamlined payment management with automated payout scheduling, payment history tracking, and transparent audit trails.
+            </p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">
+              <i className="fas fa-calendar-alt"></i>
+            </div>
+            <h3>Session Scheduling</h3>
+            <p>
+              Easy calendar integration and scheduling tools for managing mentorship sessions, reminders, and attendance logs.
             </p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">
               <i className="fas fa-comments"></i>
             </div>
-            <h3>Real-time Support</h3>
+            <h3>Real-Time Communication</h3>
             <p>
-              Connect mentors and admins through an integrated chat system for quick issue resolution.
-            </p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">
-              <i className="fas fa-file-invoice-dollar"></i>
-            </div>
-            <h3>Receipt Generation</h3>
-            <p>
-              Automatically create and distribute professional payment receipts for every transaction.
-            </p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">
-              <i className="fas fa-shield-alt"></i>
-            </div>
-            <h3>Secure Authentication</h3>
-            <p>
-              Role-based access control with Firebase Authentication ensures data security.
+              Built-in chat system for instant, secure messaging between mentors and mentees, supporting file sharing and resource links.
             </p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">
               <i className="fas fa-chart-line"></i>
             </div>
-            <h3>Payment Analytics</h3>
+            <h3>Analytics & Reports</h3>
             <p>
-              Gain insights from comprehensive reports on mentor activity and payment history.
+              Comprehensive dashboards and downloadable reports for monitoring payouts, session activity, and overall platform usage.
+            </p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">
+              <i className="fas fa-shield-alt"></i>
+            </div>
+            <h3>Audit & Compliance</h3>
+            <p>
+              Detailed action logs and compliance tools to ensure transparency and accountability for every platform interaction.
+            </p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">
+              <i className="fas fa-cogs"></i>
+            </div>
+            <h3>Customizable Settings</h3>
+            <p>
+              Flexible user and organization settings for notifications, payout preferences, session durations, and more.
+            </p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">
+              <i className="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h3>Cloud-Based & Responsive</h3>
+            <p>
+              Access PayOrbit anytime, anywhere, on any device, with fast, cloud-hosted infrastructure and a responsive user interface.
             </p>
           </div>
         </div>
