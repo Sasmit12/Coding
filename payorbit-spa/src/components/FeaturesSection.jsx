@@ -1,3 +1,14 @@
+import {
+  FaUserShield,
+  FaWallet,
+  FaCalendarAlt,
+  FaComments,
+  FaChartLine,
+  FaShieldAlt,
+  FaCogs,
+  FaCloudUploadAlt,
+} from "react-icons/fa";
+
 export default function FeaturesSection() {
   return (
     <section className="features-section">
@@ -11,7 +22,7 @@ export default function FeaturesSection() {
         <div className="feature-grid">
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-user-shield"></i>
+              <FaUserShield />
             </div>
             <h3>Secure Authentication</h3>
             <p>
@@ -20,7 +31,7 @@ export default function FeaturesSection() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-wallet"></i>
+              <FaWallet />
             </div>
             <h3>Automated Payments</h3>
             <p>
@@ -29,7 +40,7 @@ export default function FeaturesSection() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-calendar-alt"></i>
+              <FaCalendarAlt />
             </div>
             <h3>Session Scheduling</h3>
             <p>
@@ -38,7 +49,7 @@ export default function FeaturesSection() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-comments"></i>
+              <FaComments />
             </div>
             <h3>Real-Time Communication</h3>
             <p>
@@ -47,7 +58,7 @@ export default function FeaturesSection() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-chart-line"></i>
+              <FaChartLine />
             </div>
             <h3>Analytics & Reports</h3>
             <p>
@@ -56,7 +67,7 @@ export default function FeaturesSection() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-shield-alt"></i>
+              <FaShieldAlt />
             </div>
             <h3>Audit & Compliance</h3>
             <p>
@@ -65,7 +76,7 @@ export default function FeaturesSection() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-cogs"></i>
+              <FaCogs />
             </div>
             <h3>Customizable Settings</h3>
             <p>
@@ -74,7 +85,7 @@ export default function FeaturesSection() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-cloud-upload-alt"></i>
+              <FaCloudUploadAlt />
             </div>
             <h3>Cloud-Based & Responsive</h3>
             <p>

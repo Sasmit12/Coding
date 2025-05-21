@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function HeroSection() {
   return (
     <section className="hero" id="hero">
@@ -8,9 +10,9 @@ export default function HeroSection() {
             PayOrbit automates your EdTech platform's payment processing, making mentor payouts simple, transparent, and error-free.
           </p>
           <div className="cta-buttons">
-            <a href="/signup" className="btn btn-primary btn-large">
+            <Link to="/signup" className="btn btn-primary btn-large">
               Get Started
-            </a>
+            </Link>
             <a href="#demo" className="btn btn-outline btn-large">
               Watch Demo
             </a>

@@ -1,3 +1,6 @@
+import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaTwitter, FaLinkedinIn, FaFacebookF, FaInstagram } from "react-icons/fa";
+
 export default function ContactSection() {
   return (
     <section id="contact" className="contact">
@@ -33,7 +36,7 @@ export default function ContactSection() {
           <div className="contact-info">
             <div className="info-item">
               <div className="info-icon">
-                <i className="fas fa-envelope"></i>
+                <FaEnvelope />
               </div>
               <div className="info-content">
                 <h4>Email</h4>
@@ -42,7 +45,7 @@ export default function ContactSection() {
             </div>
             <div className="info-item">
               <div className="info-icon">
-                <i className="fas fa-phone-alt"></i>
+                <FaPhoneAlt />
               </div>
               <div className="info-content">
                 <h4>Phone</h4>
@@ -51,7 +54,7 @@ export default function ContactSection() {
             </div>
             <div className="info-item">
               <div className="info-icon">
-                <i className="fas fa-map-marker-alt"></i>
+                <FaMapMarkerAlt />
               </div>
               <div className="info-content">
                 <h4>Office</h4>
@@ -59,17 +62,17 @@ export default function ContactSection() {
               </div>
             </div>
             <div className="social-links">
-              <a href="#" className="social-link">
-                <i className="fab fa-twitter"></i>
+              <a href="#" className="social-link" aria-label="Twitter">
+                <FaTwitter />
               </a>
-              <a href="#" className="social-link">
-                <i className="fab fa-linkedin-in"></i>
+              <a href="#" className="social-link" aria-label="LinkedIn">
+                <FaLinkedinIn />
               </a>
-              <a href="#" className="social-link">
-                <i className="fab fa-facebook-f"></i>
+              <a href="#" className="social-link" aria-label="Facebook">
+                <FaFacebookF />
               </a>
-              <a href="#" className="social-link">
-                <i className="fab fa-instagram"></i>
+              <a href="#" className="social-link" aria-label="Instagram">
+                <FaInstagram />
               </a>
             </div>
           </div>

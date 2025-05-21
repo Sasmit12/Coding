@@ -50,23 +50,23 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutSection />} />
         <Route path="/chat" element={<ChatPage />} />
-         <Route path="/dashboard" element={<AdminDashboard />} />
-          <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/mentor-dashboard" element={<MentorDashboard />} />
-          <Route path="/mentors" element={<MentorsPage />} />
-          <Route path="/payment" element={<PaymentsPage />} />
-          <Route path="/payouts" element={<PayoutsPage />} />
-          <Route path="/profile" element={<ProfilePage />}/>
-          <Route path="/receipt" element={<ReceiptsPage />}/>
-          <Route path="/reports" element={<ReportsPage />}/>
-          <Route path="/reset-password" element={<ResetPasswordPage />}/>
-          <Route path="/sessions" element={<SessionsPage />}/>
-          <Route path="/settings" element={<SettingsPage />}/>
-          <Route path="/signup" element={<SignupPage />}/>
-          <Route path="/support" element={<SupportPage />}/>
-          <Route path="/simulation" element={<SimulationPage />} />
-          <Route path="/audit" element={<AuditPage />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/mentor-dashboard" element={<MentorDashboard />} />
+        <Route path="/mentors" element={<MentorsPage />} />
+        <Route path="/payment" element={<PaymentsPage />} />
+        <Route path="/payouts" element={<PayoutsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/receipt" element={<ReceiptsPage />} />
+        <Route path="/reports" element={<ReportsPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/sessions" element={<SessionsPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/support" element={<SupportPage />} />
+        <Route path="/simulation" element={<SimulationPage />} />
+        <Route path="/audit" element={<AuditPage />} />
         {/* Add more routes as needed */}
       </Routes>
       <Footer />

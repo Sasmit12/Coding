@@ -1,3 +1,5 @@
+import { FaUserCheck, FaWallet, FaCalendarAlt, FaComments, FaShieldAlt } from "react-icons/fa";
+
 export default function AboutSection() {
   return (
     <section className="about-section">
@@ -19,19 +21,19 @@ export default function AboutSection() {
           <h3>Key Features</h3>
           <ul>
             <li>
-              <i className="fas fa-user-check"></i> Secure authentication for all users
+              <FaUserCheck /> Secure authentication for all users
             </li>
             <li>
-              <i className="fas fa-wallet"></i> Automated payment and payout systems
+              <FaWallet /> Automated payment and payout systems
             </li>
             <li>
-              <i className="fas fa-calendar-alt"></i> Session scheduling and tracking
+              <FaCalendarAlt /> Session scheduling and tracking
             </li>
             <li>
-              <i className="fas fa-comments"></i> Real-time chat and collaboration
+              <FaComments /> Real-time chat and collaboration
             </li>
             <li>
-              <i className="fas fa-shield-alt"></i> Robust audit and reporting tools
+              <FaShieldAlt /> Robust audit and reporting tools
             </li>
           </ul>
           <h3>Meet the Team</h3>

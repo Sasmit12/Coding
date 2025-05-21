@@ -1,4 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import { 
+  FaUser, FaCaretDown, FaPaperPlane, FaPaperclip, 
+  FaUserShield, FaUserCog, FaPlus 
+} from "react-icons/fa";
 
 const initialMessages = [
   {
@@ -61,7 +65,7 @@ export default function ChatPage() {
           </div>
           <div className="user-dropdown" style={{ position: "relative" }}>
             <button className="btn btn-outline" id="mentorDropdownBtn">
-              <i className="fas fa-user"></i> Mentor <i className="fas fa-caret-down"></i>
+              <FaUser /> Mentor <FaCaretDown />
             </button>
           </div>
         </div>
@@ -105,7 +109,7 @@ export default function ChatPage() {
                   required
                 />
                 <button type="submit" className="btn btn-primary">
-                  <i className="fas fa-paper-plane"></i> Send
+                  <FaPaperPlane /> Send
                 </button>
                 <button
                   type="button"
@@ -115,7 +119,7 @@ export default function ChatPage() {
                   disabled
                   style={{ opacity: 0.7, cursor: "not-allowed" }}
                 >
-                  <i className="fas fa-paperclip"></i>
+                  <FaPaperclip />
                 </button>
               </form>
             </div>
@@ -135,22 +139,22 @@ export default function ChatPage() {
               <ul style={{ paddingLeft: 0 }}>
                 <li style={{ marginBottom: 10 }}>
                   <a href="#" className="btn btn-outline" style={{ width: "100%", textAlign: "left" }}>
-                    <i className="fas fa-user-shield"></i> Support Team
+                    <FaUserShield /> Support Team
                   </a>
                 </li>
                 <li style={{ marginBottom: 10 }}>
                   <a href="#" className="btn btn-outline" style={{ width: "100%", textAlign: "left" }}>
-                    <i className="fas fa-user-cog"></i> Admin
+                    <FaUserCog /> Admin
                   </a>
                 </li>
                 <li style={{ marginBottom: 10 }}>
                   <a href="#" className="btn btn-outline" style={{ width: "100%", textAlign: "left" }}>
-                    <i className="fas fa-user"></i> Jane (Mentor)
+                    <FaUser /> Jane (Mentor)
                   </a>
                 </li>
                 <li style={{ marginBottom: 10 }}>
                   <a href="#" className="btn btn-outline" style={{ width: "100%", textAlign: "left" }}>
-                    <i className="fas fa-plus"></i> New Chat
+                    <FaPlus /> New Chat
                   </a>
                 </li>
               </ul>

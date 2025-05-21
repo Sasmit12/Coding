@@ -42,7 +42,7 @@ export default function Navbar() {
                   Profile
                 </NavLink>
               </li>
-               <li>
+              <li>
                 <NavLink to="/receipt" onClick={closeNav}>
                   Receipt
                 </NavLink>

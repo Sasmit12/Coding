@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { 
+  FaUserPlus, FaTasks, FaMoneyCheck, FaFileAlt, 
+  FaUsers, FaCalendarCheck, FaClock, FaWallet, 
+  FaUserShield, FaCaretDown, FaUserCog, FaSearch, 
+  FaCreditCard, FaChartBar
+} from "react-icons/fa";
 
 export default function AdminDashboard() {
-  // Example static data. Replace with real data from your backend as needed.
   const [metrics] = useState({
     mentorCount: 12,
     sessionCount: 43,
@@ -12,19 +17,19 @@ export default function AdminDashboard() {
 
   const recentActivities = [
     {
-      icon: "fas fa-user-plus activity-icon secondary",
+      icon: <FaUserPlus className="activity-icon secondary" />,
       text: <>New mentor registered: <strong>Jane Doe</strong></>,
     },
     {
-      icon: "fas fa-tasks activity-icon primary",
+      icon: <FaTasks className="activity-icon primary" />,
       text: <>5 sessions pending approval</>,
     },
     {
-      icon: "fas fa-money-check activity-icon accent",
+      icon: <FaMoneyCheck className="activity-icon accent" />,
       text: <>Payout processed: <strong>$350</strong></>,
     },
     {
-      icon: "fas fa-file-alt activity-icon primary",
+      icon: <FaFileAlt className="activity-icon primary" />,
       text: <>Audit report generated</>,
     },
   ];
@@ -46,7 +51,6 @@ export default function AdminDashboard() {
       status: "Approved",
       id: 2,
     },
-    // Add more sessions as needed
   ];
 
   return (
@@ -61,7 +65,7 @@ export default function AdminDashboard() {
           </div>
           <div className="user-dropdown" id="userDropdown">
             <button className="btn btn-outline" id="adminDropdownBtn" aria-haspopup="true" aria-expanded="false">
-              <i className="fas fa-user-shield"></i> Admin <i className="fas fa-caret-down"></i>
+              <FaUserShield /> Admin <FaCaretDown />
             </button>
             {/* Dropdown implementation can be added here */}
           </div>
@@ -70,7 +74,7 @@ export default function AdminDashboard() {
         <div className="metrics-grid">
           <div className="metric-card">
             <div className="metric-flex">
-              <i className="fas fa-users metric-icon primary"></i>
+              <FaUsers className="metric-icon primary" />
               <div>
                 <div className="metric-value" id="mentorCount">{metrics.mentorCount}</div>
                 <div className="metric-label">Mentors</div>
@@ -79,7 +83,7 @@ export default function AdminDashboard() {
           </div>
           <div className="metric-card">
             <div className="metric-flex">
-              <i className="fas fa-calendar-check metric-icon secondary"></i>
+              <FaCalendarCheck className="metric-icon secondary" />
               <div>
                 <div className="metric-value" id="sessionCount">{metrics.sessionCount}</div>
                 <div className="metric-label">Sessions</div>
@@ -88,7 +92,7 @@ export default function AdminDashboard() {
           </div>
           <div className="metric-card">
             <div className="metric-flex">
-              <i className="fas fa-clock metric-icon accent"></i>
+              <FaClock className="metric-icon accent" />
               <div>
                 <div className="metric-value" id="pendingApprovals">{metrics.pendingApprovals}</div>
                 <div className="metric-label">Pending Approvals</div>
@@ -97,7 +101,7 @@ export default function AdminDashboard() {
           </div>
           <div className="metric-card">
             <div className="metric-flex">
-              <i className="fas fa-wallet metric-icon primary"></i>
+              <FaWallet className="metric-icon primary" />
               <div>
                 <div className="metric-value" id="totalPayouts">${metrics.totalPayouts.toLocaleString()}</div>
                 <div className="metric-label">Total Payouts</div>
@@ -114,7 +118,7 @@ export default function AdminDashboard() {
               <ul className="activity-list" id="recentActivities">
                 {recentActivities.map((a, i) => (
                   <li key={i}>
-                    <i className={a.icon}></i> {a.text}
+                    {a.icon} {a.text}
                   </li>
                 ))}
               </ul>
@@ -138,22 +142,22 @@ export default function AdminDashboard() {
               <ul className="sidebar-actions">
                 <li>
                   <Link to="/mentors" className="btn btn-outline action-btn">
-                    <i className="fas fa-user-cog"></i> Manage Mentors
+                    <FaUserCog /> Manage Mentors
                   </Link>
                 </li>
                 <li>
                   <Link to="/sessions" className="btn btn-outline action-btn">
-                    <i className="fas fa-search"></i> Verify Sessions
+                    <FaSearch /> Verify Sessions
                   </Link>
                 </li>
                 <li>
                   <Link to="/payouts" className="btn btn-outline action-btn">
-                    <i className="fas fa-credit-card"></i> Process Payouts
+                    <FaCreditCard /> Process Payouts
                   </Link>
                 </li>
                 <li>
                   <Link to="/reports" className="btn btn-outline action-btn">
-                    <i className="fas fa-chart-bar"></i> View Analytics
+                    <FaChartBar /> View Analytics
                   </Link>
                 </li>
               </ul>

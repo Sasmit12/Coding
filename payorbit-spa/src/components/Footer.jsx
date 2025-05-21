@@ -1,3 +1,6 @@
+import { FaTwitter, FaLinkedinIn, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer>
@@ -10,10 +13,10 @@ export default function Footer() {
             </div>
             <p>Streamlining payments for EdTech platforms and their mentors worldwide.</p>
             <div className="footer-social">
-              <a href="#" className="social-link"><i className="fab fa-twitter"></i></a>
-              <a href="#" className="social-link"><i className="fab fa-linkedin-in"></i></a>
-              <a href="#" className="social-link"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social-link"><i className="fab fa-instagram"></i></a>
+              <a href="#" className="social-link" aria-label="Twitter"><FaTwitter /></a>
+              <a href="#" className="social-link" aria-label="LinkedIn"><FaLinkedinIn /></a>
+              <a href="#" className="social-link" aria-label="Facebook"><FaFacebookF /></a>
+              <a href="#" className="social-link" aria-label="Instagram"><FaInstagram /></a>
             </div>
           </div>
           <div className="footer-col">
@@ -36,7 +39,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Company</h4>
             <ul className="footer-links">
-              <li><a href="/about">About Us</a></li>
+              <li><Link to="/about">About Us</Link></li>
               <li><a href="#">Careers</a></li>
               <li><a href="#contact">Contact</a></li>
               <li><a href="#">Privacy Policy</a></li>

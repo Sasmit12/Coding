@@ -1,3 +1,6 @@
+import { FaCheckCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 export default function UserBenefitsSection() {
   return (
     <section className="user-benefits">
@@ -10,24 +13,24 @@ export default function UserBenefitsSection() {
             </div>
             <ul className="benefits-list">
               <li>
-                <i className="fas fa-check-circle"></i> Reduce administrative overhead
+                <FaCheckCircle /> Reduce administrative overhead
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Eliminate payment errors
+                <FaCheckCircle /> Eliminate payment errors
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Gain financial visibility
+                <FaCheckCircle /> Gain financial visibility
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Generate accurate reports
+                <FaCheckCircle /> Generate accurate reports
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Improve mentor satisfaction
+                <FaCheckCircle /> Improve mentor satisfaction
               </li>
             </ul>
-            <a href="/signup?role=admin" className="btn btn-primary">
+            <Link to="/signup?role=admin" className="btn btn-primary">
               Admin Sign Up
-            </a>
+            </Link>
           </div>
           <div className="benefit-col mentor-benefits">
             <div className="section-header">
@@ -36,24 +39,24 @@ export default function UserBenefitsSection() {
             </div>
             <ul className="benefits-list">
               <li>
-                <i className="fas fa-check-circle"></i> Track your sessions easily
+                <FaCheckCircle /> Track your sessions easily
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Monitor payment status
+                <FaCheckCircle /> Monitor payment status
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Download payment receipts
+                <FaCheckCircle /> Download payment receipts
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Communicate with admin directly
+                <FaCheckCircle /> Communicate with admin directly
               </li>
               <li>
-                <i className="fas fa-check-circle"></i> Access your history anytime
+                <FaCheckCircle /> Access your history anytime
               </li>
             </ul>
-            <a href="/signup?role=mentor" className="btn btn-primary">
+            <Link to="/signup?role=mentor" className="btn btn-primary">
               Mentor Sign Up
-            </a>
+            </Link>
           </div>
         </div>
       </div>
