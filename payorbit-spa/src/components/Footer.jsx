@@ -1,5 +1,5 @@
 import { FaTwitter, FaLinkedinIn, FaFacebookF, FaInstagram } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -30,19 +30,27 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Resources</h4>
             <ul className="footer-links">
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">API Reference</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Support Center</a></li>
+              <li>
+                <NavLink to="/documentation">Documentation</NavLink>
+              </li>
+              <li>
+                <NavLink to="/api-reference">API Reference</NavLink>
+              </li>
+              <li>
+                <NavLink to="/blog">Blog</NavLink>
+              </li>
+              <li>
+                <NavLink to="/support-center">Support Center</NavLink>
+              </li>
             </ul>
           </div>
           <div className="footer-col">
             <h4>Company</h4>
             <ul className="footer-links">
               <li><Link to="/about">About Us</Link></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#">Privacy Policy</a></li>
+              <li><Link to="/careers">Careers</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>

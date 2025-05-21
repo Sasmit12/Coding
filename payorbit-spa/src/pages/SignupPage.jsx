@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { signUpWithEmail, signUpWithGoogle, signUpWithFacebook } from "../firebase/auth"; // Example import
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../firebase"; // adjust if your firebase path is different
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -18,6 +19,8 @@ export default function SignupPage() {
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    setError("");
+    setStatus("");
   }
 
   function togglePassword() {
@@ -39,22 +42,42 @@ export default function SignupPage() {
       setError("Passwords do not match.");
       return;
     }
-    // Implement your signup logic here, e.g., Firebase Auth, API call, etc.
+    if (form.password.length < 6) {
+      setError("Password should be at least 6 characters.");
+      return;
+    }
     try {
-      // await signUpWithEmail(form.email, form.password, form.name, form.role);
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password);
+
+      // Optionally update the displayName and custom role in profile (if you store roles in Firestore, add Firestore logic here)
+      await updateProfile(userCredential.user, {
+        displayName: form.name,
+      });
+
+      // You can store the role in Firestore under a 'users' collection here if needed
+
+      // Optionally, send email verification
+      // await sendEmailVerification(userCredential.user);
+
       setStatus("Signup successful! Please check your email to verify your account.");
+      setForm({
+        name: "",
+        email: "",
+        role: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (err) {
-      setError("Signup failed. Please try again.");
+      setError(err.message);
     }
   }
 
   // Social login handlers (implement as needed)
   function handleGoogleSignUp() {
-    // signUpWithGoogle();
     setStatus("Google signup coming soon!");
   }
   function handleFacebookSignUp() {
-    // signUpWithFacebook();
     setStatus("Facebook signup coming soon!");
   }
 
