@@ -22,9 +22,9 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Product</h4>
             <ul className="footer-links">
-              <li><a href="#features">Features</a></li>
-              <li><a href="#how-it-works">How It Works</a></li>
-              <li><a href="#testimonials">Testimonials</a></li>
+              <li><NavLink to="/features">Features</NavLink></li>
+              <li><NavLink to="/how-it-works">How It Works</NavLink></li>
+              <li><NavLink to="/testimonials">Testimonials</NavLink></li>
             </ul>
           </div>
           <div className="footer-col">
@@ -47,10 +47,18 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Company</h4>
             <ul className="footer-links">
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/careers">Careers</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+              <li>
+                <NavLink to="/about-us">About Us</NavLink>
+              </li>
+              <li>
+                <NavLink to="/careers">Careers</NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact">Contact</NavLink>
+              </li>
+              <li>
+                <NavLink to="/privacy-policy">Privacy Policy</NavLink>
+              </li>
             </ul>
           </div>
         </div>

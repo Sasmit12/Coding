@@ -1,24 +1,20 @@
-import { NavLink, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
   const [navOpen, setNavOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
   const toggleNav = () => setNavOpen(v => !v);
   const closeNav = () => setNavOpen(false);
 
-  // Check authentication status on component mount
-  useEffect(() => {
-    // In a real app, you would check your auth service, local storage, or context
-    // This is just a placeholder example - replace with your actual auth check
-    const checkAuthStatus = () => {
-      const token = localStorage.getItem('authToken');
-      setIsLoggedIn(!!token);
-    };
-    
-    checkAuthStatus();
-  }, []);
+  const handleLogout = async () => {
+    await logout();
+    closeNav();
+    navigate("/"); // Redirect to home or login after logout
+  };
 
   return (
     <header>
@@ -28,95 +24,36 @@ export default function Navbar() {
             <img src="/assets/logo.png" alt="PayOrbit Logo" />
             <span>PayOrbit</span>
           </div>
-          
           <div className={`nav-links${navOpen ? " active" : ""}`} id="navLinks">
             <ul>
-              {isLoggedIn ? (
-                // Navigation links for logged-in users
+              {currentUser ? (
                 <>
-                  <li>
-                    <NavLink to="/dashboard" onClick={closeNav}>
-                      Dashboard
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/mentors" onClick={closeNav}>
-                      Mentors
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/sessions" onClick={closeNav}>
-                      Sessions
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/payouts" onClick={closeNav}>
-                      Payouts
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/profile" onClick={closeNav}>
-                      Profile
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/receipt" onClick={closeNav}>
-                      Receipt
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/reports" onClick={closeNav}>
-                      Reports
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/chat" onClick={closeNav}>
-                      Chat
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/settings" onClick={closeNav}>
-                      Settings
-                    </NavLink>
-                  </li>
+                  <li><NavLink to="/dashboard" onClick={closeNav}>Dashboard</NavLink></li>
+                  <li><NavLink to="/mentors" onClick={closeNav}>Mentors</NavLink></li>
+                  <li><NavLink to="/sessions" onClick={closeNav}>Sessions</NavLink></li>
+                  <li><NavLink to="/payouts" onClick={closeNav}>Payouts</NavLink></li>
+                  <li><NavLink to="/profile" onClick={closeNav}>Profile</NavLink></li>
+                  <li><NavLink to="/receipt" onClick={closeNav}>Receipt</NavLink></li>
+                  <li><NavLink to="/reports" onClick={closeNav}>Reports</NavLink></li>
+                  <li><NavLink to="/chat" onClick={closeNav}>Chat</NavLink></li>
+                  <li><NavLink to="/settings" onClick={closeNav}>Settings</NavLink></li>
                 </>
               ) : (
-                // Navigation links for visitors (not logged in)
                 <>
-                  <li>
-                    <NavLink to="/features" onClick={closeNav}>Features</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/about" onClick={closeNav}>About</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/testimonial" onClick={closeNav}>Testimonial</NavLink>
-                  </li>                  
-                  <li>
-                    <NavLink to="/contact" onClick={closeNav}>Contact</NavLink>
-                  </li>                  
+                  <li><NavLink to="/features" onClick={closeNav}>Features</NavLink></li>
+                  <li><NavLink to="/about" onClick={closeNav}>About</NavLink></li>
+                  <li><NavLink to="/testimonials" onClick={closeNav}>Testimonials</NavLink></li>
+                  <li><NavLink to="/contact" onClick={closeNav}>Contact</NavLink></li>
                 </>
               )}
             </ul>
           </div>
-          
           <div className="auth-buttons">
-            {isLoggedIn ? (
-              // For logged-in users: show logout button
-              <Link 
-                to="/" 
-                className="btn btn-outline" 
-                onClick={() => {
-                  // Handle logout logic here
-                  localStorage.removeItem('authToken');
-                  setIsLoggedIn(false);
-                  closeNav();
-                }}
-              >
+            {currentUser ? (
+              <button className="btn btn-outline" onClick={handleLogout}>
                 Logout
-              </Link>
+              </button>
             ) : (
-              // For visitors: show login and signup buttons
               <>
                 <Link to="/login" className="btn btn-outline" onClick={closeNav}>
                   Login
@@ -127,7 +64,6 @@ export default function Navbar() {
               </>
             )}
           </div>
-          
           <div
             className={`hamburger${navOpen ? " active" : ""}`}
             id="hamburgerBtn"

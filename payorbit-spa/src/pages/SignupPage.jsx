@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase"; // adjust if your firebase path is different
+import { auth } from "../firebase";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -47,19 +47,8 @@ export default function SignupPage() {
       return;
     }
     try {
-      // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password);
-
-      // Optionally update the displayName and custom role in profile (if you store roles in Firestore, add Firestore logic here)
-      await updateProfile(userCredential.user, {
-        displayName: form.name,
-      });
-
-      // You can store the role in Firestore under a 'users' collection here if needed
-
-      // Optionally, send email verification
-      // await sendEmailVerification(userCredential.user);
-
+      await updateProfile(userCredential.user, { displayName: form.name });
       setStatus("Signup successful! Please check your email to verify your account.");
       setForm({
         name: "",
@@ -73,7 +62,6 @@ export default function SignupPage() {
     }
   }
 
-  // Social login handlers (implement as needed)
   function handleGoogleSignUp() {
     setStatus("Google signup coming soon!");
   }

@@ -26,13 +26,17 @@ import SignupPage from "./pages/SignupPage";
 import SupportPage from "./pages/SupportPage";
 import AuditPage from "./pages/AuditPage";
 import SimulationPage from "./pages/SimulationPage";
-import TestimonialsPage from "./pages/TestimonialsPage";  
+import TestimonialsPage from "./pages/TestimonialsPage";
 import ContactPage from "./pages/ContactPage";
 import DocumentationPage from "./pages/DocumentationPage";
 import APIReferencePage from "./pages/APIReferencePage";
 import BlogPage from "./pages/BlogPage";
 import SupportCenterPage from "./pages/SupportCenterPage";
+import AboutPage from "./pages/AboutPage";
+import CareersPage from "./pages/CareersPage";
 import Footer from "./components/Footer";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import HowItWorksPage from "./pages/HowItWorksPage";
 
 function LandingPage() {
   return (
@@ -73,13 +77,16 @@ export default function App() {
         <Route path="/support" element={<SupportPage />} />
         <Route path="/simulation" element={<SimulationPage />} />
         <Route path="/audit" element={<AuditPage />} />
-        <Route path="/testimonial" element={<TestimonialsPage />} />
+        <Route path="/testimonials" element={<TestimonialsPage />} />
         <Route path="/documentation" element={<DocumentationPage />} />
         <Route path="/api-reference" element={<APIReferencePage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/support-center" element={<SupportCenterPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        {/* Add more routes as needed */}
+        <Route path="/about-us" element={<AboutPage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
       </Routes>
       <Footer />
     </>

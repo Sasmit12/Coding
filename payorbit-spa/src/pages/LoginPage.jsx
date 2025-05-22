@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// If using Firebase, import your config and auth methods here
-// import { signInWithEmailAndPassword, signInWithGoogle, signInWithFacebook } from "../firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,32 +10,26 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Placeholder login handler - replace with real auth logic
-  const handleLogin = async e => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    // Example: Replace with Firebase or your backend auth logic
     if (!email || !password) {
       setError("Please enter email and password.");
       return;
     }
     try {
-      // await signInWithEmailAndPassword(email, password);
-      // navigate("/dashboard"); // or wherever you want after login
-      alert("Logged in! (Demo only, implement real auth)");
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/dashboard");
     } catch (err) {
       setError("Login failed. Check your credentials.");
     }
   };
 
   const handleGoogleLogin = () => {
-    // signInWithGoogle().then(() => navigate("/dashboard"));
-    alert("Google sign-in (Demo only, implement real auth)");
+    alert("Google sign-in coming soon!");
   };
-
   const handleFacebookLogin = () => {
-    // signInWithFacebook().then(() => navigate("/dashboard"));
-    alert("Facebook sign-in (Demo only, implement real auth)");
+    alert("Facebook sign-in coming soon!");
   };
 
   return (
