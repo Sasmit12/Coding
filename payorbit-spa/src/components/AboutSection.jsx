@@ -1,5 +1,15 @@
 import { FaUserCheck, FaWallet, FaCalendarAlt, FaComments, FaShieldAlt } from "react-icons/fa";
 
+const teamMembers = [
+  {
+    name: "Sasmit Nakhate",
+    role: "Lead Developer",
+    image: "/assets/team1.png",
+    alt: "Photo of Sasmit Nakhate, Lead Developer",
+  },
+  // Add more team members here as objects
+];
+
 export default function AboutSection() {
   return (
     <section className="about-section">
@@ -20,30 +30,21 @@ export default function AboutSection() {
           </p>
           <h3>Key Features</h3>
           <ul>
-            <li>
-              <FaUserCheck /> Secure authentication for all users
-            </li>
-            <li>
-              <FaWallet /> Automated payment and payout systems
-            </li>
-            <li>
-              <FaCalendarAlt /> Session scheduling and tracking
-            </li>
-            <li>
-              <FaComments /> Real-time chat and collaboration
-            </li>
-            <li>
-              <FaShieldAlt /> Robust audit and reporting tools
-            </li>
+            <li><FaUserCheck /> Secure authentication for all users</li>
+            <li><FaWallet /> Automated payment and payout systems</li>
+            <li><FaCalendarAlt /> Session scheduling and tracking</li>
+            <li><FaComments /> Real-time chat and collaboration</li>
+            <li><FaShieldAlt /> Robust audit and reporting tools</li>
           </ul>
           <h3>Meet the Team</h3>
           <div className="about-team">
-            <div className="team-member">
-              <img src="/assets/team1.png" alt="Team Member 1" />
-              <h4>Sasmit Nakhate</h4>
-              <p>Lead Developer</p>
-            </div>
-            {/* Add more team members as needed */}
+            {teamMembers.map((member, idx) => (
+              <div className="team-member" key={idx}>
+                <img src={member.image} alt={member.alt} />
+                <h4>{member.name}</h4>
+                <p>{member.role}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

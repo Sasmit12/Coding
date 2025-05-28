@@ -1,55 +1,97 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { 
-  FaUserPlus, FaTasks, FaMoneyCheck, FaFileAlt, 
-  FaUsers, FaCalendarCheck, FaClock, FaWallet, 
-  FaUserShield, FaCaretDown, FaUserCog, FaSearch, 
+import { useState, useEffect } from "react";
+import { db } from "../firebase";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  updateDoc
+} from "firebase/firestore";
+import {
+  FaUserPlus, FaTasks, FaMoneyCheck, FaFileAlt,
+  FaUsers, FaCalendarCheck, FaClock, FaWallet,
+  FaUserShield, FaCaretDown, FaUserCog, FaSearch,
   FaCreditCard, FaChartBar
 } from "react-icons/fa";
 
 export default function AdminDashboard() {
-  const [metrics] = useState({
-    mentorCount: 12,
-    sessionCount: 43,
-    pendingApprovals: 5,
-    totalPayouts: 12500,
+  const [metrics, setMetrics] = useState({
+    mentorCount: 0,
+    sessionCount: 0,
+    pendingApprovals: 0,
+    totalPayouts: 0,
   });
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Approve/Reject handlers
+  const handleApprove = async (sessionId) => {
+    try {
+      await updateDoc(doc(db, "sessions", sessionId), { status: "Approved" });
+    } catch (err) {
+      setError("Failed to approve session.");
+    }
+  };
+
+  const handleReject = async (sessionId) => {
+    try {
+      await updateDoc(doc(db, "sessions", sessionId), { status: "Rejected" });
+    } catch (err) {
+      setError("Failed to reject session.");
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    setError("");
+    // Real-time mentors
+    const unsubMentors = onSnapshot(collection(db, "mentors"), (mentorsSnap) => {
+      setMetrics((prev) => ({ ...prev, mentorCount: mentorsSnap.size }));
+    }, (err) => setError("Failed to load mentors."));
+
+    // Real-time sessions
+    const unsubSessions = onSnapshot(collection(db, "sessions"), (sessionsSnap) => {
+      const sessionsData = [];
+      let pendingApprovals = 0, totalPayouts = 0;
+      sessionsSnap.forEach(docSnap => {
+        const data = docSnap.data();
+        sessionsData.push({ id: docSnap.id, ...data });
+        if (data.status === "Pending") pendingApprovals++;
+        if (data.status === "Approved" && data.payout) totalPayouts += Number(data.payout || 0);
+      });
+      setMetrics(prev => ({
+        ...prev,
+        sessionCount: sessionsData.length,
+        pendingApprovals,
+        totalPayouts,
+      }));
+      setSessions(sessionsData);
+      setLoading(false);
+    }, (err) => setError("Failed to load sessions."));
+
+    return () => {
+      unsubMentors();
+      unsubSessions();
+    };
+  }, []);
 
   const recentActivities = [
     {
       icon: <FaUserPlus className="activity-icon secondary" />,
-      text: <>New mentor registered: <strong>Jane Doe</strong></>,
+      text: <>New mentor registered</>,
     },
     {
       icon: <FaTasks className="activity-icon primary" />,
-      text: <>5 sessions pending approval</>,
+      text: <>{metrics.pendingApprovals} sessions pending approval</>,
     },
     {
       icon: <FaMoneyCheck className="activity-icon accent" />,
-      text: <>Payout processed: <strong>$350</strong></>,
+      text: <>Payout processed: <strong>${metrics.totalPayouts}</strong></>,
     },
     {
       icon: <FaFileAlt className="activity-icon primary" />,
       text: <>Audit report generated</>,
-    },
-  ];
-
-  const sessions = [
-    {
-      mentor: "Jane Doe",
-      date: "2025-05-18",
-      topic: "React Basics",
-      duration: "2h",
-      status: "Pending",
-      id: 1,
-    },
-    {
-      mentor: "John Smith",
-      date: "2025-05-17",
-      topic: "Node.js Intro",
-      duration: "1.5h",
-      status: "Approved",
-      id: 2,
     },
   ];
 
@@ -67,9 +109,15 @@ export default function AdminDashboard() {
             <button className="btn btn-outline" id="adminDropdownBtn" aria-haspopup="true" aria-expanded="false">
               <FaUserShield /> Admin <FaCaretDown />
             </button>
-            {/* Dropdown implementation can be added here */}
           </div>
         </div>
+
+        {error && (
+          <div className="error-msg" style={{ color: "red", marginBottom: 16 }}>
+            {error}
+          </div>
+        )}
+
         {/* Metrics Cards */}
         <div className="metrics-grid">
           <div className="metric-card">
@@ -109,6 +157,7 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
+
         {/* Recent Activity and File Upload */}
         <div className="dashboard-flex">
           {/* Recent Activities */}
@@ -182,13 +231,18 @@ export default function AdminDashboard() {
                   <th>Topic</th>
                   <th>Duration</th>
                   <th>Status</th>
+                  <th>Payout</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody id="allSessionsTable">
-                {sessions.length === 0 ? (
+                {loading ? (
                   <tr>
-                    <td colSpan={6}>Loading...</td>
+                    <td colSpan={7}>Loading...</td>
+                  </tr>
+                ) : sessions.length === 0 ? (
+                  <tr>
+                    <td colSpan={7}>No sessions found.</td>
                   </tr>
                 ) : (
                   sessions.map(session => (
@@ -198,13 +252,18 @@ export default function AdminDashboard() {
                       <td>{session.topic}</td>
                       <td>{session.duration}</td>
                       <td>
-                        <span className={`status-badge ${session.status.toLowerCase()}`}>{session.status}</span>
+                        <span className={`status-badge ${session.status?.toLowerCase()}`}>{session.status}</span>
                       </td>
+                      <td>${session.payout || 0}</td>
                       <td>
                         {session.status === "Pending" ? (
                           <>
-                            <button className="btn btn-primary btn-small" style={{ marginRight: 6 }}>Approve</button>
-                            <button className="btn btn-outline btn-small">Reject</button>
+                            <button className="btn btn-primary btn-small" style={{ marginRight: 6 }} onClick={() => handleApprove(session.id)}>
+                              Approve
+                            </button>
+                            <button className="btn btn-outline btn-small" onClick={() => handleReject(session.id)}>
+                              Reject
+                            </button>
                           </>
                         ) : (
                           <span>-</span>

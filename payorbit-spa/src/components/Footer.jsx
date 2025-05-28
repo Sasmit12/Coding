@@ -1,5 +1,5 @@
 import { FaTwitter, FaLinkedinIn, FaFacebookF, FaInstagram } from "react-icons/fa";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -13,10 +13,10 @@ export default function Footer() {
             </div>
             <p>Streamlining payments for EdTech platforms and their mentors worldwide.</p>
             <div className="footer-social">
-              <a href="#" className="social-link" aria-label="Twitter"><FaTwitter /></a>
-              <a href="#" className="social-link" aria-label="LinkedIn"><FaLinkedinIn /></a>
-              <a href="#" className="social-link" aria-label="Facebook"><FaFacebookF /></a>
-              <a href="#" className="social-link" aria-label="Instagram"><FaInstagram /></a>
+              <a href="#" className="social-link" aria-label="Twitter" tabIndex={-1}><FaTwitter /></a>
+              <a href="#" className="social-link" aria-label="LinkedIn" tabIndex={-1}><FaLinkedinIn /></a>
+              <a href="#" className="social-link" aria-label="Facebook" tabIndex={-1}><FaFacebookF /></a>
+              <a href="#" className="social-link" aria-label="Instagram" tabIndex={-1}><FaInstagram /></a>
             </div>
           </div>
           <div className="footer-col">

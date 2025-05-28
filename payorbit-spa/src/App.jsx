@@ -37,6 +37,9 @@ import CareersPage from "./pages/CareersPage";
 import Footer from "./components/Footer";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
+import React, { useEffect } from "react";
+import { auth } from "./firebase"; // Import Firebase auth
+import { onAuthStateChanged } from "firebase/auth";
 
 function LandingPage() {
   return (

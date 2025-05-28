@@ -1,48 +1,66 @@
 import { useState, useRef, useEffect } from "react";
+import { db } from "../firebase";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 import { 
   FaUser, FaCaretDown, FaPaperPlane, FaPaperclip, 
   FaUserShield, FaUserCog, FaPlus 
 } from "react-icons/fa";
 
-const initialMessages = [
-  {
-    from: "support",
-    avatar: "/assets/avatar-support.png",
-    text: "Hello! How can I help you today?",
-  },
-  {
-    from: "user",
-    avatar: "/assets/avatar-mentor.jpg",
-    text: "Hi, I have a question about my recent payout.",
-  },
-  {
-    from: "support",
-    avatar: "/assets/avatar-support.png",
-    text: "Sure! Please provide your session ID or details.",
-  },
-];
+// You can remove initialMessages, since messages will load from Firestore
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState(initialMessages);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const chatEndRef = useRef(null);
+
+  // Fetch chat messages in real-time from Firestore
+  useEffect(() => {
+    const q = query(
+      collection(db, "chats"),
+      orderBy("timestamp", "asc")
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const msgs = [];
+      querySnapshot.forEach((doc) => {
+        msgs.push({ id: doc.id, ...doc.data() });
+      });
+      setMessages(msgs);
+      setLoading(false);
+    }, err => {
+      setError("Failed to load messages: " + (err.message || err));
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  function handleSend(e) {
+  // Send a message and add it to Firestore
+  async function handleSend(e) {
     e.preventDefault();
     if (input.trim() === "") return;
-    setMessages([
-      ...messages,
-      {
+    try {
+      await addDoc(collection(db, "chats"), {
         from: "user",
         avatar: "/assets/avatar-mentor.jpg",
         text: input,
-      },
-    ]);
-    setInput("");
+        timestamp: serverTimestamp(),
+      });
+      setInput("");
+    } catch (err) {
+      setError("Failed to send message: " + (err.message || err));
+    }
   }
 
   return (
@@ -83,15 +101,22 @@ export default function ChatPage() {
             >
               <h3 style={{ marginBottom: 14 }}>Support Chat</h3>
               <div className="chat-area" id="chatArea" style={{ marginBottom: 18 }}>
-                {messages.map((msg, idx) => (
-                  <div
-                    className={`chat-message${msg.from === "user" ? " sent" : ""}`}
-                    key={idx}
-                  >
-                    <img className="avatar" src={msg.avatar} alt={msg.from === "user" ? "You" : "Support"} />
-                    <div className="chat-bubble">{msg.text}</div>
-                  </div>
-                ))}
+                {error && (
+                  <div style={{ color: "red", marginBottom: 10 }}>{error}</div>
+                )}
+                {loading ? (
+                  <div>Loading...</div>
+                ) : (
+                  messages.map((msg, idx) => (
+                    <div
+                      className={`chat-message${msg.from === "user" ? " sent" : ""}`}
+                      key={msg.id || idx}
+                    >
+                      <img className="avatar" src={msg.avatar} alt={msg.from === "user" ? "You" : "Support"} />
+                      <div className="chat-bubble">{msg.text}</div>
+                    </div>
+                  ))
+                )}
                 <div ref={chatEndRef} />
               </div>
               <form
@@ -107,6 +132,7 @@ export default function ChatPage() {
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   required
+                  aria-label="Type your message"
                 />
                 <button type="submit" className="btn btn-primary">
                   <FaPaperPlane /> Send
@@ -118,6 +144,7 @@ export default function ChatPage() {
                   tabIndex={-1}
                   disabled
                   style={{ opacity: 0.7, cursor: "not-allowed" }}
+                  aria-disabled="true"
                 >
                   <FaPaperclip />
                 </button>
