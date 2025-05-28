@@ -24,6 +24,7 @@ export default function Navbar() {
             <img src="/assets/logo.png" alt="PayOrbit Logo" />
             <span>PayOrbit</span>
           </div>
+          {/* Only ONE nav-links */}
           <div className={`nav-links${navOpen ? " active" : ""}`} id="navLinks">
             <ul>
               {currentUser ? (
@@ -37,6 +38,11 @@ export default function Navbar() {
                   <li><NavLink to="/reports" onClick={closeNav}>Reports</NavLink></li>
                   <li><NavLink to="/chat" onClick={closeNav}>Chat</NavLink></li>
                   <li><NavLink to="/settings" onClick={closeNav}>Settings</NavLink></li>
+                  <li className="nav-auth-mobile">
+                    <button className="btn btn-outline" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
                 </>
               ) : (
                 <>
@@ -44,10 +50,19 @@ export default function Navbar() {
                   <li><NavLink to="/about" onClick={closeNav}>About</NavLink></li>
                   <li><NavLink to="/testimonials" onClick={closeNav}>Testimonials</NavLink></li>
                   <li><NavLink to="/contact" onClick={closeNav}>Contact</NavLink></li>
+                  <li className="nav-auth-mobile">
+                    <Link to="/login" className="btn btn-outline" onClick={closeNav}>
+                      Login
+                    </Link>
+                    <Link to="/signup" className="btn btn-primary" onClick={closeNav}>
+                      Sign Up
+                    </Link>
+                  </li>
                 </>
               )}
             </ul>
           </div>
+          {/* Desktop auth buttons */}
           <div className="auth-buttons">
             {currentUser ? (
               <button className="btn btn-outline" onClick={handleLogout}>

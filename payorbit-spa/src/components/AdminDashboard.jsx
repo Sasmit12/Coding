@@ -48,8 +48,12 @@ export default function AdminDashboard() {
     // Real-time mentors
     const unsubMentors = onSnapshot(collection(db, "mentors"), (mentorsSnap) => {
       setMetrics((prev) => ({ ...prev, mentorCount: mentorsSnap.size }));
-    }, (err) => setError("Failed to load mentors."));
-
+    }, (err) =>
+      {
+        console.error("Mentors snapshot error", err); 
+        setError("Failed to load mentors.")
+      } 
+    );
     // Real-time sessions
     const unsubSessions = onSnapshot(collection(db, "sessions"), (sessionsSnap) => {
       const sessionsData = [];
