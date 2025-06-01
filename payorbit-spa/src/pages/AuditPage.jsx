@@ -1,211 +1,316 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Search,
+  Filter,
+  History,
+  User,
+  Calendar,
+  Eye,
+} from "lucide-react";
+import { api } from "@/lib/api";
 
-const mockAuditLogs = [
-  {
-    timestamp: "2025-05-16 17:45",
-    user: "admin1",
-    userType: "admin",
-    action: "CREATE",
-    target: "Mentor",
-    details: <>Added new mentor <strong>Jane Doe</strong></>,
-    ip: "192.168.1.100",
-  },
-  {
-    timestamp: "2025-05-16 17:40",
-    user: "mentor5",
-    userType: "mentor",
-    action: "LOGIN",
-    target: "Account",
-    details: <>Successful login</>,
-    ip: "192.168.1.23",
-  },
-  {
-    timestamp: "2025-05-16 17:32",
-    user: "admin2",
-    userType: "admin",
-    action: "PAYOUT",
-    target: "Payout",
-    details: <>Processed payout <strong>$500</strong> to <strong>mentor3</strong></>,
-    ip: "192.168.1.115",
-  },
-  {
-    timestamp: "2025-05-16 17:25",
-    user: "mentor2",
-    userType: "mentor",
-    action: "UPDATE",
-    target: "Profile",
-    details: <>Updated email address</>,
-    ip: "192.168.1.48",
-  },
-  {
-    timestamp: "2025-05-16 17:18",
-    user: "admin1",
-    userType: "admin",
-    action: "DELETE",
-    target: "Session",
-    details: <>Deleted session <strong>SESS-0005</strong></>,
-    ip: "192.168.1.100",
-  },
-  {
-    timestamp: "2025-05-16 17:10",
-    user: "mentor1",
-    userType: "mentor",
-    action: "UPDATE",
-    target: "Session",
-    details: <>Updated session details <strong>SESS-0007</strong></>,
-    ip: "192.168.1.53",
-  },
-  {
-    timestamp: "2025-05-16 17:06",
-    user: "admin1",
-    userType: "admin",
-    action: "PAYOUT",
-    target: "Payout",
-    details: <>Processed payout <strong>$350</strong> to <strong>mentor2</strong></>,
-    ip: "192.168.1.100",
-  },
-];
+export default function AuditLogs() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [resourceFilter, setResourceFilter] = useState("all");
+  const [actionFilter, setActionFilter] = useState("all");
 
-function getUserIcon(type) {
-  if (type === "admin")
-    return <i className="fas fa-user-shield" style={{ color: "var(--primary-color)", marginRight: 4 }} />;
-  return <i className="fas fa-user" style={{ color: "var(--secondary-color)", marginRight: 4 }} />;
-}
+  const { data: auditData, isLoading } = useQuery({
+    queryKey: ["/api/audit-logs", resourceFilter === "all" ? undefined : resourceFilter],
+    queryFn: () =>
+      api.auditLogs.getAll(resourceFilter === "all" ? {} : { resource: resourceFilter }),
+  });
 
-function getActionClass(action) {
-  switch (action) {
-    case "CREATE":
-      return "audit-type create";
-    case "LOGIN":
-      return "audit-type login";
-    case "UPDATE":
-      return "audit-type update";
-    case "DELETE":
-      return "audit-type delete";
-    case "PAYOUT":
-      return "audit-type payout";
-    default:
-      return "audit-type";
+  const auditLogs = auditData?.logs || [];
+
+  const getActionColor = (action) => {
+    switch (action.toLowerCase()) {
+      case "create":
+        return "bg-success/10 text-success border-success/20";
+      case "update":
+      case "update_status":
+        return "bg-primary/10 text-primary border-primary/20";
+      case "delete":
+        return "bg-destructive/10 text-destructive border-destructive/20";
+      case "calculate":
+      case "generate":
+        return "bg-warning/10 text-warning border-warning/20";
+      case "send":
+      case "mark_read":
+        return "bg-purple-100 text-purple-700 border-purple-200";
+      default:
+        return "bg-muted text-muted-foreground";
+    }
+  };
+
+  const getResourceIcon = (resource) => {
+    switch (resource.toLowerCase()) {
+      case "session":
+        return "📅";
+      case "mentor":
+        return "👨‍🏫";
+      case "payout":
+        return "💰";
+      case "receipt":
+        return "🧾";
+      case "chat_message":
+        return "💬";
+      default:
+        return "📄";
+    }
+  };
+
+  const filteredLogs = auditLogs.filter((log) => {
+    const matchesSearch =
+      log.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      log.resource.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      log.userId.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesAction =
+      actionFilter === "all" ||
+      log.action.toLowerCase() === actionFilter.toLowerCase();
+
+    return matchesSearch && matchesAction;
+  });
+
+  const uniqueActions = [...new Set(auditLogs.map((log) => log.action))];
+  const uniqueResources = [...new Set(auditLogs.map((log) => log.resource))];
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading audit logs...</p>
+        </div>
+      </div>
+    );
   }
-}
-
-export default function AuditPage() {
-  // You can expand features (filter, search, export) as needed.
-  const [logs] = useState(mockAuditLogs);
 
   return (
     <>
-      <main>
-        <section className="dashboard-section" style={{ background: "var(--background-light)" }}>
-          <div className="container">
-            <div
-              className="dashboard-header"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 38,
-              }}
-            >
-              <div>
-                <h1 style={{ marginBottom: "0.2em" }}>Audit Logs</h1>
-                <p style={{ color: "var(--text-color-light)" }}>
-                  Track all important actions, changes, and access for compliance and transparency.
-                </p>
-              </div>
-              <div className="user-dropdown" style={{ position: "relative" }}>
-                <button className="btn btn-outline" id="adminDropdownBtn">
-                  <i className="fas fa-user-shield"></i> Admin{" "}
-                  <i className="fas fa-caret-down"></i>
-                </button>
-              </div>
+      {/* Header */}
+      <header className="bg-card shadow-sm border-b border-border px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-medium text-foreground">Audit Logs</h2>
+            <p className="text-sm text-muted-foreground">
+              Track system activities and changes ({auditData?.total || 0} total
+              entries)
+            </p>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <Input
+                type="text"
+                placeholder="Search logs..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-64 pl-10"
+              />
+              <Search className="absolute left-3 top-2.5 w-4 h-4 text-muted-foreground" />
             </div>
-            <div
-              style={{
-                background: "var(--light-color)",
-                padding: 24,
-                borderRadius: "var(--border-radius)",
-                boxShadow: "var(--box-shadow)",
-                marginBottom: 28,
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: 16,
-                  flexWrap: "wrap",
-                }}
-              >
-                <h3 style={{ marginBottom: 0 }}>Audit Trail</h3>
-                <button className="btn btn-outline" style={{ marginBottom: 8 }}>
-                  <i className="fas fa-file-csv"></i> Export CSV
-                </button>
-              </div>
-              <div style={{ overflowX: "auto" }}>
-                <table className="audit-table">
-                  <thead>
+
+            <Select value={resourceFilter} onValueChange={setResourceFilter}>
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Resource" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Resources</SelectItem>
+                {uniqueResources.map((resource) => (
+                  <SelectItem key={resource} value={resource}>
+                    {resource}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select value={actionFilter} onValueChange={setActionFilter}>
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Action" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Actions</SelectItem>
+                {uniqueActions.map((action) => (
+                  <SelectItem key={action} value={action}>
+                    {action}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      </header>
+
+      {/* Content */}
+      <div className="flex-1 overflow-auto p-6">
+        {filteredLogs.length === 0 ? (
+          <Card className="shadow-material">
+            <CardContent className="flex flex-col items-center justify-center py-16">
+              <History className="w-16 h-16 text-muted-foreground mb-4" />
+              <h3 className="text-lg font-medium text-foreground mb-2">
+                No audit logs found
+              </h3>
+              <p className="text-muted-foreground text-center">
+                {searchTerm ||
+                resourceFilter !== "all" ||
+                actionFilter !== "all"
+                  ? "No logs match your search criteria."
+                  : "System activities will appear here as they occur."}
+              </p>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card className="shadow-material">
+            <CardHeader>
+              <h3 className="text-lg font-medium">
+                Activity Log ({filteredLogs.length} entries)
+                {auditData?.limited && (
+                  <span className="text-sm text-muted-foreground ml-2">
+                    (showing latest 100)
+                  </span>
+                )}
+              </h3>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-muted/50">
                     <tr>
-                      <th>Timestamp</th>
-                      <th>User</th>
-                      <th>Action</th>
-                      <th>Target</th>
-                      <th>Details</th>
-                      <th>IP</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Timestamp
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        User
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Action
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Resource
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Details
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        IP Address
+                      </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {logs.map((log, idx) => (
-                      <tr key={idx}>
-                        <td>{log.timestamp}</td>
-                        <td>
-                          {getUserIcon(log.userType)}
-                          {log.user}
+                  <tbody className="bg-card divide-y divide-border">
+                    {filteredLogs.map((log) => (
+                      <tr
+                        key={log.id}
+                        className="hover:bg-muted/30 transition-colors"
+                      >
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
+                          <div className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-2 text-muted-foreground" />
+                            <div>
+                              <div>
+                                {new Date(log.createdAt).toLocaleDateString()}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {new Date(log.createdAt).toLocaleTimeString()}
+                              </div>
+                            </div>
+                          </div>
                         </td>
-                        <td>
-                          <span className={getActionClass(log.action)}>{log.action}</span>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+                              <User className="w-4 h-4 text-muted-foreground" />
+                            </div>
+                            <div className="ml-3">
+                              <p className="text-sm font-medium text-foreground">
+                                {log.userId}
+                              </p>
+                              <Badge variant="outline" className="text-xs">
+                                {log.userType}
+                              </Badge>
+                            </div>
+                          </div>
                         </td>
-                        <td>{log.target}</td>
-                        <td>{log.details}</td>
-                        <td>{log.ip}</td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <Badge
+                            variant="outline"
+                            className={getActionColor(log.action)}
+                          >
+                            {log.action}
+                          </Badge>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
+                          <div className="flex items-center">
+                            <span className="mr-2">
+                              {getResourceIcon(log.resource)}
+                            </span>
+                            <div>
+                              <div className="font-medium">{log.resource}</div>
+                              {log.resourceId && (
+                                <div className="text-xs text-muted-foreground">
+                                  ID: {log.resourceId.slice(0, 8)}...
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-sm text-foreground max-w-xs">
+                          {log.changes ? (
+                            <div className="space-y-1">
+                              {Object.entries(log.changes)
+                                .slice(0, 2)
+                                .map(([key, value]) => (
+                                  <div key={key} className="text-xs">
+                                    <span className="font-medium">{key}:</span>{" "}
+                                    <span className="text-muted-foreground">
+                                      {typeof value === "object"
+                                        ? JSON.stringify(value).slice(0, 30) +
+                                          "..."
+                                        : String(value).slice(0, 30)}
+                                    </span>
+                                  </div>
+                                ))}
+                              {Object.keys(log.changes).length > 2 && (
+                                <div className="text-xs text-muted-foreground">
+                                  +{Object.keys(log.changes).length - 2} more
+                                  changes
+                                </div>
+                              )}
+                            </div>
+                          ) : log.metadata ? (
+                            <div className="text-xs text-muted-foreground">
+                              {JSON.stringify(log.metadata).slice(0, 50)}...
+                            </div>
+                          ) : (
+                            <span className="text-muted-foreground">
+                              No details
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
+                          {log.ipAddress || "N/A"}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div
-              style={{
-                background: "var(--background-light)",
-                padding: 20,
-                borderRadius: "var(--border-radius)",
-                boxShadow: "var(--box-shadow)",
-              }}
-            >
-              <h4 style={{ marginBottom: 10 }}>What is an Audit Log?</h4>
-              <p style={{ fontSize: "0.97rem", marginBottom: 12 }}>
-                Audit logs record all important actions, changes, and access events in the system for transparency and
-                compliance. Only admins can view all logs. For more details, see the{" "}
-                <a
-                  href="#"
-                  style={{ color: "var(--primary-color)", textDecoration: "underline" }}
-                >
-                  documentation
-                </a>
-                .
-              </p>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer>
-        <div className="container">
-          <div className="footer-bottom">
-            <p>&copy; 2025 PayOrbit. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </>
   );
 }

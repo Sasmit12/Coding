@@ -1,6 +1,8 @@
-export default function PaymentsPage() {
-  // Example payment data
-  const payments = [
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
+export default function Payments() {
+  const [payments] = useState([
     {
       date: "2025-05-15",
       session: "Jane Doe",
@@ -22,7 +24,7 @@ export default function PaymentsPage() {
       status: "Paid",
       receipt: true,
     },
-  ];
+  ]);
 
   return (
     <>
@@ -55,9 +57,9 @@ export default function PaymentsPage() {
                       </td>
                       <td>
                         {payment.receipt ? (
-                          <button className="btn btn-outline btn-small">
+                          <Button variant="outline" size="sm">
                             Download
-                          </button>
+                          </Button>
                         ) : (
                           "-"
                         )}
@@ -67,7 +69,7 @@ export default function PaymentsPage() {
                 </tbody>
               </table>
             </div>
-            <button className="btn btn-primary">Request Payout</button>
+            <Button className="btn btn-primary mt-4">Request Payout</Button>
           </div>
         </section>
       </main>

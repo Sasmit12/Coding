@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
-export default function ReceiptsPage() {
+export default function Receipts() {
   // Demo receipt data
   const receipts = [
     {
@@ -35,7 +36,7 @@ export default function ReceiptsPage() {
   const [modalReceipt, setModalReceipt] = useState(receipts[0]);
 
   function showReceiptDetails(receiptId) {
-    const receipt = receipts.find(r => r.id === receiptId);
+    const receipt = receipts.find((r) => r.id === receiptId);
     setModalReceipt(receipt);
     setModalOpen(true);
   }
@@ -99,19 +100,23 @@ export default function ReceiptsPage() {
                               <span className={`status-badge ${r.status.toLowerCase()}`}>{r.status}</span>
                             </td>
                             <td style={{ padding: "8px 6px" }}>
-                              <button className="btn btn-outline btn-small"
+                              <Button
+                                variant="outline"
+                                size="sm"
                                 onClick={() => showReceiptDetails(r.id)}
                                 data-receipt={r.id}
                               >
                                 <i className="fas fa-eye"></i> View
-                              </button>
-                              <button
-                                className="btn btn-outline btn-small"
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
                                 disabled={r.status !== "Paid"}
                                 title={r.status !== "Paid" ? "Available after payment" : undefined}
+                                style={{ marginLeft: 8 }}
                               >
                                 <i className="fas fa-download"></i> PDF
-                              </button>
+                              </Button>
                             </td>
                           </tr>
                         ))}
@@ -119,9 +124,9 @@ export default function ReceiptsPage() {
                     </table>
                   </div>
                   <div style={{ marginTop: 18 }}>
-                    <button className="btn btn-outline">
+                    <Button variant="outline">
                       <i className="fas fa-file-csv"></i> Export CSV
-                    </button>
+                    </Button>
                   </div>
                 </div>
                 {/* Receipt Details Modal */}
@@ -187,12 +192,12 @@ export default function ReceiptsPage() {
                         <span id="modalReceiptTotal">{modalReceipt.modal.total}</span>
                       </p>
                       <div style={{ marginTop: 18 }}>
-                        <button className="btn btn-primary btn-small">
+                        <Button variant="primary" size="sm">
                           <i className="fas fa-download"></i> Download PDF
-                        </button>
-                        <button className="btn btn-outline btn-small">
+                        </Button>
+                        <Button variant="outline" size="sm" style={{ marginLeft: 8 }}>
                           <i className="fas fa-envelope"></i> Email
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   </div>
