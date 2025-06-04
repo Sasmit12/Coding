@@ -155,4 +155,4 @@ export const processPayout = async (req, res) => {
     console.error('Error processing payout:', error);
     res.status(500).json({ error: 'Failed to process payout' });
   }
-}; 
+};

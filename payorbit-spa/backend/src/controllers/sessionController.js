@@ -46,10 +46,16 @@ export const getSessions = async (req, res) => {
 
     // Filter by date range
     if (startDate) {
-      queries.push({ field: 'date', operator: '>=', value: new Date(startDate) });
+      const d = new Date(startDate);
+      if (!isNaN(d)) {
+        queries.push({ field: 'date', operator: '>=', value: d });
+      }
     }
     if (endDate) {
-      queries.push({ field: 'date', operator: '<=', value: new Date(endDate) });
+      const d = new Date(endDate);
+      if (!isNaN(d)) {
+        queries.push({ field: 'date', operator: '<=', value: d });
+      }
     }
 
     // Filter by session type

@@ -1,15 +1,17 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import FeaturesSection from "./components/FeaturesSection";
-import HowItWorksSection from "./components/HowItWorksSection";
-import UserBenefitsSection from "./components/UserBenefitsSection";
-import TestimonialsSection from "./components/TestimonialsSection";
-import CtaSection from "./components/CtaSection";
-import ContactSection from "./components/ContactSection";
-import AboutSection from "./components/AboutSection";
-import ChatPage from "./components/ChatPage";
-import AdminDashboard from "./components/AdminDashboard";
+import Navbar from "./components/ui/Navbar";
+import Footer from "./components/ui/Footer";
+import HeroSection from "./components/dashboards/HeroSection";
+import FeaturesSection from "./components/dashboards/FeaturesSection";
+import HowItWorksSection from "./components/dashboards/HowItWorksSection";
+import UserBenefitsSection from "./components/dashboards/UserBenefitsSection";
+import TestimonialsSection from "./components/dashboards/TestimonialsSection";
+import CtaSection from "./components/dashboards/CtaSection";
+import ContactSection from "./components/dashboards/ContactSection";
+import AboutSection from "./components/dashboards/AboutSection";
+import ChatPage from "./components/chat/ChatPage";
+import AdminDashboard from "./components/dashboards/AdminDashboard";
 import FeaturesPage from "./pages/FeaturesPage";
 import LoginPage from "./pages/LoginPage";
 import MentorDashboard from "./pages/MentorDashboard";
@@ -34,11 +36,9 @@ import BlogPage from "./pages/BlogPage";
 import SupportCenterPage from "./pages/SupportCenterPage";
 import AboutPage from "./pages/AboutPage";
 import CareersPage from "./pages/CareersPage";
-import Footer from "./components/Footer";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
-import React, { useEffect } from "react";
-import { auth } from "./firebase"; // Import Firebase auth
+import { auth } from "./lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 function LandingPage() {

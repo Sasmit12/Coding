@@ -1,4 +1,4 @@
-import HowItWorksSection from "../components/HowItWorksSection";
+import HowItWorksSection from "../components/dashboards/HowItWorksSection";
 
 export default function HowItWorksPage() {
   return (

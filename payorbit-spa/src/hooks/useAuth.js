@@ -1,17 +1,14 @@
-// src/hooks/useAuth.js
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useState, useEffect } from "react";
 
-// This hook simply re-exports your context hook for consistency
-export default function useAuth() {
-  return useContext(AuthContext);
-}import { useState, useEffect } from "react";
+// This is a custom authentication hook with mock logic.
+// Remove or adapt mock logic to integrate with real auth (e.g., Firebase).
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Simulate loading a user from storage or an API on mount
     const mockUser = {
       id: "admin-user-1",
       username: "admin",

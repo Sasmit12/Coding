@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Filter, User } from 'lucide-react';
-import { SessionModal } from '@/components/SessionModal';
+import { SessionModal } from '@/components/sessions/SessionModal';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function Sessions() {

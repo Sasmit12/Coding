@@ -1,13 +1,13 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Navbar() {
   const [navOpen, setNavOpen] = useState(false);
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
-  const toggleNav = () => setNavOpen(v => !v);
+  const toggleNav = () => setNavOpen((v) => !v);
   const closeNav = () => setNavOpen(false);
 
   const handleLogout = async () => {

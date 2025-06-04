@@ -60,7 +60,14 @@ export const getChatHistory = async (req, res) => {
     ]);
 
     // Sort messages by timestamp
-    messages.sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis());
+    messages.sort((a, b) => {
+      // Handles Firestore Timestamp or JS Date for robust comparison
+      const getTime = (x) =>
+        x.timestamp?.toMillis?.() ||
+        x.timestamp?.getTime?.() ||
+        new Date(x.timestamp).getTime();
+      return getTime(a) - getTime(b);
+    });
 
     // Update message status to 'read' for received messages
     const messageUpdates = messages
@@ -110,7 +117,11 @@ export const getUserThreads = async (req, res) => {
 
       // Update last message if newer
       const thread = threads.get(message.threadId);
-      if (message.timestamp.toMillis() > thread.lastMessage.timestamp.toMillis()) {
+      const getTime = (x) =>
+        x.timestamp?.toMillis?.() ||
+        x.timestamp?.getTime?.() ||
+        new Date(x.timestamp).getTime();
+      if (getTime(message) > getTime(thread.lastMessage)) {
         thread.lastMessage = message;
       }
 
@@ -132,4 +143,4 @@ export const getUserThreads = async (req, res) => {
     console.error('Error fetching user threads:', error);
     res.status(500).json({ error: 'Failed to fetch user threads' });
   }
-}; 
+};
