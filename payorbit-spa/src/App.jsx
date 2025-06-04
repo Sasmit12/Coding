@@ -2,6 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
+import Layout from "./components/ui/Layout"; // The layout with Sidebar
+
+// Dashboard/Landing Components
 import HeroSection from "./components/dashboards/HeroSection";
 import FeaturesSection from "./components/dashboards/FeaturesSection";
 import HowItWorksSection from "./components/dashboards/HowItWorksSection";
@@ -12,9 +15,11 @@ import ContactSection from "./components/dashboards/ContactSection";
 import AboutSection from "./components/dashboards/AboutSection";
 import ChatPage from "./components/chat/ChatPage";
 import AdminDashboard from "./components/dashboards/AdminDashboard";
+import MentorDashboard from "./pages/MentorDashboard";
+
+// Pages
 import FeaturesPage from "./pages/FeaturesPage";
 import LoginPage from "./pages/LoginPage";
-import MentorDashboard from "./pages/MentorDashboard";
 import MentorsPage from "./pages/MentorsPage";
 import PaymentsPage from "./pages/PaymentsPage";
 import PayoutsPage from "./pages/PayoutsPage";
@@ -38,8 +43,6 @@ import AboutPage from "./pages/AboutPage";
 import CareersPage from "./pages/CareersPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
-import { auth } from "./lib/firebase";
-import { onAuthStateChanged } from "firebase/auth";
 
 function LandingPage() {
   return (
@@ -60,36 +63,144 @@ export default function App() {
     <>
       <Navbar />
       <Routes>
+        {/* Public routes (no sidebar) */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutSection />} />
-        <Route path="/chat" element={<ChatPage />} />
-        <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/features" element={<FeaturesPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/mentor-dashboard" element={<MentorDashboard />} />
-        <Route path="/mentors" element={<MentorsPage />} />
-        <Route path="/payment" element={<PaymentsPage />} />
-        <Route path="/payouts" element={<PayoutsPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/receipt" element={<ReceiptsPage />} />
-        <Route path="/reports" element={<ReportsPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/sessions" element={<SessionsPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/support" element={<SupportPage />} />
-        <Route path="/simulation" element={<SimulationPage />} />
-        <Route path="/audit" element={<AuditPage />} />
         <Route path="/testimonials" element={<TestimonialsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/documentation" element={<DocumentationPage />} />
         <Route path="/api-reference" element={<APIReferencePage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/support-center" element={<SupportCenterPage />} />
-        <Route path="/contact" element={<ContactPage />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/careers" element={<CareersPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
+
+        {/* Dashboard/Sidebar routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <Layout>
+              <AdminDashboard />
+            </Layout>
+          }
+        />
+        <Route
+          path="/mentor-dashboard"
+          element={
+            <Layout>
+              <MentorDashboard />
+            </Layout>
+          }
+        />
+        <Route
+          path="/mentors"
+          element={
+            <Layout>
+              <MentorsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <Layout>
+              <PaymentsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/payouts"
+          element={
+            <Layout>
+              <PayoutsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Layout>
+              <ProfilePage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/receipt"
+          element={
+            <Layout>
+              <ReceiptsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <Layout>
+              <ReportsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <Layout>
+              <ResetPasswordPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/sessions"
+          element={
+            <Layout>
+              <SessionsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <Layout>
+              <SettingsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/support"
+          element={
+            <Layout>
+              <SupportPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/simulation"
+          element={
+            <Layout>
+              <SimulationPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/audit"
+          element={
+            <Layout>
+              <AuditPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <Layout>
+              <ChatPage />
+            </Layout>
+          }
+        />
       </Routes>
       <Footer />
     </>
