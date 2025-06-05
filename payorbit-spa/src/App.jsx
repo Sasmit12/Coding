@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
-import Layout from "./components/ui/Layout"; // The layout with Sidebar
+import { Layout } from "./components/ui/Layout"; // The layout with Sidebar
 
 // Dashboard/Landing Components
 import HeroSection from "./components/dashboards/HeroSection";

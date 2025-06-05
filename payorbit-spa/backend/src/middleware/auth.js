@@ -12,7 +12,7 @@ export const authenticateUser = async (req, res, next) => {
     const decodedToken = await getAuth().verifyIdToken(token);
     req.user = decodedToken;
     next();
-  } catch (error) {
+  } catch {
     return res.status(401).json({ error: 'Invalid token' });
   }
 };

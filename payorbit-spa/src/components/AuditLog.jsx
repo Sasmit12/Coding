@@ -122,4 +122,130 @@ export function AuditLog() {
   }
 
   return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Audit Log</CardTitle>
+        <CardDescription>Track all system activities and changes.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="space-y-2">
+            <Label htmlFor="filter-action">Action</Label>
+            <Select value={filterAction} onValueChange={setFilterAction}>
+              <SelectTrigger id="filter-action">
+                <SelectValue placeholder="Filter by action" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Actions</SelectItem>
+                <SelectItem value="CREATE">Create</SelectItem>
+                <SelectItem value="UPDATE">Update</SelectItem>
+                <SelectItem value="DELETE">Delete</SelectItem>
+                <SelectItem value="SEND">Send</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="filter-entity">Entity</Label>
+            <Select value={filterEntity} onValueChange={setFilterEntity}>
+              <SelectTrigger id="filter-entity">
+                <SelectValue placeholder="Filter by entity" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Entities</SelectItem>
+                <SelectItem value="Session">Session</SelectItem>
+                <SelectItem value="Payout">Payout</SelectItem>
+                <SelectItem value="Receipt">Receipt</SelectItem>
+                <SelectItem value="Mentor">Mentor</SelectItem>
+                <SelectItem value="Message">Message</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="filter-user">User</Label>
+            <Input
+              id="filter-user"
+              placeholder="Filter by user..."
+              value={filterUser}
+              onChange={(e) => setFilterUser(e.target.value)}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-2">
+              <Label htmlFor="filter-start-date">Start Date</Label>
+              <Input
+                id="filter-start-date"
+                type="date"
+                value={dateRange.start}
+                onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="filter-end-date">End Date</Label>
+              <Input
+                id="filter-end-date"
+                type="date"
+                value={dateRange.end}
+                onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+              />
+            </div>
+          </div>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Entity</TableHead>
+              <TableHead>Action</TableHead>
+              <TableHead>User</TableHead>
+              <TableHead>Details</TableHead>
+              <TableHead className="text-right">Timestamp</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredEntries.map((entry) => (
+              <TableRow key={entry.id}>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    {getEntityIcon(entry.entity)}
+                    <div>
+                      <div className="font-medium">{entry.entity}</div>
+                      <div className="text-xs text-muted-foreground">{entry.entityId}</div>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <Badge className={actionColors[entry.action]}>{entry.action}</Badge>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback>{entry.user.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <div className="font-medium">{entry.user}</div>
+                      <div className="text-xs text-muted-foreground">{entry.userRole}</div>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="text-sm">{entry.description}</div>
+                  {entry.changes.length > 0 && (
+                    <div className="text-xs text-muted-foreground mt-1">
+                      {entry.changes.map((c, i) => (
+                        <div key={i}>
+                          <strong>{c.field}:</strong> {c.oldValue ? `${c.oldValue} -> ${c.newValue}` : `set to ${c.newValue}`}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </TableCell>
+                <TableCell className="text-right text-sm text-muted-foreground">{entry.timestamp}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  )
 
+
+}

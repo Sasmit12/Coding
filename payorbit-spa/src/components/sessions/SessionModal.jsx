@@ -43,7 +43,7 @@ export function SessionModal({ isOpen, onClose, onSessionCreated }) {
       onSessionCreated();
       onClose();
       setFormData({ mentorId: "", sessionType: "", date: "", duration: "" });
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to create session. Please try again.",

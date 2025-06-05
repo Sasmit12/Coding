@@ -58,10 +58,10 @@ export function rejectSession(sessionId, db) {
 
 /**
  * (Demo) Parse Sessions CSV.
- * @param {File} file - The uploaded CSV file.
+ * @param {File} _file - The uploaded CSV file.
  * @returns {Promise<Array>} - Resolves to an array of session objects.
  */
-export function parseSessionsCSV(file) {
+export function parseSessionsCSV(_file) {
   // Implement CSV parsing logic here (e.g., with PapaParse)
   // For now, return a resolved promise (demo)
   return Promise.resolve([]);

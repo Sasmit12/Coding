@@ -52,3 +52,9 @@ export const capitalize = (str) =>
   str && typeof str === "string"
     ? str.charAt(0).toUpperCase() + str.slice(1)
     : str;
+import { clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs))
+}

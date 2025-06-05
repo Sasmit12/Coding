@@ -18,7 +18,8 @@ export const useAuth = () => {
     setIsLoading(false);
   }, []);
 
-  const login = async (username, password) => {
+  // Remove 'password' if not used, or use '_' as a placeholder for unused parameter
+  const login = async (username /*, password */) => {
     setIsLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const mockUser = {

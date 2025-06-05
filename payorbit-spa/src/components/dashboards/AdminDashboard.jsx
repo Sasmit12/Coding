@@ -346,7 +346,7 @@ export default function AdminDashboard() {
   const handleApprove = async (sessionId) => {
     try {
       await updateDoc(doc(db, "sessions", sessionId), { status: "Approved" });
-    } catch (err) {
+    } catch {
       setError("Failed to approve session.");
     }
   };
@@ -354,7 +354,7 @@ export default function AdminDashboard() {
   const handleReject = async (sessionId) => {
     try {
       await updateDoc(doc(db, "sessions", sessionId), { status: "Rejected" });
-    } catch (err) {
+    } catch {
       setError("Failed to reject session.");
     }
   };
@@ -389,7 +389,7 @@ export default function AdminDashboard() {
       }));
       setSessions(sessionsData);
       setLoading(false);
-    }, (err) => setError("Failed to load sessions."));
+    }, () => setError("Failed to load sessions."));
 
     return () => {
       unsubMentors();

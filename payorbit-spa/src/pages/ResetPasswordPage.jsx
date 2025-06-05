@@ -19,7 +19,7 @@ export default function ResetPasswordPage() {
     try {
       // await sendPasswordResetEmail(email);
       setStatus("If there's an account with this email, a reset link has been sent.");
-    } catch (err) {
+    } catch {
       setError("Failed to send reset email. Please try again.");
     }
   };

@@ -3,7 +3,6 @@ import {
   createDocument,
   getDocument,
   updateDocument,
-  queryDocuments,
   createAuditLog
 } from '../services/db.js';
 

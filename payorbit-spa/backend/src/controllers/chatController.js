@@ -1,7 +1,6 @@
 import {
   collections,
   createDocument,
-  getDocument,
   queryDocuments,
   createAuditLog,
   updateDocument

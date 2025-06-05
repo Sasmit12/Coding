@@ -56,7 +56,7 @@ export function MentorDashboard() {
   const totalSessions = sessions.length
   const avgEarningsPerSession = totalSessions > 0 ? totalEarnings / totalSessions : 0
 
-  const downloadReceipt = (receiptUrl) => {
+  const downloadReceipt = () => {
     alert("Receipt downloaded!")
   }
 

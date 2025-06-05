@@ -97,7 +97,7 @@ export default function Dashboard() {
         title: 'Payouts calculated',
         description: `Calculated payouts for ${Object.keys(sessionsByMentor).length} mentors.`,
       });
-    } catch (error) {
+    } catch {
       toast({
         title: 'Error',
         description: 'Failed to calculate payouts. Please try again.',

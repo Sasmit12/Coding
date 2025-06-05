@@ -67,7 +67,7 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/audit-logs', auditRoutes);
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   logger.error(err.stack);
   res.status(err.status || 500).json({
     error: {

@@ -30,7 +30,7 @@ export default function ContactSection() {
       });
       setStatus({ submitting: false, success: "Message sent! We will get back to you soon.", error: "" });
       setForm({ name: "", email: "", company: "", message: "" });
-    } catch (err) {
+    } catch {
       setStatus({ submitting: false, success: "", error: "Failed to send message. Please try again." });
     }
   }
