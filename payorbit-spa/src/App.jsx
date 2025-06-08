@@ -1,8 +1,7 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom"; // Added Link for NotFoundPage
 import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
-import { Layout } from "./components/ui/Layout"; // The layout with Sidebar
 
 // Dashboard/Landing Components
 import HeroSection from "./components/dashboards/HeroSection";
@@ -44,6 +43,10 @@ import CareersPage from "./pages/CareersPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
 
+// New Imports
+import LayoutWrapper from "./components/LayoutWrapper"; // For protected routes with sidebar
+import NotFoundPage from "./pages/NotFoundPage"; // For 404 errors
+
 function LandingPage() {
   return (
     <main>
@@ -79,128 +82,38 @@ export default function App() {
         <Route path="/careers" element={<CareersPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-        {/* Dashboard/Sidebar routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <Layout>
-              <AdminDashboard />
-            </Layout>
-          }
-        />
-        <Route
-          path="/mentor-dashboard"
-          element={
-            <Layout>
-              <MentorDashboard />
-            </Layout>
-          }
-        />
-        <Route
-          path="/mentors"
-          element={
-            <Layout>
-              <MentorsPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/payment"
-          element={
-            <Layout>
-              <PaymentsPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/payouts"
-          element={
-            <Layout>
-              <PayoutsPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <Layout>
-              <ProfilePage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/receipt"
-          element={
-            <Layout>
-              <ReceiptsPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/reports"
-          element={
-            <Layout>
-              <ReportsPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/reset-password"
-          element={
-            <Layout>
-              <ResetPasswordPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/sessions"
-          element={
-            <Layout>
-              <SessionsPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <Layout>
-              <SettingsPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/support"
-          element={
-            <Layout>
-              <SupportPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/simulation"
-          element={
-            <Layout>
-              <SimulationPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/audit"
-          element={
-            <Layout>
-              <AuditPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/chat"
-          element={
-            <Layout>
-              <ChatPage />
-            </Layout>
-          }
-        />
+        {/* Authenticated routes with Sidebar Layout */}
+        {/* All routes within this group will be protected by ProtectedRoute and use the Layout with sidebar */}
+        {/*
+          If specific roles are needed for certain groups of routes, you can pass `allowedRoles` to LayoutWrapper.
+          For example: <Route element={<LayoutWrapper allowedRoles={['admin']} />}>
+                         <Route path="/admin-only-area" element={<AdminOnlyComponent />} />
+                       </Route>
+          Ensure your AuthContext and ProtectedRoute correctly handle role information.
+        */}
+        <Route element={<LayoutWrapper />}>
+          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/mentor-dashboard" element={<MentorDashboard />} />
+          <Route path="/mentors" element={<MentorsPage />} />
+          {/* Consider path consistency: /payment vs /payments */}
+          <Route path="/payment" element={<PaymentsPage />} />
+          <Route path="/payouts" element={<PayoutsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          {/* Consider path consistency: /receipt vs /receipts */}
+          <Route path="/receipt" element={<ReceiptsPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/sessions" element={<SessionsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/support" element={<SupportPage />} />
+          <Route path="/simulation" element={<SimulationPage />} />
+          <Route path="/audit" element={<AuditPage />} />
+          <Route path="/chat" element={<ChatPage />} />
+        </Route>
+
+        {/* Fallback for Not Found - must be the last route */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </>

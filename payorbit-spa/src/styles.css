@@ -1935,3 +1935,82 @@ textarea:focus-visible,
   font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+/* Example CSS for TestimonialsPage.jsx */
+
+.testimonials-page-section {
+  background: var(--background-light);
+  /* Add other section-specific styles */
+}
+
+.testimonials-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 38px;
+}
+
+.testimonials-page-content-wrapper {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.testimonials-form-container {
+  flex: 2;
+  min-width: 300px;
+}
+
+.testimonials-form-card {
+  background: var(--light-color);
+  padding: 32px 28px 28px 28px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.testimonial-result-message {
+  background: var(--background-darker);
+  padding: 22px 18px;
+  margin-top: 14px;
+  border-radius: var(--border-radius);
+}
+
+.testimonials-sidebar {
+  flex: 1;
+  min-width: 260px;
+}
+
+.testimonials-list-card {
+  background: var(--light-color);
+  padding: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-bottom: 28px;
+}
+
+.testimonials-list-scroll {
+  max-height: 350px; /* Or your desired height */
+  overflow-y: auto;
+}
+
+.testimonial-item-card {
+  margin-bottom: 18px;
+  padding: 14px 12px;
+  border-radius: var(--border-radius);
+  background: var(--background-light); /* Or var(--background-very-light) if you have one */
+  box-shadow: var(--box-shadow-sm);
+}
+
+.testimonial-item-card .fa-star {
+  color: #FFD700; /* Or a CSS variable for star color */
+}
+
+.testimonials-info-card {
+  background: var(--background-light); /* Or var(--background-very-light) */
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+/* Add more specific styles for form elements if needed, */
+/* or ensure your global .form-group styles cover them. */
+

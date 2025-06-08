@@ -55,39 +55,26 @@ export default function TestimonialsPage() {
   return (
     <>
       <main>
-        <section className="dashboard-section" style={{ background: "var(--background-light)" }}>
+        {/* Example: Apply a class for section styling instead of inline style */}
+        <section className="dashboard-section testimonials-page-section">
           <div className="container">
-            <div
-              className="dashboard-header"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 38,
-              }}
-            >
+            <div className="dashboard-header testimonials-page-header">
               <div>
                 <h1 style={{ marginBottom: "0.2em" }}>Testimonials</h1>
                 <p style={{ color: "var(--text-color-light)" }}>
                   Share your experience or read what others say about PayOrbit.
                 </p>
               </div>
-              <div className="user-dropdown" style={{ position: "relative" }}>
+              {/* Consider removing this admin dropdown if not applicable to this public page */}
+              {/* <div className="user-dropdown" style={{ position: "relative" }}>
                 <button className="btn btn-outline" id="adminDropdownBtn">
                   <i className="fas fa-user-shield"></i> Admin <i className="fas fa-caret-down"></i>
                 </button>
-              </div>
+              </div> */}
             </div>
-            <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
-              <div style={{ flex: 2, minWidth: 300 }}>
-                <div
-                  style={{
-                    background: "var(--light-color)",
-                    padding: "32px 28px 28px 28px",
-                    borderRadius: "var(--border-radius)",
-                    boxShadow: "var(--box-shadow)",
-                  }}
-                >
+            <div className="testimonials-page-content-wrapper">
+              <div className="testimonials-form-container">
+                <div className="card testimonials-form-card">
                   <h3 style={{ marginBottom: 18 }}>Share your Testimonial</h3>
                   <form id="testimonialForm" style={{ marginBottom: 18 }} onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -156,15 +143,7 @@ export default function TestimonialsPage() {
                     </button>
                   </form>
                   {submitted && (
-                    <div
-                      id="testimonialResult"
-                      style={{
-                        background: "var(--background-darker)",
-                        padding: "22px 18px",
-                        marginTop: 14,
-                        borderRadius: "var(--border-radius)",
-                      }}
-                    >
+                    <div id="testimonialResult" className="testimonial-result-message">
                       <h4 style={{ marginBottom: 10 }}>Thank you for your feedback!</h4>
                       <p>Your testimonial has been submitted.</p>
                       <button className="btn btn-outline" onClick={handleClose}>
@@ -174,28 +153,14 @@ export default function TestimonialsPage() {
                   )}
                 </div>
               </div>
-              <div className="dashboard-sidebar" style={{ flex: 1, minWidth: 260 }}>
-                <div
-                  style={{
-                    background: "var(--light-color)",
-                    padding: 24,
-                    borderRadius: "var(--border-radius)",
-                    boxShadow: "var(--box-shadow)",
-                    marginBottom: 28,
-                  }}
-                >
+              <div className="dashboard-sidebar testimonials-sidebar">
+                <div className="card testimonials-list-card">
                   <h3 style={{ marginBottom: 14 }}>Recent Testimonials</h3>
-                  <div style={{ maxHeight: 350, overflowY: "auto" }}>
+                  <div className="testimonials-list-scroll">
                     {testimonials.map((item, idx) => (
                       <div
                         key={idx}
-                        style={{
-                          marginBottom: 18,
-                          padding: "14px 12px",
-                          borderRadius: "var(--border-radius)",
-                          background: "var(--background-light)",
-                          boxShadow: "var(--box-shadow-sm)",
-                        }}
+                        className="testimonial-item-card"
                       >
                         <p style={{ fontStyle: "italic", marginBottom: 6 }}>
                           "{item.testimonial}"
@@ -214,14 +179,7 @@ export default function TestimonialsPage() {
                     ))}
                   </div>
                 </div>
-                <div
-                  style={{
-                    background: "var(--background-light)",
-                    padding: 20,
-                    borderRadius: "var(--border-radius)",
-                    boxShadow: "var(--box-shadow)",
-                  }}
-                >
+                <div className="card testimonials-info-card">
                   <h4 style={{ marginBottom: 10 }}>Why Testimonials Matter?</h4>
                   <p style={{ fontSize: "0.97rem", marginBottom: 12 }}>
                     Your feedback helps us improve and inspires others to join our platform!
@@ -232,13 +190,7 @@ export default function TestimonialsPage() {
           </div>
         </section>
       </main>
-      <footer>
-        <div className="container">
-          <div className="footer-bottom">
-            <p>&copy; 2025 PayOrbit. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* Footer is handled globally by App.jsx, so it's removed from here */}
     </>
   );
 }
