@@ -1,0 +1,15 @@
+[
+  {"name": "HTML5", "icon": "assets/images/skills/html5.png"},
+  {"name": "CSS3", "icon": "assets/images/skills/css3.png"},
+  {"name": "JavaScript", "icon": "assets/images/skills/javascript.png"},
+  {"name": "React.js", "icon": "assets/images/skills/react.png"},
+  {"name": "Tailwind CSS", "icon": "assets/images/skills/TailwindCSS.png"},
+  {"name": "Firebase", "icon": "assets/images/skills/firebase.png"},
+  {"name": "Supabase", "icon": "assets/images/skills/supabase.png"},
+  {"name": "C", "icon": "assets/images/skills/c.png"},
+  {"name": "Core Java", "icon": "assets/images/skills/java.png"},
+  {"name": "Git", "icon": "assets/images/skills/git.png"},
+  {"name": "GitHub", "icon": "assets/images/skills/github.png"},
+  {"name": "VS Code", "icon": "assets/images/skills/vscode.png"},
+  {"name": "Vite", "icon": "assets/images/skills/vite.png"}
+]

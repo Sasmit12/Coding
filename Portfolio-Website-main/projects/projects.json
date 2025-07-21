@@ -1,0 +1,72 @@
+[
+  {
+    "name": "ThreadSphere",
+    "desc": "Niche community platform. JS + Firebase SPA with login, comments, filters. Real-time Firestore data updates.",
+    "image": "threadsphere",
+    "category": "basicweb",
+    "links": {
+      "view": "#",
+      "code": "#"
+    }
+  },
+  {
+    "name": "PayOrbit",
+    "desc": "EdTech mentor payout system. React + Firebase. Admin panel, session tracking, receipts, secure messaging, audit logs.",
+    "image": "payorbit",
+    "category": "mern",
+    "links": {
+      "view": "#",
+      "code": "#"
+    }
+  },
+  {
+    "name": "Farm To Kitchen",
+    "desc": "Farm-to-table marketplace. Roles: Farmer and Consumer. Cart, Checkout, Weather API, AI Suggestions. Stack: React, Tailwind CSS, Firebase/Supabase.",
+    "image": "farmtokitchen",
+    "category": "mern",
+    "links": {
+      "view": "#",
+      "code": "#"
+    }
+  },
+  {
+    "name": "Gemini Chat Widget",
+    "desc": "Persistent chatbot with Google Gemini API. Typing animations, assistant/user roles, localStorage sync. Stack: React, Context API.",
+    "image": "geminichatwidget",
+    "category": "mern",
+    "links": {
+      "view": "#",
+      "code": "#"
+    }
+  },
+  {
+    "name": "Optimized Map Application",
+    "desc": "Real-time location, search, routing. Performance optimized with React.memo, useMemo, useCallback. APIs: Google Maps, OpenWeather (optional).",
+    "image": "optimizedmap",
+    "category": "mern",
+    "links": {
+      "view": "#",
+      "code": "#"
+    }
+  },
+  {
+    "name": "Redux Toolkit Shopping Cart",
+    "desc": "Add/Remove products, total calculation. Stack: Vite + Redux Toolkit.",
+    "image": "reduxcart",
+    "category": "mern",
+    "links": {
+      "view": "#",
+      "code": "#"
+    }
+  },
+  {
+    "name": "MindTrack",
+    "desc": "Student wellness journal. Log daily mood, sleep, study, stress. Reflections with markdown + heatmap. Stack: React + Vite.",
+    "image": "mindtrack",
+    "category": "mern",
+    "links": {
+      "view": "#",
+      "code": "#"
+    }
+  }
+]
