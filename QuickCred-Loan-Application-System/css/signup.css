@@ -1,0 +1,311 @@
+/* Enhanced Signup Page Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form Error Styles */
+.field-error {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.field-error::before {
+    content: "⚠";
+    font-size: 1em;
+}
+
+input.error, select.error {
+    border-color: #dc3545 !important;
+    background: rgba(220, 53, 69, 0.05) !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
+}
+
+input.error:focus, select.error:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2) !important;
+}
+
+/* Loading button styles */
+button.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+button.loading i {
+    margin-right: 8px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none !important;
+    box-shadow: none !important;
+}
+    overflow-x: hidden;
+}
+
+/* Animated Background */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+    opacity: 0.3;
+    animation: backgroundMove 20s linear infinite;
+}
+
+@keyframes backgroundMove {
+    0% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(-30px) translateY(-30px); }
+    100% { transform: translateX(0) translateY(0); }
+}
+
+/* Enhanced Signup Container */
+.signup-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    padding: 40px 35px 25px;
+    margin: 20px;
+    width: 450px;
+    max-width: 90vw;
+    border-radius: 24px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    position: relative;
+    animation: slideIn 0.8s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.logo-image {
+    display: block;
+    margin: 0 auto 20px auto;
+    height: auto;
+    max-width: 150px;
+    }
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 0.9em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.password-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input input[type="password"] {
+    width: calc(100% - 42px); 
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #777;
+}
+
+small {
+    display: block;
+    margin-top: 3px;
+    color: #777;
+    font-size: 0.8em;
+}
+
+.checkbox-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+}
+
+.checkbox-inline input[type="checkbox"] {
+    margin: 0;
+    width: auto;
+}
+
+.checkbox-inline label {
+    margin: 0;
+    color: #333;
+    font-weight: normal;
+}
+
+.create-account-btn {
+    background-color: #6750a4;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.create-account-btn:hover {
+    background-color: #513a84;
+}
+
+.or-continue {
+    text-align: center;
+    color: #777;
+    margin: 15px 0;
+    font-size: 0.9em;
+}
+
+.social-login {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.social-login button {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.social-login button:hover {
+    background-color: #eee;
+}
+
+.google-btn {
+    color: #db4437;
+}
+
+.facebook-btn {
+    color: #1877f2;
+}
+
+.apple-btn svg {
+    fill: #333;
+    width: 1em;
+    height: 1em;
+}
+
+.login-link {
+    text-align: center;
+    color: #777;
+    font-size: 0.9em;
+}
+
+.login-link a {
+    color: #6750a4;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    width: 100%;
+    padding: 8px 20px 20px 20px;
+    text-align: center;
+    font-size: 0.8em;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+}
+
+.footer a {
+    color: #777;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.language-select select {
+    padding: 8px;
+    color: #777;
+    border-radius: 4px;
+    border:0.1px ;
+    background-color: #f4f4f4;
+    font-size: 0.9em;
+}
+
+.copyright {
+    color: #777;
+    font-size: 0.8em;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}

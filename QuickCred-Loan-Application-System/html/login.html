@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuickCred Login</title>
+  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap">
+</head>
+<body>
+  <div class="container">
+    <img src="../assets/QuickCred_logo1.png" alt="QuickCred" class="logo-image">
+    <h2>Welcome Back</h2>
+
+    <p>Sign in to your account to continue</p>
+
+    <input type="email" id="email" placeholder="you@example.com" />
+    <input type="password" id="password" placeholder="********" />
+    <div class="options">
+        <label class="toggle-container">
+          <input type="checkbox" id="remember" class="toggle-input" />
+          <span class="toggle-slider"></span> Remember me
+        </label>
+        <a href="../html/forgotPassword.html">Forgot password?</a>
+      </div>
+      
+    <button onclick="login()">Sign in</button>
+    <div class="divider"><span>Or continue with</span></div>
+
+    <div class="social-buttons">
+      <button onclick="signInWithGoogle()"><img src="../assets/googleLogo.png" alt="">Google</button>
+      <button onclick="signInWithFacebook()"><img src="../assets/facebookLogo.png" alt="">Facebook</button> <!--facebook authentication not done-->
+      <button onclick="signInWithApple()"><img src="../assets/appleLogo.png" alt="">Apple</button>
+    </div>
+
+    <p class="signup-text">Don't have an account? <a href="../html/signup.html">Sign up</a></p>
+  </div>
+
+  <script src="../js/login.js" type="module"></script>
+</body>
+</html>
