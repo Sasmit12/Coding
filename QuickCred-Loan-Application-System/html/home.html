@@ -3,79 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickCred Home</title>
+    <title>QuickCred Dashboard - Manage Your Loans</title>
+    <meta name="description" content="Manage your loans, track applications, and access financial tools in your personalized QuickCred dashboard.">
     <link rel="stylesheet" href="../css/home.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="enhanced-header">
-        <nav class="main-nav">
+    <!-- Modern Dashboard Header -->
+    <header class="dashboard-header">
+        <nav class="dashboard-nav">
+            <!-- Brand Section -->
+            <div class="nav-brand">
+                <a href="../index.html" class="brand-link">
+                    <img src="../assets/QuickCred_logo1.png" alt="QuickCred" class="brand-logo">
+                    <span class="brand-text">QuickCred</span>
+                </a>
+            </div>
             
-            <!-- left nav -->
-            <a href="#"><img src="../assets/QuickCred_logo1.png" alt="QuickCred" class="logo-image"></a>
-            <div class="nav-links">
-                <a href="#">Dashboard</a>
-                <a href="#">Applications</a>
-                <a href="#">Payments</a>
-                <a href="#">Compare</a>
+            <!-- Navigation Links -->
+            <div class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#applications" class="nav-item" data-section="applications">
+                    <i class="fas fa-file-alt"></i>
+                    <span>My Applications</span>
+                </a>
+                <a href="#payments" class="nav-item" data-section="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payments</span>
+                </a>
+                <a href="#tools" class="nav-item" data-section="tools">
+                    <i class="fas fa-calculator"></i>
+                    <span>Loan Tools</span>
+                </a>
+                <a href="#support" class="nav-item" data-section="support">
+                    <i class="fas fa-headset"></i>
+                    <span>Support</span>
+                </a>
             </div>
 
-            <!-- right nav -->
+            <!-- User Actions Section -->
             <div class="user-actions">
-                <button class="notification-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.902z"/>
-                    </svg>
-                    <span class="notification-badge">3</span>
-                </button>
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-btn" title="Loan Calculator">
+                        <i class="fas fa-calculator"></i>
+                    </button>
+                    <button class="action-btn" title="Apply for New Loan">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                
+                <!-- Notifications -->
+                <div class="notifications">
+                    <button class="notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h4>Notifications</h4>
+                            <button class="mark-all-read">Mark all as read</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread">
+                                <i class="fas fa-check-circle text-success"></i>
+                                <div class="notification-content">
+                                    <p>Your personal loan application has been approved!</p>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <i class="fas fa-clock text-warning"></i>
+                                <div class="notification-content">
+                                    <p>Payment due in 3 days for Auto Loan #1234</p>
+                                    <span class="notification-time">1 day ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-info-circle text-info"></i>
+                                <div class="notification-content">
+                                    <p>New loan offers available based on your credit score</p>
+                                    <span class="notification-time">3 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#" class="view-all-link">View all notifications</a>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Profile Dropdown -->
-                <div class="profile-dropdown">
-                    <button class="profile-button" id="profile-button">
-                        <div class="user-avatar" id="user-avatar"></div>
-                        <span class="user-name" id="user-name"></span>
+                <div class="profile-section">
+                    <button class="profile-btn" id="profileBtn">
+                        <div class="user-avatar" id="userAvatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name" id="userName">John Doe</span>
+                            <span class="user-role">Premium Member</span>
+                        </div>
                         <i class="fas fa-chevron-down profile-arrow"></i>
                     </button>
                     
-                    <div class="profile-menu" id="profile-menu">
-                        <div class="profile-header">
-                            <div class="user-avatar-large" id="user-avatar-large"></div>
-                            <div class="user-info">
-                                <span class="user-display-name" id="user-display-name"></span>
-                                <span class="user-email" id="user-email"></span>
+                    <div class="profile-menu" id="profileMenu">
+                        <div class="profile-menu-header">
+                            <div class="user-avatar-large" id="userAvatarLarge">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="user-details">
+                                <span class="user-display-name" id="userDisplayName">John Doe</span>
+                                <span class="user-email" id="userEmail">john.doe@example.com</span>
+                                <span class="user-member-since">Member since 2023</span>
                             </div>
                         </div>
                         
-                        <div class="profile-menu-divider"></div>
+                        <div class="menu-divider"></div>
                         
-                        <div class="profile-menu-items">
-                            <a href="#" class="profile-menu-item" onclick="handleProfileAction('view-profile')">
-                                <i class="fas fa-user"></i>
-                                <span>View Profile</span>
+                        <div class="menu-section">
+                            <div class="menu-section-title">Account</div>
+                            <a href="#" class="menu-item" onclick="handleProfileAction('view-profile')">
+                                <i class="fas fa-user-circle"></i>
+                                <span>My Profile</span>
                             </a>
-                            <a href="#" class="profile-menu-item" onclick="handleProfileAction('edit-profile')">
-                                <i class="fas fa-edit"></i>
-                                <span>Edit Profile</span>
-                            </a>
-                            <a href="#" class="profile-menu-item" onclick="handleProfileAction('account-settings')">
+                            <a href="#" class="menu-item" onclick="handleProfileAction('account-settings')">
                                 <i class="fas fa-cog"></i>
-                                <span>Account Settings</span>
+                                <span>Settings</span>
                             </a>
-                            <a href="#" class="profile-menu-item" onclick="handleProfileAction('security')">
+                            <a href="#" class="menu-item" onclick="handleProfileAction('security')">
                                 <i class="fas fa-shield-alt"></i>
-                                <span>Security</span>
-                            </a>
-                            <a href="#" class="profile-menu-item" onclick="handleProfileAction('help')">
-                                <i class="fas fa-question-circle"></i>
-                                <span>Help & Support</span>
+                                <span>Security & Privacy</span>
                             </a>
                         </div>
                         
-                        <div class="profile-menu-divider"></div>
+                        <div class="menu-divider"></div>
                         
-                        <div class="profile-menu-items">
-                            <a href="#" class="profile-menu-item logout-item" onclick="handleProfileAction('logout')">
+                        <div class="menu-section">
+                            <div class="menu-section-title">Support</div>
+                            <a href="#" class="menu-item" onclick="handleProfileAction('help')">
+                                <i class="fas fa-life-ring"></i>
+                                <span>Help Center</span>
+                            </a>
+                            <a href="#" class="menu-item" onclick="handleProfileAction('contact')">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact Support</span>
+                            </a>
+                            <a href="#" class="menu-item" onclick="handleProfileAction('feedback')">
+                                <i class="fas fa-comment-alt"></i>
+                                <span>Send Feedback</span>
+                            </a>
+                        </div>
+                        
+                        <div class="menu-divider"></div>
+                        
+                        <div class="menu-section">
+                            <a href="#" class="menu-item logout-item" onclick="handleProfileAction('logout')">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Sign Out</span>
                             </a>
@@ -83,10 +169,20 @@
                     </div>
                 </div>
                 
-                <button class="apply-button">Apply Now</button>
+                <!-- Apply Button -->
+                <a href="#" class="apply-new-loan-btn">
+                    <i class="fas fa-plus"></i>
+                    <span>New Application</span>
+                </a>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             </div>
         </nav>
- 
     </header>
 
     <!-- Dashboard Section -->

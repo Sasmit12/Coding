@@ -630,5 +630,23 @@ function initDevicePreview() {
 // Call all initializations
 initDevicePreview();
     
+    document.querySelectorAll('.feature-item').forEach((item, idx) => {
+        const tooltips = [
+            "Lightning-fast loan approval process.",
+            "Your data is protected with advanced encryption.",
+            "Get the best rates tailored for you."
+        ];
+        item.setAttribute('data-tooltip', tooltips[idx]);
+    });
+    
+    // FAQ accordion functionality
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const item = this.parentElement;
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        item.classList.toggle('active');
+    });
+});
+
     console.log('QuickCred Index Page Enhanced! 🚀');
 });
