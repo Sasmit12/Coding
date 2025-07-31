@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Application - QuickCred | Multi-Step Application Process</title>
+  <meta name="description" content="Complete your loan application with our easy multi-step process. Get approved quickly with QuickCred's streamlined application system.">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/modern-style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="icon" href="../assets/QuickCred_logo1.png" type="image/png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    .application-container {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);
+      padding: var(--space-6) var(--space-4);
+    }
+
+    .application-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: var(--rounded-xl);
+      box-shadow: var(--shadow-2xl);
+      overflow: hidden;
+    }
+
+    .application-header {
+      background: var(--primary-600);
+      color: white;
+      padding: var(--space-6);
+      text-align: center;
+    }
+
+    .application-header h1 {
+      margin: 0 0 var(--space-2);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+    }
+
+    .application-header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    /* Progress Indicator */
+    .progress-container {
+      background: white;
+      padding: var(--space-6) var(--space-6) 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+      position: relative;
+    }
+
+    .progress-steps::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gray-200);
+      z-index: 1;
+    }
+
+    .progress-line {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      height: 2px;
+      background: var(--primary-600);
+      transition: width 0.3s ease;
+      z-index: 2;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+      background: white;
+      padding: 0 var(--space-2);
+    }
+
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+      transition: all 0.3s ease;
+    }
+
+    .step.active .step-circle {
+      background: var(--primary-600);
+      color: white;
+    }
+
+    .step.completed .step-circle {
+      background: var(--success-600);
+      color: white;
+    }
+
+    .step-label {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--gray-600);
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .step.active .step-label {
+      color: var(--primary-600);
+      font-weight: 600;
+    }
+
+    .step.completed .step-label {
+      color: var(--success-600);
+    }
+
+    /* Form Steps */
+    .form-container {
+      padding: var(--space-8);
+    }
+
+    .form-step {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: var(--space-2);
+    }
+
+    .step-description {
+      color: var(--gray-600);
+      margin-bottom: var(--space-6);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .form-grid.single-column {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: var(--space-3);
+      border: 1px solid var(--gray-300);
+      border-radius: var(--rounded-lg);
+      font-size: var(--text-base);
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary-500);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .checkbox-input {
+      margin-top: 2px;
+    }
+
+    .checkbox-label {
+      font-size: var(--text-sm);
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* Navigation Buttons */
+    .form-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .btn-back {
+      background: var(--gray-100);
+      color: var(--gray-700);
+      border: 1px solid var(--gray-300);
+    }
+
+    .btn-back:hover {
+      background: var(--gray-200);
+    }
+
+    .btn-next, .btn-submit {
+      background: var(--primary-600);
+      color: white;
+    }
+
+    .btn-next:hover, .btn-submit:hover {
+      background: var(--primary-700);
+    }
+
+    .btn-next:disabled, .btn-submit:disabled {
+      background: var(--gray-300);
+      color: var(--gray-500);
+      cursor: not-allowed;
+    }
+
+    /* Loan Type Cards */
+    .loan-type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .loan-type-card {
+      border: 2px solid var(--gray-200);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-4);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .loan-type-card:hover {
+      border-color: var(--primary-300);
+      background: var(--primary-50);
+    }
+
+    .loan-type-card.selected {
+      border-color: var(--primary-600);
+      background: var(--primary-50);
+    }
+
+    .loan-type-icon {
+      font-size: var(--text-2xl);
+      color: var(--primary-600);
+      margin-bottom: var(--space-2);
+    }
+
+    .loan-type-title {
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: var(--space-1);
+    }
+
+    .loan-type-description {
+      font-size: var(--text-sm);
+      color: var(--gray-600);
+    }
+
+    /* Amount Slider */
+    .amount-slider-container {
+      margin: var(--space-6) 0;
+    }
+
+    .amount-display {
+      text-align: center;
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--primary-600);
+      margin-bottom: var(--space-4);
+    }
+
+    .amount-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--gray-200);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .amount-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-600);
+      cursor: pointer;
+    }
+
+    .amount-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-600);
+      cursor: pointer;
+      border: none;
+    }
+
+    .amount-range {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--text-sm);
+      color: var(--gray-500);
+      margin-top: var(--space-2);
+    }
+
+    /* Error States */
+    .form-error {
+      color: var(--error-600);
+      font-size: var(--text-sm);
+      margin-top: var(--space-1);
+    }
+
+    .form-input.error, .form-select.error {
+      border-color: var(--error-500);
+    }
+
+    /* Success Message */
+    .success-step {
+      text-align: center;
+      padding: var(--space-8);
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      color: var(--success-600);
+      margin-bottom: var(--space-4);
+    }
+
+    .success-title {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: var(--space-2);
+    }
+
+    .success-description {
+      color: var(--gray-600);
+      margin-bottom: var(--space-6);
+    }
+
+    .application-id {
+      background: var(--gray-100);
+      padding: var(--space-4);
+      border-radius: var(--rounded-lg);
+      font-family: monospace;
+      font-weight: 600;
+      margin-bottom: var(--space-6);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .application-container {
+        padding: var(--space-4) var(--space-2);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .progress-steps {
+        flex-wrap: wrap;
+        gap: var(--space-4);
+      }
+
+      .step-label {
+        font-size: var(--text-xs);
+        min-width: 60px;
+      }
+
+      .loan-type-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-navigation {
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+
+      .form-navigation .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="application-container">
+    <div class="application-wrapper">
+      <!-- Header -->
+      <div class="application-header">
+        <h1>Loan Application</h1>
+        <p>Complete your application in just a few simple steps</p>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div class="progress-container">
+        <div class="progress-steps">
+          <div class="progress-line" id="progressLine"></div>
+          
+          <div class="step active" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">Loan Type</div>
+          </div>
+          
+          <div class="step" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">Personal Info</div>
+          </div>
+          
+          <div class="step" data-step="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">Financial Info</div>
+          </div>
+          
+          <div class="step" data-step="4">
+            <div class="step-circle">4</div>
+            <div class="step-label">Employment</div>
+          </div>
+          
+          <div class="step" data-step="5">
+            <div class="step-circle">5</div>
+            <div class="step-label">Review</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Container -->
+      <div class="form-container">
+        <form id="loanApplicationForm">
+          
+          <!-- Step 1: Loan Type -->
+          <div class="form-step active" data-step="1">
+            <h2 class="step-title">What type of loan do you need?</h2>
+            <p class="step-description">Select the loan type that best fits your needs</p>
+            
+            <div class="loan-type-grid">
+              <div class="loan-type-card" data-loan-type="personal">
+                <div class="loan-type-icon">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="loan-type-title">Personal Loan</div>
+                <div class="loan-type-description">For personal expenses, debt consolidation, or major purchases</div>
+              </div>
+              
+              <div class="loan-type-card" data-loan-type="business">
+                <div class="loan-type-icon">
+                  <i class="fas fa-building"></i>
+                </div>
+                <div class="loan-type-title">Business Loan</div>
+                <div class="loan-type-description">For business expansion, equipment, or working capital</div>
+              </div>
+              
+              <div class="loan-type-card" data-loan-type="auto">
+                <div class="loan-type-icon">
+                  <i class="fas fa-car"></i>
+                </div>
+                <div class="loan-type-title">Auto Loan</div>
+                <div class="loan-type-description">For purchasing new or used vehicles</div>
+              </div>
+              
+              <div class="loan-type-card" data-loan-type="home">
+                <div class="loan-type-icon">
+                  <i class="fas fa-home"></i>
+                </div>
+                <div class="loan-type-title">Home Loan</div>
+                <div class="loan-type-description">For purchasing or refinancing your home</div>
+              </div>
+            </div>
+
+            <div class="amount-slider-container">
+              <label class="form-label">How much do you need?</label>
+              <div class="amount-display">$<span id="loanAmountDisplay">25,000</span></div>
+              <input type="range" id="loanAmountSlider" class="amount-slider" min="1000" max="500000" value="25000" step="1000">
+              <div class="amount-range">
+                <span>$1,000</span>
+                <span>$500,000</span>
+              </div>
+            </div>
+
+            <input type="hidden" id="selectedLoanType" name="loanType" required>
+            <input type="hidden" id="loanAmount" name="loanAmount" value="25000">
+          </div>
+
+          <!-- Step 2: Personal Information -->
+          <div class="form-step" data-step="2">
+            <h2 class="step-title">Personal Information</h2>
+            <p class="step-description">Tell us about yourself</p>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name *</label>
+                <input type="text" id="firstName" name="firstName" class="form-input" required>
+                <div class="form-error" id="firstNameError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" class="form-input" required>
+                <div class="form-error" id="lastNameError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" id="email" name="email" class="form-input" required>
+                <div class="form-error" id="emailError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" class="form-input" required>
+                <div class="form-error" id="phoneError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="dateOfBirth" class="form-label">Date of Birth *</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-input" required>
+                <div class="form-error" id="dateOfBirthError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="ssn" class="form-label">Social Security Number *</label>
+                <input type="text" id="ssn" name="ssn" class="form-input" placeholder="XXX-XX-XXXX" required>
+                <div class="form-error" id="ssnError"></div>
+              </div>
+              
+              <div class="form-group full-width">
+                <label for="address" class="form-label">Street Address *</label>
+                <input type="text" id="address" name="address" class="form-input" required>
+                <div class="form-error" id="addressError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="city" class="form-label">City *</label>
+                <input type="text" id="city" name="city" class="form-input" required>
+                <div class="form-error" id="cityError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="state" class="form-label">State *</label>
+                <select id="state" name="state" class="form-select" required>
+                  <option value="">Select State</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <!-- Add more states as needed -->
+                </select>
+                <div class="form-error" id="stateError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="zipCode" class="form-label">ZIP Code *</label>
+                <input type="text" id="zipCode" name="zipCode" class="form-input" required>
+                <div class="form-error" id="zipCodeError"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Financial Information -->
+          <div class="form-step" data-step="3">
+            <h2 class="step-title">Financial Information</h2>
+            <p class="step-description">Help us understand your financial situation</p>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="annualIncome" class="form-label">Annual Income *</label>
+                <input type="number" id="annualIncome" name="annualIncome" class="form-input" min="0" required>
+                <div class="form-error" id="annualIncomeError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="monthlyExpenses" class="form-label">Monthly Expenses *</label>
+                <input type="number" id="monthlyExpenses" name="monthlyExpenses" class="form-input" min="0" required>
+                <div class="form-error" id="monthlyExpensesError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="creditScore" class="form-label">Credit Score (if known)</label>
+                <select id="creditScore" name="creditScore" class="form-select">
+                  <option value="">Select Range</option>
+                  <option value="excellent">Excellent (750+)</option>
+                  <option value="good">Good (700-749)</option>
+                  <option value="fair">Fair (650-699)</option>
+                  <option value="poor">Poor (600-649)</option>
+                  <option value="bad">Bad (Below 600)</option>
+                  <option value="unknown">I don't know</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="bankAccount" class="form-label">Bank Account Type *</label>
+                <select id="bankAccount" name="bankAccount" class="form-select" required>
+                  <option value="">Select Type</option>
+                  <option value="checking">Checking</option>
+                  <option value="savings">Savings</option>
+                  <option value="both">Both Checking & Savings</option>
+                </select>
+                <div class="form-error" id="bankAccountError"></div>
+              </div>
+              
+              <div class="form-group full-width">
+                <label for="existingDebts" class="form-label">Existing Debts/Loans</label>
+                <textarea id="existingDebts" name="existingDebts" class="form-textarea" placeholder="Please describe any existing loans, credit card debts, or other financial obligations..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Employment Information -->
+          <div class="form-step" data-step="4">
+            <h2 class="step-title">Employment Information</h2>
+            <p class="step-description">Tell us about your employment status</p>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="employmentStatus" class="form-label">Employment Status *</label>
+                <select id="employmentStatus" name="employmentStatus" class="form-select" required>
+                  <option value="">Select Status</option>
+                  <option value="employed">Employed Full-time</option>
+                  <option value="parttime">Employed Part-time</option>
+                  <option value="selfemployed">Self-employed</option>
+                  <option value="unemployed">Unemployed</option>
+                  <option value="retired">Retired</option>
+                  <option value="student">Student</option>
+                </select>
+                <div class="form-error" id="employmentStatusError"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="jobTitle" class="form-label">Job Title</label>
+                <input type="text" id="jobTitle" name="jobTitle" class="form-input">
+              </div>
+              
+              <div class="form-group">
+                <label for="employer" class="form-label">Employer Name</label>
+                <input type="text" id="employer" name="employer" class="form-input">
+              </div>
+              
+              <div class="form-group">
+                <label for="workExperience" class="form-label">Years at Current Job</label>
+                <select id="workExperience" name="workExperience" class="form-select">
+                  <option value="">Select Duration</option>
+                  <option value="0-1">Less than 1 year</option>
+                  <option value="1-2">1-2 years</option>
+                  <option value="2-5">2-5 years</option>
+                  <option value="5-10">5-10 years</option>
+                  <option value="10+">More than 10 years</option>
+                </select>
+              </div>
+              
+              <div class="form-group full-width">
+                <label for="loanPurpose" class="form-label">Loan Purpose *</label>
+                <textarea id="loanPurpose" name="loanPurpose" class="form-textarea" placeholder="Please describe what you plan to use this loan for..." required></textarea>
+                <div class="form-error" id="loanPurposeError"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Review and Submit -->
+          <div class="form-step" data-step="5">
+            <h2 class="step-title">Review Your Application</h2>
+            <p class="step-description">Please review your information before submitting</p>
+            
+            <div id="reviewContent">
+              <!-- Review content will be populated by JavaScript -->
+            </div>
+            
+            <div class="form-group">
+              <div class="checkbox-group">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" class="checkbox-input" required>
+                <label for="agreeTerms" class="checkbox-label">
+                  I agree to the <a href="#" class="text-primary">Terms and Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a>
+                </label>
+              </div>
+              <div class="form-error" id="agreeTermsError"></div>
+            </div>
+            
+            <div class="form-group">
+              <div class="checkbox-group">
+                <input type="checkbox" id="authorizeCredit" name="authorizeCredit" class="checkbox-input" required>
+                <label for="authorizeCredit" class="checkbox-label">
+                  I authorize QuickCred to perform a credit check and verify the information provided
+                </label>
+              </div>
+              <div class="form-error" id="authorizeCreditError"></div>
+            </div>
+          </div>
+
+          <!-- Success Step -->
+          <div class="form-step" data-step="success" id="successStep">
+            <div class="success-step">
+              <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <h2 class="success-title">Application Submitted Successfully!</h2>
+              <p class="success-description">
+                Thank you for choosing QuickCred. Your loan application has been received and is being processed.
+              </p>
+              <div class="application-id">
+                Application ID: <span id="applicationId">QL-2024-001234</span>
+              </div>
+              <p class="success-description">
+                You will receive an email confirmation shortly. Our team will review your application and contact you within 24-48 hours.
+              </p>
+              <div class="flex gap-4 justify-center">
+                <a href="../html/home.html" class="btn btn-primary">Go to Dashboard</a>
+                <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="form-navigation" id="formNavigation">
+            <button type="button" id="backBtn" class="btn btn-back" style="display: none;">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <div></div>
+            <button type="button" id="nextBtn" class="btn btn-next">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+            <button type="submit" id="submitBtn" class="btn btn-submit" style="display: none;">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="../js/loan-application.js"></script>
+</body>
+</html>

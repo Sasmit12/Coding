@@ -3,696 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickCred Dashboard - Manage Your Loans</title>
+    <title>Dashboard - QuickCred | Manage Your Loans</title>
     <meta name="description" content="Manage your loans, track applications, and access financial tools in your personalized QuickCred dashboard.">
-    <link rel="stylesheet" href="../css/home.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/modern-style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="icon" href="../assets/QuickCred_logo1.png" type="image/png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-    <!-- Modern Dashboard Header -->
+<body class="dashboard-body">
+    <!-- Dashboard Header -->
     <header class="dashboard-header">
-        <nav class="dashboard-nav">
-            <!-- Brand Section -->
-            <div class="nav-brand">
-                <a href="../index.html" class="brand-link">
-                    <img src="../assets/QuickCred_logo1.png" alt="QuickCred" class="brand-logo">
-                    <span class="brand-text">QuickCred</span>
-                </a>
-            </div>
-            
-            <!-- Navigation Links -->
-            <div class="nav-menu">
-                <a href="#dashboard" class="nav-item active" data-section="dashboard">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#applications" class="nav-item" data-section="applications">
-                    <i class="fas fa-file-alt"></i>
-                    <span>My Applications</span>
-                </a>
-                <a href="#payments" class="nav-item" data-section="payments">
-                    <i class="fas fa-credit-card"></i>
-                    <span>Payments</span>
-                </a>
-                <a href="#tools" class="nav-item" data-section="tools">
-                    <i class="fas fa-calculator"></i>
-                    <span>Loan Tools</span>
-                </a>
-                <a href="#support" class="nav-item" data-section="support">
-                    <i class="fas fa-headset"></i>
-                    <span>Support</span>
-                </a>
-            </div>
-
-            <!-- User Actions Section -->
-            <div class="user-actions">
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <button class="action-btn" title="Loan Calculator">
-                        <i class="fas fa-calculator"></i>
-                    </button>
-                    <button class="action-btn" title="Apply for New Loan">
-                        <i class="fas fa-plus"></i>
-                    </button>
+        <div class="container">
+            <div class="header-container">
+                <!-- Brand -->
+                <div class="header-brand">
+                    <a href="../index.html" class="brand-link">
+                        <img src="../assets/QuickCred_logo1.png" alt="QuickCred">
+                        <span>QuickCred</span>
+                    </a>
                 </div>
                 
-                <!-- Notifications -->
-                <div class="notifications">
-                    <button class="notification-btn" id="notificationBtn">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-count">3</span>
-                    </button>
-                    <div class="notification-dropdown" id="notificationDropdown">
-                        <div class="notification-header">
-                            <h4>Notifications</h4>
-                            <button class="mark-all-read">Mark all as read</button>
-                        </div>
-                        <div class="notification-list">
-                            <div class="notification-item unread">
-                                <i class="fas fa-check-circle text-success"></i>
-                                <div class="notification-content">
-                                    <p>Your personal loan application has been approved!</p>
-                                    <span class="notification-time">2 hours ago</span>
-                                </div>
-                            </div>
-                            <div class="notification-item unread">
-                                <i class="fas fa-clock text-warning"></i>
-                                <div class="notification-content">
-                                    <p>Payment due in 3 days for Auto Loan #1234</p>
-                                    <span class="notification-time">1 day ago</span>
-                                </div>
-                            </div>
-                            <div class="notification-item">
-                                <i class="fas fa-info-circle text-info"></i>
-                                <div class="notification-content">
-                                    <p>New loan offers available based on your credit score</p>
-                                    <span class="notification-time">3 days ago</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="notification-footer">
-                            <a href="#" class="view-all-link">View all notifications</a>
-                        </div>
+                <!-- Search -->
+                <div class="header-search">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search loans, payments, documents...">
                     </div>
                 </div>
                 
-                <!-- Profile Dropdown -->
-                <div class="profile-section">
-                    <button class="profile-btn" id="profileBtn">
-                        <div class="user-avatar" id="userAvatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="user-info">
-                            <span class="user-name" id="userName">John Doe</span>
-                            <span class="user-role">Premium Member</span>
-                        </div>
-                        <i class="fas fa-chevron-down profile-arrow"></i>
-                    </button>
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="action-btn" title="Loan Calculator" onclick="openCalculator()">
+                            <i class="fas fa-calculator"></i>
+                        </button>
+                        <button class="action-btn" title="Apply for New Loan" onclick="openNewApplication()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
                     
-                    <div class="profile-menu" id="profileMenu">
-                        <div class="profile-menu-header">
-                            <div class="user-avatar-large" id="userAvatarLarge">
+                    <!-- Notifications -->
+                    <div class="notifications">
+                        <button class="notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">3</span>
+                        </button>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h4>Notifications</h4>
+                                <button class="mark-all-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    <div class="notification-content">
+                                        <p>Your personal loan application has been approved!</p>
+                                        <span class="notification-time">2 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <i class="fas fa-clock text-warning"></i>
+                                    <div class="notification-content">
+                                        <p>Payment due in 3 days for Auto Loan #AL-2024-001</p>
+                                        <span class="notification-time">1 day ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <i class="fas fa-info-circle text-primary"></i>
+                                    <div class="notification-content">
+                                        <p>New loan offers available based on your credit score</p>
+                                        <span class="notification-time">3 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#" class="view-all-link">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile -->
+                    <div class="profile-section">
+                        <button class="profile-btn" id="profileBtn">
+                            <div class="user-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="user-details">
-                                <span class="user-display-name" id="userDisplayName">John Doe</span>
-                                <span class="user-email" id="userEmail">john.doe@example.com</span>
-                                <span class="user-member-since">Member since 2023</span>
+                            <div class="user-info">
+                                <span class="user-name" id="userName">John Doe</span>
+                                <span class="user-role">Premium Member</span>
                             </div>
-                        </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
                         
-                        <div class="menu-divider"></div>
-                        
-                        <div class="menu-section">
-                            <div class="menu-section-title">Account</div>
-                            <a href="#" class="menu-item" onclick="handleProfileAction('view-profile')">
-                                <i class="fas fa-user-circle"></i>
-                                <span>My Profile</span>
-                            </a>
-                            <a href="#" class="menu-item" onclick="handleProfileAction('account-settings')">
-                                <i class="fas fa-cog"></i>
-                                <span>Settings</span>
-                            </a>
-                            <a href="#" class="menu-item" onclick="handleProfileAction('security')">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Security & Privacy</span>
-                            </a>
-                        </div>
-                        
-                        <div class="menu-divider"></div>
-                        
-                        <div class="menu-section">
-                            <div class="menu-section-title">Support</div>
-                            <a href="#" class="menu-item" onclick="handleProfileAction('help')">
-                                <i class="fas fa-life-ring"></i>
-                                <span>Help Center</span>
-                            </a>
-                            <a href="#" class="menu-item" onclick="handleProfileAction('contact')">
-                                <i class="fas fa-envelope"></i>
-                                <span>Contact Support</span>
-                            </a>
-                            <a href="#" class="menu-item" onclick="handleProfileAction('feedback')">
-                                <i class="fas fa-comment-alt"></i>
-                                <span>Send Feedback</span>
-                            </a>
-                        </div>
-                        
-                        <div class="menu-divider"></div>
-                        
-                        <div class="menu-section">
-                            <a href="#" class="menu-item logout-item" onclick="handleProfileAction('logout')">
+                        <div class="profile-menu" id="profileMenu">
+                            <div class="profile-menu-header">
+                                <div class="user-avatar-large">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="user-details">
+                                    <h4 id="userNameLarge">John Doe</h4>
+                                    <p>john.doe@email.com</p>
+                                    <span class="member-badge">Premium Member</span>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-divider"></div>
+                            
+                            <div class="menu-section">
+                                <div class="menu-section-title">Account</div>
+                                <a href="#" class="menu-item">
+                                    <i class="fas fa-user"></i>
+                                    <span>View Profile</span>
+                                </a>
+                                <a href="#" class="menu-item">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Edit Profile</span>
+                                </a>
+                                <a href="#" class="menu-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Security & Privacy</span>
+                                </a>
+                            </div>
+                            
+                            <div class="menu-divider"></div>
+                            
+                            <div class="menu-section">
+                                <div class="menu-section-title">Support</div>
+                                <a href="#" class="menu-item">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span>Help Center</span>
+                                </a>
+                                <a href="#" class="menu-item">
+                                    <i class="fas fa-headset"></i>
+                                    <span>Contact Support</span>
+                                </a>
+                            </div>
+                            
+                            <div class="menu-divider"></div>
+                            
+                            <a href="login-new.html" class="menu-item logout">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Sign Out</span>
                             </a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Apply Button -->
-                <a href="#" class="apply-new-loan-btn">
-                    <i class="fas fa-plus"></i>
-                    <span>New Application</span>
-                </a>
-                
-                <!-- Mobile Menu Toggle -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <!-- Dashboard Section -->
-    <div class="dashboard-section">
-        <div class="welcome-banner">
-            <h1>Welcome back to QuickCred, <span class="user-name" id="welcome-user"></span>!</h1>
-            <p class="tagline">Bringing you the best loan experience - Seamlessly manage your loans here.</p>
-        </div>
-
-        <div class="dashboard-cards">
-            <div class="card">
-                <div class="content">
-                    <i class="fas fa-file-alt"></i>
-                    <div class="card-info">
-                        <h2>2</h2>
-                        <p>Active Applications</p>
-                    </div>
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Welcome back, <span id="welcomeUserName">John</span>! 👋</h1>
+                    <p class="welcome-subtitle">Here's what's happening with your loans today</p>
                 </div>
-                <span class="new-tag">+1 new</span>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <i class="fas fa-dollar-sign"></i>
-                    <div class="card-info">
-                        <h2>$1,250</h2>
-                        <p>Next Payment Due</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <i class="fas fa-coins"></i>
-                    <div class="card-info">
-                        <h2>$85,000</h2>
-                        <p>Total Borrowed</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <i class="fas fa-star"></i>
-                    <div class="card-info">
-                        <h2>745</h2>
-                        <p>Credit Score</p>
-                    </div>
-                </div>
-                <span class="score-change">+12 pts</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Loan Application Progress -->
-    <div class="loan-progress">
-        <h3>Complete Your Loan Application</h3>
-        <div class="progress-indicator">
-            <div class="progress-item completed">
-                <i class="fas fa-check-circle"></i>
-                Personal Details
-            </div>
-            <div class="progress-item current">
-                <i class="fas fa-edit"></i>
-                Financial Details
-            </div>
-            <div class="progress-item">
-                <i class="fas fa-upload"></i>
-                Document Upload
-            </div>
-            <div class="progress-item">
-                <i class="fas fa-clipboard-check"></i>
-                Review
-            </div>
-        </div>
-        <div class="progress-bar">
-            <div class="filled" style="width: 50%;"></div>
-            <p>50% Complete</p>
-        </div>
-    </div>
-
-    <!-- Multi-Step Loan Application Form -->
-    <div class="loan-application-container" id="loanApplicationContainer">
-        <div class="application-header">
-            <h2>Complete Your Loan Application</h2>
-            <div class="progress-steps">
-                <div class="step active" data-step="1">
-                    <span class="step-number">1</span>
-                    <span class="step-title">Personal Details</span>
-                </div>
-                <div class="step" data-step="2">
-                    <span class="step-number">2</span>
-                    <span class="step-title">Financial Details</span>
-                </div>
-                <div class="step" data-step="3">
-                    <span class="step-number">3</span>
-                    <span class="step-title">Document Upload</span>
-                </div>
-                <div class="step" data-step="4">
-                    <span class="step-number">4</span>
-                    <span class="step-title">Review</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-container">
-            <!-- Step 1: Personal Details -->
-            <div class="form-step active" id="step1">
-                <h3>Personal Information</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dateOfBirth">Date of Birth</label>
-                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ssn">Social Security Number</label>
-                        <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="address">Home Address</label>
-                        <input type="text" id="address" name="address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" id="city" name="city" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State</label>
-                        <select id="state" name="state" required>
-                            <option value="">Select State</option>
-                            <option value="CA">California</option>
-                            <option value="NY">New York</option>
-                            <option value="TX">Texas</option>
-                            <option value="FL">Florida</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="zipCode">ZIP Code</label>
-                        <input type="text" id="zipCode" name="zipCode" required>
-                    </div>
+                <div class="welcome-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Apply for New Loan
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-calculator"></i>
+                        Loan Calculator
+                    </button>
                 </div>
             </div>
 
-            <!-- Step 2: Financial Details -->
-            <div class="form-step" id="step2">
-                <h3>Financial Information</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="employmentStatus">Employment Status</label>
-                        <select id="employmentStatus" name="employmentStatus" required>
-                            <option value="">Select Status</option>
-                            <option value="employed">Full-time Employed</option>
-                            <option value="self-employed">Self-employed</option>
-                            <option value="part-time">Part-time Employed</option>
-                            <option value="unemployed">Unemployed</option>
-                        </select>
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-wallet"></i>
                     </div>
-                    <div class="form-group">
-                        <label for="employer">Employer Name</label>
-                        <input type="text" id="employer" name="employer">
-                    </div>
-                    <div class="form-group">
-                        <label for="jobTitle">Job Title</label>
-                        <input type="text" id="jobTitle" name="jobTitle">
-                    </div>
-                    <div class="form-group">
-                        <label for="workExperience">Years at Current Job</label>
-                        <input type="number" id="workExperience" name="workExperience" min="0" max="50">
-                    </div>
-                    <div class="form-group">
-                        <label for="annualIncome">Annual Income</label>
-                        <input type="number" id="annualIncome" name="annualIncome" min="0" step="1000">
-                    </div>
-                    <div class="form-group">
-                        <label for="monthlyExpenses">Monthly Expenses</label>
-                        <input type="number" id="monthlyExpenses" name="monthlyExpenses" min="0" step="100">
-                    </div>
-                    <div class="form-group">
-                        <label for="loanAmount">Requested Loan Amount</label>
-                        <input type="number" id="loanAmount" name="loanAmount" min="1000" step="1000">
-                    </div>
-                    <div class="form-group">
-                        <label for="loanPurpose">Loan Purpose</label>
-                        <select id="loanPurpose" name="loanPurpose" required>
-                            <option value="">Select Purpose</option>
-                            <option value="home-improvement">Home Improvement</option>
-                            <option value="debt-consolidation">Debt Consolidation</option>
-                            <option value="auto-loan">Auto Loan</option>
-                            <option value="personal-loan">Personal Loan</option>
-                            <option value="education">Education</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 3: Document Upload -->
-            <div class="form-step" id="step3">
-                <h3>Document Upload</h3>
-                <div class="document-upload-section">
-                    <div class="upload-item">
-                        <div class="upload-header">
-                            <i class="fas fa-id-card"></i>
-                            <span>Government ID</span>
-                            <span class="required">Required</span>
+                    <div class="stat-content">
+                        <div class="stat-value">$45,250</div>
+                        <div class="stat-label">Total Loan Amount</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>2.5% from last month</span>
                         </div>
-                        <div class="upload-area" data-document="gov-id">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Drag & drop files here or click to browse</p>
-                            <input type="file" id="govId" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">$1,247</div>
+                        <div class="stat-label">Monthly Payment</div>
+                        <div class="stat-change">
+                            <i class="fas fa-calendar"></i>
+                            <span>Due in 5 days</span>
                         </div>
-                        <div class="file-list" id="govIdList"></div>
                     </div>
+                </div>
 
-                    <div class="upload-item">
-                        <div class="upload-header">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Proof of Income</span>
-                            <span class="required">Required</span>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">750</div>
+                        <div class="stat-label">Credit Score</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+15 points</span>
                         </div>
-                        <div class="upload-area" data-document="income">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Pay stubs, tax returns, or employment letter</p>
-                            <input type="file" id="incomeProof" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">4.2%</div>
+                        <div class="stat-label">Average APR</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>0.3% lower</span>
                         </div>
-                        <div class="file-list" id="incomeProofList"></div>
-                    </div>
-
-                    <div class="upload-item">
-                        <div class="upload-header">
-                            <i class="fas fa-university"></i>
-                            <span>Bank Statements</span>
-                            <span class="required">Required</span>
-                        </div>
-                        <div class="upload-area" data-document="bank">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Last 3 months bank statements</p>
-                            <input type="file" id="bankStatements" accept=".pdf,.jpg,.jpeg,.png" multiple>
-                        </div>
-                        <div class="file-list" id="bankStatementsList"></div>
-                    </div>
-
-                    <div class="upload-item">
-                        <div class="upload-header">
-                            <i class="fas fa-home"></i>
-                            <span>Proof of Address</span>
-                            <span class="optional">Optional</span>
-                        </div>
-                        <div class="upload-area" data-document="address">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Utility bill or lease agreement</p>
-                            <input type="file" id="addressProof" accept=".pdf,.jpg,.jpeg,.png" multiple>
-                        </div>
-                        <div class="file-list" id="addressProofList"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 4: Review -->
-            <div class="form-step" id="step4">
-                <h3>Review Your Application</h3>
-                <div class="review-section">
-                    <div class="review-card">
-                        <h4>Personal Information</h4>
-                        <div id="reviewPersonal" class="review-content"></div>
+            <!-- Main Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Active Loans -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Active Loans</h2>
+                        <a href="#" class="view-all-link">View All</a>
                     </div>
-                    <div class="review-card">
-                        <h4>Financial Information</h4>
-                        <div id="reviewFinancial" class="review-content"></div>
-                    </div>
-                    <div class="review-card">
-                        <h4>Documents</h4>
-                        <div id="reviewDocuments" class="review-content"></div>
-                    </div>
-                    <div class="terms-agreement">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="agreeTerms" required>
-                            <span class="checkmark"></span>
-                            I agree to the <a href="#" target="_blank">Terms and Conditions</a> and <a href="#" target="_blank">Privacy Policy</a>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-navigation">
-            <button type="button" id="prevBtn" class="btn btn-secondary" onclick="changeStep(-1)">Previous</button>
-            <button type="button" id="nextBtn" class="btn btn-primary" onclick="changeStep(1)">Next</button>
-            <button type="button" id="submitBtn" class="btn btn-success" onclick="submitApplication()" style="display: none;">Submit Application</button>
-        </div>
-    </div>
-
-    <!-- Application Status Tracking -->
-    <div class="status-tracking-section">
-        <h2>Application Status</h2>
-        <div class="status-timeline">
-            <div class="timeline-item completed">
-                <div class="timeline-marker">✓</div>
-                <div class="timeline-content">
-                    <h4>Application Submitted</h4>
-                    <p>Your application has been received and is being processed.</p>
-                    <span class="timestamp">January 15, 2025 - 10:30 AM</span>
-                </div>
-            </div>
-            <div class="timeline-item active">
-                <div class="timeline-marker">⏳</div>
-                <div class="timeline-content">
-                    <h4>Document Verification</h4>
-                    <p>We are currently verifying your submitted documents.</p>
-                    <span class="timestamp">In Progress</span>
-                </div>
-            </div>
-            <div class="timeline-item pending">
-                <div class="timeline-marker">3</div>
-                <div class="timeline-content">
-                    <h4>Credit Check</h4>
-                    <p>Credit history review and scoring.</p>
-                    <span class="timestamp">Pending</span>
-                </div>
-            </div>
-            <div class="timeline-item pending">
-                <div class="timeline-marker">4</div>
-                <div class="timeline-content">
-                    <h4>Final Approval</h4>
-                    <p>Final review and loan approval decision.</p>
-                    <span class="timestamp">Pending</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Payment Calendar -->
-    <div class="calendar-section">
-        <h2>Payment Calendar</h2>
-        <div class="calendar-container">
-            <div class="calendar-header">
-                <button id="prevMonth" class="calendar-nav">‹</button>
-                <h3 id="currentMonth"></h3>
-                <button id="nextMonth" class="calendar-nav">›</button>
-            </div>
-            <div class="calendar-grid" id="calendarGrid"></div>
-            <div class="calendar-legend">
-                <div class="legend-item">
-                    <span class="legend-dot due"></span>
-                    <span>Payment Due</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot paid"></span>
-                    <span>Payment Made</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot overdue"></span>
-                    <span>Overdue</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Loan Comparison Tool -->
-    <div class="loan-comparison-section">
-        <h2>Loan Comparison Tool</h2>
-        <div class="comparison-container">
-            <div class="loan-calculator">
-                <h3>Loan Calculator</h3>
-                <div class="calculator-inputs">
-                    <div class="input-group">
-                        <label for="calcLoanAmount">Loan Amount</label>
-                        <input type="range" id="calcLoanAmount" min="1000" max="100000" value="25000" step="1000">
-                        <span class="value-display" id="loanAmountDisplay">$25,000</span>
-                    </div>
-                    <div class="input-group">
-                        <label for="calcInterestRate">Interest Rate (%)</label>
-                        <input type="range" id="calcInterestRate" min="1" max="20" value="5.5" step="0.1">
-                        <span class="value-display" id="interestRateDisplay">5.5%</span>
-                    </div>
-                    <div class="input-group">
-                        <label for="calcLoanTerm">Loan Term (Years)</label>
-                        <input type="range" id="calcLoanTerm" min="1" max="30" value="5" step="1">
-                        <span class="value-display" id="loanTermDisplay">5 years</span>
-                    </div>
-                </div>
-                <div class="calculation-results">
-                    <div class="result-item">
-                        <span class="label">Monthly Payment:</span>
-                        <span class="value" id="monthlyPayment">$479.64</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="label">Total Interest:</span>
-                        <span class="value" id="totalInterest">$3,778.40</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="label">Total Amount:</span>
-                        <span class="value" id="totalAmount">$28,778.40</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="loan-offers">
-                <h3>Available Loan Offers</h3>
-                <div class="offers-grid">
-                    <div class="offer-card">
-                        <div class="lender-logo">FB</div>
-                        <h4>First Bank</h4>
-                        <div class="offer-details">
-                            <div class="detail-item">
-                                <span class="label">Interest Rate</span>
-                                <span class="value">4.5% APR</span>
+                    
+                    <div class="loans-list">
+                        <div class="loan-card">
+                            <div class="loan-header">
+                                <div class="loan-info">
+                                    <h4 class="loan-title">Personal Loan</h4>
+                                    <p class="loan-id">#PL-2024-001</p>
+                                </div>
+                                <div class="loan-status approved">
+                                    <span>Active</span>
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Monthly Payment</span>
-                                <span class="value">$459.67</span>
+                            <div class="loan-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Loan Amount</span>
+                                    <span class="detail-value">$25,000</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Monthly Payment</span>
+                                    <span class="detail-value">$547</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Next Payment</span>
+                                    <span class="detail-value">Feb 15, 2025</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Balance</span>
+                                    <span class="detail-value">$22,350</span>
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Loan Term</span>
-                                <span class="value">60 months</span>
+                            <div class="loan-progress">
+                                <div class="progress-info">
+                                    <span>Progress</span>
+                                    <span>10.6% paid</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 10.6%"></div>
+                                </div>
+                            </div>
+                            <div class="loan-actions">
+                                <button class="btn btn-secondary btn-sm">Make Payment</button>
+                                <button class="btn btn-outline btn-sm">View Details</button>
                             </div>
                         </div>
-                        <button class="apply-offer-btn">Apply Now</button>
-                    </div>
 
-                    <div class="offer-card featured">
-                        <div class="featured-badge">Best Rate</div>
-                        <div class="lender-logo">CU</div>
-                        <h4>Credit Union Plus</h4>
-                        <div class="offer-details">
-                            <div class="detail-item">
-                                <span class="label">Interest Rate</span>
-                                <span class="value">3.9% APR</span>
+                        <div class="loan-card">
+                            <div class="loan-header">
+                                <div class="loan-info">
+                                    <h4 class="loan-title">Auto Loan</h4>
+                                    <p class="loan-id">#AL-2024-001</p>
+                                </div>
+                                <div class="loan-status approved">
+                                    <span>Active</span>
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Monthly Payment</span>
-                                <span class="value">$449.32</span>
+                            <div class="loan-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Loan Amount</span>
+                                    <span class="detail-value">$20,250</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Monthly Payment</span>
+                                    <span class="detail-value">$425</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Next Payment</span>
+                                    <span class="detail-value">Feb 20, 2025</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Balance</span>
+                                    <span class="detail-value">$18,900</span>
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Loan Term</span>
-                                <span class="value">60 months</span>
+                            <div class="loan-progress">
+                                <div class="progress-info">
+                                    <span>Progress</span>
+                                    <span>6.7% paid</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 6.7%"></div>
+                                </div>
+                            </div>
+                            <div class="loan-actions">
+                                <button class="btn btn-secondary btn-sm">Make Payment</button>
+                                <button class="btn btn-outline btn-sm">View Details</button>
                             </div>
                         </div>
-                        <button class="apply-offer-btn">Apply Now</button>
                     </div>
+                </div>
 
-                    <div class="offer-card">
-                        <div class="lender-logo">NL</div>
-                        <h4>National Lending</h4>
-                        <div class="offer-details">
-                            <div class="detail-item">
-                                <span class="label">Interest Rate</span>
-                                <span class="value">5.2% APR</span>
+                <!-- Recent Activity -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Activity</h2>
+                        <a href="#" class="view-all-link">View All</a>
+                    </div>
+                    
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-check"></i>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Monthly Payment</span>
-                                <span class="value">$472.84</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">Loan Term</span>
-                                <span class="value">60 months</span>
+                            <div class="activity-content">
+                                <h4>Payment Processed</h4>
+                                <p>Personal Loan payment of $547 was successfully processed</p>
+                                <span class="activity-time">2 hours ago</span>
                             </div>
                         </div>
-                        <button class="apply-offer-btn">Apply Now</button>
+
+                        <div class="activity-item">
+                            <div class="activity-icon info">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Document Uploaded</h4>
+                                <p>Income verification document uploaded for loan #PL-2024-002</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon warning">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Payment Reminder</h4>
+                                <p>Auto Loan payment due in 3 days</p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Loan Approved</h4>
+                                <p>Your personal loan application has been approved</p>
+                                <span class="activity-time">1 week ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quick Actions</h2>
+                    </div>
+                    
+                    <div class="quick-actions-grid">
+                        <div class="quick-action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <h4>Apply for Loan</h4>
+                            <p>Start a new loan application</p>
+                            <button class="btn btn-primary btn-sm w-full">Apply Now</button>
+                        </div>
+
+                        <div class="quick-action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h4>Loan Calculator</h4>
+                            <p>Calculate monthly payments</p>
+                            <button class="btn btn-secondary btn-sm w-full">Calculate</button>
+                        </div>
+
+                        <div class="quick-action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <h4>Make Payment</h4>
+                            <p>Pay your loan installment</p>
+                            <button class="btn btn-secondary btn-sm w-full">Pay Now</button>
+                        </div>
+
+                        <div class="quick-action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h4>Contact Support</h4>
+                            <p>Get help from our team</p>
+                            <button class="btn btn-secondary btn-sm w-full">Contact</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Footer -->
-    <footer class="enhanced-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>About QuickCred</h4>
-                <p>Your trusted partner for quick and secure loan applications with competitive rates.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#">Loan Calculator</a></li>
-                    <li><a href="#">Apply for Loan</a></li>
-                    <li><a href="#">Check Status</a></li>
-                    <li><a href="#">Customer Support</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contact Us</h4>
-                <p>📞 1-800-QUICKCRED</p>
-                <p>✉️ support@quickcred.com</p>
-                <div class="social-media-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 QuickCred. All rights reserved. | FDIC Insured</p>
-        </div>
-    </footer>
+    <!-- JavaScript -->
+    <script src="../js/home.js"></script>
+    <script>
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user data
+            loadUserData();
+            
+            // Initialize notifications
+            initNotifications();
+            
+            // Initialize profile menu
+            initProfileMenu();
+        });
 
-    <!-- Include JS -->
-    <script src="../js/home.js" type="module"></script>
+        function loadUserData() {
+            // This would typically load from an API
+            const userData = {
+                name: 'John Doe',
+                email: 'john.doe@email.com',
+                membershipType: 'Premium Member'
+            };
+
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userNameLarge').textContent = userData.name;
+            document.getElementById('welcomeUserName').textContent = userData.name.split(' ')[0];
+        }
+
+        function initNotifications() {
+            const notificationBtn = document.getElementById('notificationBtn');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+
+            notificationBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function() {
+                notificationDropdown.classList.remove('active');
+            });
+        }
+
+        function initProfileMenu() {
+            const profileBtn = document.getElementById('profileBtn');
+            const profileMenu = document.getElementById('profileMenu');
+
+            profileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.classList.remove('active');
+            });
+        }
+
+        function openCalculator() {
+            // Open loan calculator modal or navigate to calculator page
+            window.open('../index-new.html#calculator', '_blank');
+        }
+
+        function openNewApplication() {
+            // Navigate to loan application
+            window.location.href = '../html/loan-application.html';
+        }
+    </script>
 </body>
 </html>
