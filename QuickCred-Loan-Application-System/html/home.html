@@ -443,7 +443,20 @@
     </main>
 
     <!-- JavaScript -->
+    <!-- Core components -->
     <script src="../js/home.js"></script>
+    
+    <!-- Loan Status Tracker Component -->
+    <script src="../js/loan-status-tracker.js"></script>
+    <script src="../js/loan-status-tracker-methods.js"></script>
+    <script src="../js/loan-status-tracker-interactions.js"></script>
+    
+    <!-- Repayment Calendar Component -->
+    <script src="../js/repayment-calendar.js"></script>
+    <script src="../js/repayment-calendar-styles.js"></script>
+    <script src="../js/repayment-calendar-methods.js"></script>
+    <script src="../js/repayment-calendar-interactions.js"></script>
+    
     <script>
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
@@ -455,6 +468,9 @@
             
             // Initialize profile menu
             initProfileMenu();
+            
+            // Initialize Loan Components
+            initializeComponents();
         });
 
         function loadUserData() {
@@ -495,6 +511,46 @@
 
             document.addEventListener('click', function() {
                 profileMenu.classList.remove('active');
+            });
+        }
+
+        function initializeComponents() {
+            // Loan status tracker and repayment calendar are self-initializing
+            console.log("Loan status tracker and repayment calendar initialized");
+            
+            // Set up action buttons for apply and calculate
+            setupActionButtons();
+        }
+
+        function setupActionButtons() {
+            // Apply for loan buttons
+            const applyButtons = document.querySelectorAll('.btn-primary:not(.make-payment-btn):not(.process-payment-btn)');
+            applyButtons.forEach(button => {
+                button.addEventListener('click', openNewApplication);
+            });
+            
+            // Calculator buttons
+            const calcButtons = document.querySelectorAll('.btn-secondary:contains("Calculate")');
+            calcButtons.forEach(button => {
+                button.addEventListener('click', openCalculator);
+            });
+            
+            // Make payment buttons
+            const paymentButtons = document.querySelectorAll('.btn-secondary:contains("Make Payment")');
+            paymentButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Find the loan ID from the closest loan card
+                    const loanCard = button.closest('.loan-card');
+                    if (loanCard) {
+                        const loanIdElement = loanCard.querySelector('.loan-id');
+                        const loanId = loanIdElement ? loanIdElement.textContent.trim().substring(1) : null;
+                        
+                        if (loanId && window.RepaymentCalendar) {
+                            // Show make payment modal using RepaymentCalendar component
+                            window.RepaymentCalendar.showRepaymentSchedule({id: loanId});
+                        }
+                    }
+                });
             });
         }
 
